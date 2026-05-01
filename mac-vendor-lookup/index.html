@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAC Vendor Lookup — Offline OUI scanner &amp; decoder · Choate Labs</title>
+<meta name="description" content="Identify any MAC address vendor in under a second. Camera scan, bulk paste, full IEEE OUI database — 100% offline. By Choate Labs.">
+<meta name="theme-color" content="#0C0F14">
+<link rel="canonical" href="https://choatelabs.app/mac-vendor-lookup/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0C0F14;--glass:rgba(22,27,34,.6);--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--amber:#F1C40F;--iris:#9B59B6;--slate:#5D7A8C}
+
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.18;pointer-events:none}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.95) 0%,transparent 100%)}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
+.brand svg{width:30px;height:30px}
+.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
+.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
+.links{display:flex;gap:1.5rem;list-style:none}
+.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
+.links a:hover{opacity:1}
+@media(max-width:600px){.links{display:none}}
+
+main{position:relative;z-index:10}
+
+.hero{padding:7rem 1.5rem 4rem;max-width:1100px;margin:0 auto;text-align:center}
+.app-badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .7rem;border-radius:999px;color:var(--copper);border:1px solid rgba(230,126,34,.35);display:inline-block;margin-bottom:1.5rem}
+.app-icon{width:96px;height:96px;margin:0 auto 1.5rem;display:block}
+.hero h1{font-size:clamp(2.4rem,5.5vw,3.8rem);line-height:1.1;letter-spacing:-.03em;max-width:18ch;margin:0 auto 1rem}
+.hero h1 .accent{color:var(--copper)}
+.hero p{font-size:clamp(1rem,1.8vw,1.2rem);max-width:54ch;opacity:.7;margin:0 auto 2rem}
+.meta-row{font-family:'JetBrains Mono',monospace;font-size:.75rem;opacity:.5;margin-bottom:2rem}
+.meta-row .dot{margin:0 .6rem}
+.cta{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .2s}
+.btn-copper{background:var(--copper);border-color:var(--copper);color:var(--noir)}
+.btn-copper:hover{background:transparent;color:var(--chalk)}
+.btn-ghost{border-color:rgba(244,246,240,.18);color:var(--chalk)}
+.btn-ghost:hover{border-color:var(--chalk)}
+
+.features{padding:4rem 1.5rem 2rem;max-width:1100px;margin:0 auto}
+.section-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.45;margin-bottom:2rem;text-align:center}
+.fgrid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.feature{background:var(--glass);border:1px solid rgba(244,246,240,.06);border-radius:10px;padding:1.6rem;backdrop-filter:blur(10px);transition:transform .2s,border-color .2s}
+.feature:hover{transform:translateY(-3px);border-color:rgba(244,246,240,.12)}
+.feature .ic{font-family:'JetBrains Mono',monospace;font-size:1.4rem;color:var(--copper);margin-bottom:.6rem;line-height:1}
+.feature h3{font-size:1.05rem;margin-bottom:.4rem;letter-spacing:-.01em}
+.feature p{font-size:.9rem;opacity:.65;margin:0;line-height:1.5}
+
+.privacy-block{padding:5rem 1.5rem;max-width:760px;margin:0 auto;text-align:center}
+.privacy-block h2{font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:1rem;letter-spacing:-.02em}
+.privacy-block p{opacity:.7;font-size:1.05rem;max-width:55ch;margin:0 auto 1.5rem}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:2rem}
+.tags span{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .8rem;border:1px solid rgba(88,214,141,.3);border-radius:999px;color:var(--mint)}
+.tags span::before{content:"✓ ";opacity:.7}
+.privacy-block .more{margin-top:2rem}
+.privacy-block .more a{color:var(--copper);font-family:'JetBrains Mono',monospace;font-size:.78rem;text-decoration:none;border-bottom:1px solid rgba(230,126,34,.3);padding-bottom:1px}
+.privacy-block .more a:hover{border-color:var(--copper)}
+
+.audience{padding:4rem 1.5rem;max-width:900px;margin:0 auto}
+.audience h2{font-size:clamp(1.6rem,3vw,2rem);text-align:center;margin-bottom:2rem;letter-spacing:-.02em}
+.aud-grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.aud-grid div{font-size:.95rem;opacity:.7;padding:1rem 1.2rem;border-left:2px solid var(--copper);background:rgba(22,27,34,.4);border-radius:0 6px 6px 0}
+
+footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
+.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
+.ft a{color:var(--chalk);opacity:.7;text-decoration:none}
+.ft a:hover{opacity:1;text-decoration:underline}
+.ft .row{margin-top:.5rem}
+.ft .row a{margin:0 .6rem}
+</style>
+</head>
+<body>
+
+<canvas id="n"></canvas>
+
+<nav>
+  <a href="/" class="brand">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
+      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
+      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    </svg>
+    <div>
+      <span class="bw">Choate</span>
+      <span class="bl">Labs</span>
+    </div>
+  </a>
+  <ul class="links mono">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <span class="app-badge">Specimen #001 · Network</span>
+    <svg class="app-icon" viewBox="0 0 96 96" fill="none">
+      <rect x="2" y="2" width="92" height="92" rx="22" fill="#0C0F14" stroke="#1E2D5C" stroke-width="2"/>
+      <circle cx="48" cy="48" r="22" stroke="#E67E22" stroke-width="3"/>
+      <circle cx="48" cy="48" r="6" fill="#E67E22"/>
+      <path d="M64 64 L80 80" stroke="#E67E22" stroke-width="3" stroke-linecap="round"/>
+      <text x="48" y="52" text-anchor="middle" fill="#F4F6F0" font-family="JetBrains Mono,monospace" font-size="10" font-weight="700">OUI</text>
+    </svg>
+    <h1>The fastest way to know <span class="accent">what's on the wire</span>.</h1>
+    <p>MAC Vendor Lookup identifies the manufacturer behind any MAC address — instantly, offline, and without an account.</p>
+    <p class="meta-row mono">iPhone &amp; iPad <span class="dot">·</span> iOS 17+ <span class="dot">·</span> Free</p>
+    <div class="cta">
+      <a href="#" class="btn btn-copper">Download on the App Store</a>
+      <a href="#features" class="btn btn-ghost">See Features</a>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <p class="section-title">Field Capabilities</p>
+    <div class="fgrid">
+
+      <div class="feature">
+        <div class="ic">⌕</div>
+        <h3>Smart MAC parsing</h3>
+        <p>Accepts colons, dashes, dots, no separators, or just the first 6 hex chars. Paste anything that looks like a MAC.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">▢</div>
+        <h3>Camera scanner</h3>
+        <p>On-device Vision OCR reads MACs from device labels. No cloud round-trip, no images uploaded anywhere.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⊞</div>
+        <h3>Scan Session</h3>
+        <p>Walk a closet or rack and capture multiple devices in one sweep. Live preview detection. Save the whole batch.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">≡</div>
+        <h3>Bulk paste</h3>
+        <p>Drop in a list from <span class="mono">arp -a</span>, a DHCP table, or a CSV. Lookup all of them at once. Export results.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">◉</div>
+        <h3>Bit-level decoding</h3>
+        <p>Unicast vs. multicast, U/L bit, randomized/private MAC detection, broadcast, EUI-64 derivation per RFC 4291.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⤳</div>
+        <h3>Sessions &amp; tags</h3>
+        <p>Group lookups by site, closet, IDF, or job ticket. Searchable history with notes and favorites.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⌘</div>
+        <h3>Shortcuts &amp; Siri</h3>
+        <p>"Look up MAC vendor" works as an App Intent. Spotlight, Shortcuts, voice — all without opening the app.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⌖</div>
+        <h3>39,340 OUIs bundled</h3>
+        <p>The full IEEE Registration Authority database ships inside the app. ~2.6 MB. Works offline forever.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="privacy-block">
+    <p class="section-title">No data leaves the lab.</p>
+    <h2>Built private by default.</h2>
+    <p>MAC Vendor Lookup is fully offline. There is no network code in the binary. Your lookups, notes, tags, and camera frames stay on your device.</p>
+    <div class="tags">
+      <span>No accounts</span>
+      <span>No tracking</span>
+      <span>No analytics</span>
+      <span>No third-party SDKs</span>
+      <span>No advertising</span>
+      <span>No telemetry</span>
+    </div>
+    <p class="more"><a href="privacy.html">Read the full privacy policy →</a></p>
+  </section>
+
+  <section class="audience">
+    <h2>Built for the rack.</h2>
+    <div class="aud-grid">
+      <div>Network engineers tracing rogue or unknown devices on a switch port.</div>
+      <div>Sysadmins and helpdesk teams inventorying gear in closets and IDFs.</div>
+      <div>MSPs walking customer sites who need to log dozens of devices fast.</div>
+      <div>Security analysts checking for randomized vs. burned-in MAC addresses.</div>
+      <div>Field techs identifying APs, phones, cameras, and IoT devices.</div>
+      <div>Networking students learning the OUI registry, U/L bit, and EUI-64.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="ft">
+    © 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
+  </p>
+  <p class="ft row">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="support.html">Support</a>
+  </p>
+</footer>
+
+<script>
+const c=document.getElementById('n'),x=c.getContext('2d');
+let w,h;const N=40,P=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}
+addEventListener('resize',r);r();
+class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;this.r=Math.random()*1.4+.8}
+u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
+d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.4)';x.fill()}}
+for(let i=0;i<N;i++)P.push(new M());
+function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.05*(1-d/160)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
+A();
+</script>
+
+</body>
+</html>

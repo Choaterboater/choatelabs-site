@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choate Labs — Every connection leaves a trace</title>
+<meta name="description" content="Choate Labs builds native iOS tools for mapping connection — human networks, asset graphs, market topology, and the systems that bind them.">
+<meta name="theme-color" content="#0C0F14">
+<link rel="canonical" href="https://choatelabs.app/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0C0F14;--glass:rgba(22,27,34,.6);--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--amber:#F1C40F;--iris:#9B59B6;--slate:#5D7A8C}
+
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.3;pointer-events:none}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.9) 0%,transparent 100%)}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
+.brand svg{width:30px;height:30px}
+.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
+.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
+.links{display:flex;gap:1.5rem;list-style:none}
+.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
+.links a:hover{opacity:1}
+@media(max-width:600px){.links{display:none}}
+
+.hero{position:relative;z-index:10;min-height:80vh;display:flex;flex-direction:column;justify-content:center;padding:7rem 1.5rem 3rem;max-width:1100px;margin:0 auto}
+.hero h1{font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;letter-spacing:-.03em;max-width:14ch;margin-bottom:1.25rem}
+.hero p{font-size:clamp(1rem,2vw,1.25rem);max-width:52ch;opacity:.7;margin-bottom:2rem}
+.cta{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .2s}
+.btn-copper{background:transparent;border-color:var(--copper);color:var(--chalk)}
+.btn-copper:hover{background:var(--copper);color:var(--noir)}
+.btn-ghost{border-color:rgba(244,246,240,.18);color:var(--chalk)}
+.btn-ghost:hover{border-color:var(--chalk)}
+
+.bench{position:relative;z-index:10;padding:0 1.5rem 6rem;max-width:1100px;margin:0 auto}
+.bench-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+.bench-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.45}
+.filters{display:flex;gap:.5rem;flex-wrap:wrap}
+.fil{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;padding:.35rem .7rem;background:transparent;border:1px solid rgba(244,246,240,.08);color:var(--chalk);cursor:pointer;transition:all .15s;border-radius:999px}
+.fil:hover{border-color:rgba(244,246,240,.3)}
+.fil.on{background:rgba(244,246,240,.08);border-color:rgba(244,246,240,.25)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem}
+
+.card{background:var(--glass);border:1px solid rgba(244,246,240,.06);padding:1.6rem;border-radius:10px;backdrop-filter:blur(10px);transition:transform .2s,border-color .2s;text-decoration:none;color:var(--chalk);display:block}
+.card:hover{transform:translateY(-3px);border-color:rgba(244,246,240,.12)}
+.card.hide{display:none}
+.icon{width:44px;height:44px;margin-bottom:.8rem;display:block}
+.meta{display:flex;gap:.55rem;margin-bottom:.8rem;flex-wrap:wrap}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;padding:.25rem .5rem;border-radius:999px;border:1px solid transparent}
+.cat-network{color:var(--copper);border-color:rgba(230,126,34,.35)}
+.cat-human{color:var(--amber);border-color:rgba(241,196,15,.35)}
+.cat-asset{color:var(--mint);border-color:rgba(88,214,141,.35)}
+.cat-market{color:var(--copper);border-color:rgba(230,126,34,.35)}
+.cat-knowledge{color:var(--iris);border-color:rgba(155,89,182,.35)}
+.cat-system{color:var(--slate);border-color:rgba(93,122,140,.35)}
+.stat-live{color:var(--mint);border:1px solid rgba(88,214,141,.25)}
+.stat-calf{color:var(--copper);border:1px dashed rgba(230,126,34,.4)}
+.stat-arch{color:var(--slate);border:1px solid rgba(93,122,140,.2);opacity:.7}
+.stat-soon{color:var(--slate);border:1px solid rgba(93,122,140,.25);opacity:.8}
+.card h3{font-size:1.4rem;margin-bottom:.4rem;letter-spacing:-.01em}
+.card p{font-size:.92rem;opacity:.65;line-height:1.5;margin-bottom:1.25rem}
+.applink{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--chalk);text-decoration:none;border-bottom:1px solid rgba(244,246,240,.15);padding-bottom:1px;transition:border-color .2s}
+.applink:hover{border-color:var(--chalk)}
+.applink.nope{opacity:.35;border:none}
+
+footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
+.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
+.ft a{color:var(--chalk);opacity:.7;text-decoration:none}
+.ft a:hover{opacity:1;text-decoration:underline}
+.ft .row{margin-top:.5rem}
+.ft .row a{margin:0 .6rem}
+
+.goat{position:fixed;bottom:12%;left:-60px;font-size:2.8rem;z-index:100;pointer-events:none}
+@keyframes run{to{left:110vw}}
+</style>
+</head>
+<body>
+
+<canvas id="n"></canvas>
+
+<nav>
+  <a href="/" class="brand">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
+      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
+      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    </svg>
+    <div>
+      <span class="bw">Choate</span>
+      <span class="bl">Labs</span>
+    </div>
+  </a>
+  <ul class="links mono">
+    <li><a href="#bench">Work</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="mailto:stephen.choate@choatelabs.com">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>Every connection leaves a trace.</h1>
+  <p>Choate Labs builds native iOS tools for mapping them. Network topology, asset graphs, and the systems that bind them. Built in the dark, shipped at dawn.</p>
+  <div class="cta">
+    <a href="#bench" class="btn btn-copper">Open the Lab</a>
+    <a href="/about.html" class="btn btn-ghost">About the Lab</a>
+  </div>
+</section>
+
+<section class="bench" id="bench">
+  <div class="bench-head">
+    <p class="bench-title">Specimens on the Bench</p>
+    <div class="filters">
+      <button class="fil on" data-filter="all">All</button>
+      <button class="fil" data-filter="network">Network</button>
+      <button class="fil" data-filter="asset">Asset</button>
+      <button class="fil" data-filter="human">Human</button>
+      <button class="fil" data-filter="market">Market</button>
+      <button class="fil" data-filter="system">System</button>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <a class="card" data-category="network" href="/mac-vendor-lookup/">
+      <svg class="icon" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="14" stroke="#E67E22" stroke-width="2.5"/>
+        <circle cx="24" cy="24" r="3.5" fill="#E67E22"/>
+        <path d="M34 34 L42 42" stroke="#E67E22" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="24" y="27" text-anchor="middle" fill="#F4F6F0" font-family="JetBrains Mono,monospace" font-size="6" font-weight="700">OUI</text>
+      </svg>
+      <div class="meta">
+        <span class="tag cat-network">Network</span>
+        <span class="tag stat-live">Live</span>
+      </div>
+      <h3>MAC Vendor Lookup</h3>
+      <p>Identify the manufacturer behind any MAC address. Camera scan, bulk paste, full IEEE OUI database — 100% offline.</p>
+      <span class="applink">Learn more →</span>
+    </a>
+
+    <article class="card" data-category="asset">
+      <svg class="icon" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="6" width="10" height="36" rx="2" stroke="#58D68D" stroke-width="2"/>
+        <rect x="22" y="14" width="10" height="28" rx="2" stroke="#58D68D" stroke-width="2"/>
+        <rect x="36" y="22" width="6" height="20" rx="1" stroke="#58D68D" stroke-width="2"/>
+        <circle cx="39" cy="12" r="5" fill="#58D68D"/>
+      </svg>
+      <div class="meta">
+        <span class="tag cat-asset">Asset</span>
+        <span class="tag stat-calf">Calibrating</span>
+      </div>
+      <h3>RackBeacon</h3>
+      <p>Know where your hardware lives. Asset tracking with teeth — barcode scan, serial OCR, and a graph of every piece of gear in the rack.</p>
+      <span class="applink nope">In Calibration</span>
+    </article>
+
+    <article class="card" data-category="human">
+      <svg class="icon" viewBox="0 0 48 48" fill="none">
+        <path d="M12 38 Q 24 10 36 38" stroke="#F1C40F" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="12" cy="38" r="4" fill="#F1C40F"/>
+        <circle cx="24" cy="22" r="4" fill="#F1C40F"/>
+        <circle cx="36" cy="38" r="4" fill="#F1C40F"/>
+      </svg>
+      <div class="meta">
+        <span class="tag cat-human">Human</span>
+        <span class="tag stat-soon">Coming Soon</span>
+      </div>
+      <h3>Threadback</h3>
+      <p>Map generations without touching a spreadsheet. Genealogy as a graph, native to your pocket.</p>
+      <span class="applink nope">In Progress</span>
+    </article>
+
+    <article class="card" data-category="market">
+      <svg class="icon" viewBox="0 0 48 48" fill="none">
+        <path d="M6 42 L24 6 L42 42" stroke="#E67E22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 30 H36" stroke="#E67E22" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="24" cy="6" r="4" fill="#E67E22"/>
+      </svg>
+      <div class="meta">
+        <span class="tag cat-market">Market</span>
+        <span class="tag stat-soon">Coming Soon</span>
+      </div>
+      <h3>Clearing</h3>
+      <p>The market is a graph. Real-time topology and order-flow visualization for the curious retail trader.</p>
+      <span class="applink nope">In Calibration</span>
+    </article>
+
+    <article class="card" data-category="system">
+      <svg class="icon" viewBox="0 0 48 48" fill="none">
+        <path d="M24 4 L43 15 V37 L24 48 L5 37 V15 Z" stroke="#5D7A8C" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="24" cy="26" r="4" fill="#5D7A8C"/>
+        <circle cx="24" cy="10" r="2.5" fill="#5D7A8C"/>
+        <circle cx="39" cy="18" r="2.5" fill="#5D7A8C"/>
+        <circle cx="39" cy="34" r="2.5" fill="#5D7A8C"/>
+        <circle cx="24" cy="42" r="2.5" fill="#5D7A8C"/>
+        <circle cx="9" cy="34" r="2.5" fill="#5D7A8C"/>
+        <circle cx="9" cy="18" r="2.5" fill="#5D7A8C"/>
+      </svg>
+      <div class="meta">
+        <span class="tag cat-system">System</span>
+        <span class="tag stat-soon">Coming Soon</span>
+      </div>
+      <h3>Experiment #006</h3>
+      <p>Network diagnostics for the impatient. The roadmap is informal; the experiments are serious.</p>
+      <span class="applink nope">In Progress</span>
+    </article>
+
+  </div>
+</section>
+
+<footer>
+  <p class="ft">
+    © 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
+  </p>
+  <p class="ft row">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/mac-vendor-lookup/">MAC Vendor Lookup</a>
+  </p>
+</footer>
+
+<script>
+const c=document.getElementById('n'),x=c.getContext('2d');
+let w,h;const N=50,P=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}
+addEventListener('resize',r);r();
+class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.5;this.vy=(Math.random()-.5)*.5;this.r=Math.random()*1.6+.9}
+u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
+d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.45)';x.fill()}}
+for(let i=0;i<N;i++)P.push(new M());
+function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<150){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.06*(1-d/150)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
+A();
+
+document.querySelectorAll('.fil').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.fil').forEach(f=>f.classList.remove('on'));
+  b.classList.add('on');
+  const k=b.dataset.filter;
+  document.querySelectorAll('.card').forEach(C=>C.classList.toggle('hide',k!=='all'&&C.dataset.category!==k));
+}));
+
+console.log('%cChoate Labs','color:#E67E22;font-size:14px;font-weight:bold;','\nNice terminal. We respect the inspect element.');
+
+const K=[38,38,40,40,37,39,37,39,66,65];let p=0;
+addEventListener('keydown',e=>{if(e.keyCode===K[p]){p++;if(p===K.length){const g=document.createElement('div');g.className='goat';g.textContent='🐐';g.style.animation='run 3s linear forwards';document.body.appendChild(g);setTimeout(()=>g.remove(),3000);p=0}}else p=0;});
+</script>
+
+</body>
+</html>
