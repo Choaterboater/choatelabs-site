@@ -1,0 +1,21 @@
+# Files Wrangler should NOT upload as static site assets
+
+.git/
+.git/**
+
+.gitignore
+.assetsignore
+
+# Documentation, not for the live site
+DEPLOY.md
+
+# Wrangler internals (auto-generated during build)
+.wrangler/
+.wrangler/**
+wrangler.jsonc
+wrangler.toml
+node_modules/
+.cache/
+
+# macOS
+.DS_Store
