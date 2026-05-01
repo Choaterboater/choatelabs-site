@@ -11,12 +11,15 @@ website/
 ├── index.html                       → choatelabs.app/
 ├── about.html                       → choatelabs.app/about.html
 ├── 404.html                         → served on any unknown path
-├── _redirects                       → .com & www.* → apex (Cloudflare-specific)
+├── .assetsignore                    → tells Wrangler which files NOT to ship
 ├── DEPLOY.md                        → (this file, don't deploy)
 └── mac-vendor-lookup/
     ├── index.html                   → choatelabs.app/mac-vendor-lookup/
     ├── privacy.html                 → choatelabs.app/mac-vendor-lookup/privacy.html
     └── support.html                 → choatelabs.app/mac-vendor-lookup/support.html
+
+Note: cross-domain redirects (.com → .app, www → apex) are handled at the
+DNS layer via Porkbun's URL Forwarding, not via _redirects. See Step 3.
 ```
 
 The Swift app and App Store listing reference these exact paths. Don't rename them.
