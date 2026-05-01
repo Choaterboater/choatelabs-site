@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Choate Labs</title>
+<meta name="description" content="Choate Labs is the independent software practice of Stephen Choate. Native iOS, no VC, no AI slop — just software that ships.">
+<meta name="theme-color" content="#0C0F14">
+<link rel="canonical" href="https://choatelabs.app/about.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0C0F14;--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--slate:#5D7A8C}
+
+*{box-sizing:border-box;margin:0}
+body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.18;pointer-events:none}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.95) 0%,transparent 100%)}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
+.brand svg{width:30px;height:30px}
+.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
+.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
+.links{display:flex;gap:1.5rem;list-style:none}
+.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
+.links a:hover{opacity:1}
+.links a.on{opacity:1;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--copper)}
+@media(max-width:600px){.links{display:none}}
+
+main{position:relative;z-index:10;max-width:740px;margin:0 auto;padding:7rem 1.5rem 5rem}
+
+h1{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:1.5rem}
+.lead{font-size:clamp(1.1rem,2.2vw,1.35rem);opacity:.7;max-width:55ch;margin-bottom:3rem}
+.rule{height:1px;background:rgba(244,246,240,.08);margin:3rem 0;border:none}
+
+h2{font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;opacity:.45;margin-bottom:1.25rem}
+p{margin-bottom:1.25rem;font-size:1.05rem;opacity:.85}
+p strong{color:var(--chalk);opacity:1}
+
+.principles{display:grid;gap:1.5rem;margin:2.5rem 0}
+.principle{display:flex;gap:1rem;align-items:flex-start}
+.principle-num{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--copper);opacity:.8;min-width:2ch}
+.principle-body h3{font-size:1.1rem;margin-bottom:.25rem;letter-spacing:-.01em}
+.principle-body p{font-size:.95rem;opacity:.65;margin:0}
+
+.sig{margin-top:4rem;padding:2rem;background:rgba(22,27,34,.5);border:1px solid rgba(244,246,240,.06);border-radius:10px}
+.sig-mark{width:48px;height:48px;margin-bottom:1rem}
+.sig-name{font-size:1.15rem;font-weight:700;margin-bottom:.25rem}
+.sig-role{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.5;text-transform:uppercase;letter-spacing:.05em}
+.sig-contact{margin-top:1.25rem;display:flex;gap:1rem;flex-wrap:wrap}
+.sig-contact a{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--copper);text-decoration:none;border-bottom:1px solid rgba(230,126,34,.25);padding-bottom:1px;transition:border-color .2s}
+.sig-contact a:hover{border-color:var(--copper)}
+
+footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
+.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
+.ft a{color:var(--chalk);opacity:.7;text-decoration:none}
+.ft a:hover{opacity:1;text-decoration:underline}
+.ft .row{margin-top:.5rem}
+.ft .row a{margin:0 .6rem}
+</style>
+</head>
+<body>
+
+<canvas id="n"></canvas>
+
+<nav>
+  <a href="/" class="brand">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
+      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
+      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    </svg>
+    <div>
+      <span class="bw">Choate</span>
+      <span class="bl">Labs</span>
+    </div>
+  </a>
+  <ul class="links mono">
+    <li><a href="/#bench">Work</a></li>
+    <li><a href="/about.html" class="on">About</a></li>
+    <li><a href="mailto:stephen.choate@choatelabs.com">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <h1>Built in the dark, shipped at dawn.</h1>
+  <p class="lead">Choate Labs is the independent software practice of Stephen Choate. Native iOS. No venture capital. No roadmap theater. No AI slop. Just software that ships.</p>
+
+  <hr class="rule">
+
+  <h2 class="mono">The Foundry</h2>
+  <p>Most apps are built to <strong>capture attention</strong>. Choate Labs builds them to <strong>map connection</strong> — between people, between assets, between ideas. Every product on the bench is an experiment in network topology.</p>
+  <p>MAC Vendor Lookup started because every IT pro alive has typed an OUI into a search box one too many times. Threadback started because genealogy software still looks like tax software. The trade tools started because the market is the most brutal social network alive, and nobody has built a decent graph for it.</p>
+  <p>If it doesn't fit in your pocket, it doesn't ship. If it needs a tutorial, it's broken. If it sells your data, we don't build it.</p>
+
+  <hr class="rule">
+
+  <h2 class="mono">Operating Principles</h2>
+  <div class="principles">
+    <div class="principle">
+      <span class="principle-num">01</span>
+      <div class="principle-body">
+        <h3>Network-first design</h3>
+        <p>Everything is a graph. Family trees, server racks, MAC tables, price action. The interface should reveal the topology, not bury it.</p>
+      </div>
+    </div>
+    <div class="principle">
+      <span class="principle-num">02</span>
+      <div class="principle-body">
+        <h3>Privacy by default</h3>
+        <p>No data brokers. No ad networks. No "anonymized" enrichment. Your network is yours; we are just the lens.</p>
+      </div>
+    </div>
+    <div class="principle">
+      <span class="principle-num">03</span>
+      <div class="principle-body">
+        <h3>Native only</h3>
+        <p>iOS is the substrate. Built for Metal, for SwiftData, for the constraints of actual silicon. Not Electron. Not React Native. Swift and sweat.</p>
+      </div>
+    </div>
+    <div class="principle">
+      <span class="principle-num">04</span>
+      <div class="principle-body">
+        <h3>Ship, then iterate</h3>
+        <p>Version 1.0 is a hypothesis. Version 2.0 is the experiment confirmed. We do not wait for perfect; we wait for coherent.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <h2 class="mono">Yes, like the prep school.</h2>
+  <p>No, not that one. But if you went there and you are looking for a boarding-school reunion app, it'll be considered for Experiment #007.</p>
+
+  <div class="sig">
+    <svg class="sig-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
+      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
+      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    </svg>
+    <p class="sig-name">Stephen Choate</p>
+    <p class="sig-role mono">Principal Investigator</p>
+    <div class="sig-contact">
+      <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
+      <a href="/#bench">View the Bench</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p class="ft">
+    © 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
+  </p>
+  <p class="ft row">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/mac-vendor-lookup/">MAC Vendor Lookup</a>
+  </p>
+</footer>
+
+<script>
+const c=document.getElementById('n'),x=c.getContext('2d');
+let w,h;const N=40,P=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}
+addEventListener('resize',r);r();
+class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;this.r=Math.random()*1.4+.8}
+u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
+d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.4)';x.fill()}}
+for(let i=0;i<N;i++)P.push(new M());
+function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.05*(1-d/160)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
+A();
+</script>
+
+</body>
+</html>
