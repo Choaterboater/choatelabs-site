@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — RackBeacon · Choate Labs</title>
+<meta name="description" content="RackBeacon is fully offline. We collect no data, run no analytics, and use no third-party SDKs.">
+<meta name="theme-color" content="#0C0F14">
+<link rel="canonical" href="https://choatelabs.app/rackbeacon/privacy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0C0F14;--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--slate:#5D7A8C}
+
+*{box-sizing:border-box;margin:0}
+body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.65;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.12;pointer-events:none}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.95) 0%,transparent 100%)}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
+.brand svg{width:30px;height:30px}
+.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
+.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
+.links{display:flex;gap:1.5rem;list-style:none}
+.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
+.links a:hover{opacity:1}
+.links a.on{opacity:1;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--mint)}
+@media(max-width:600px){.links{display:none}}
+
+main{position:relative;z-index:10;max-width:740px;margin:0 auto;padding:7rem 1.5rem 5rem}
+
+h1{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:.5rem;letter-spacing:-.03em}
+.updated{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45;text-transform:uppercase;letter-spacing:.08em;margin:0 0 2rem}
+
+.callout{background:rgba(22,27,34,.6);border:1px solid rgba(244,246,240,.06);border-left:3px solid var(--mint);padding:1.25rem 1.5rem;border-radius:8px;margin:0 0 2.5rem;backdrop-filter:blur(10px)}
+.callout strong{color:var(--chalk)}
+
+h2{font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;opacity:.5;margin:2.5rem 0 1rem}
+h2.mono{margin:2.5rem 0 1rem}
+p{margin-bottom:1rem;font-size:1rem;opacity:.85}
+p strong{color:var(--chalk);opacity:1}
+ul{margin:0 0 1rem;padding-left:1.5rem}
+ul li{margin:.5rem 0;opacity:.85}
+ul li strong{color:var(--chalk);opacity:1}
+em{color:var(--mint);font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.92em}
+a{color:var(--mint);text-decoration:none;border-bottom:1px solid rgba(88,214,141,.3)}
+a:hover{border-color:var(--mint)}
+
+footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
+.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
+.ft a{color:var(--chalk);opacity:.7;text-decoration:none;border:none}
+.ft a:hover{opacity:1;text-decoration:underline}
+.ft .row{margin-top:.5rem}
+.ft .row a{margin:0 .6rem}
+</style>
+</head>
+<body>
+
+<canvas id="n"></canvas>
+
+<nav>
+  <a href="/" class="brand">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
+      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
+      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    </svg>
+    <div>
+      <span class="bw">Choate</span>
+      <span class="bl">Labs</span>
+    </div>
+  </a>
+  <ul class="links mono">
+    <li><a href="/rackbeacon/">RackBeacon</a></li>
+    <li><a href="privacy.html" class="on">Privacy</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+</nav>
+
+<main>
+  <h1>Privacy Policy</h1>
+  <p class="updated">RackBeacon · Effective May 1, 2026</p>
+
+  <div class="callout">
+    <p><strong>Short version:</strong> RackBeacon is a fully offline tool. We do not collect, store, transmit, share, or sell any of your data. There is no analytics, no telemetry, no advertising, and no third-party SDKs in the app.</p>
+  </div>
+
+  <h2 class="mono">What we collect</h2>
+  <p>Nothing. The app contains no network code. There is no server to send data to. Your device never contacts Choate Labs at any point.</p>
+
+  <h2 class="mono">What stays on your device</h2>
+  <ul>
+    <li><strong>Rack layouts and device records.</strong> Every rack you build, every device you place, every port assignment — stored in the app's local database.</li>
+    <li><strong>Floor plans and room scans.</strong> Apple RoomPlan output, multi-room stitches, annotations, and cable runs are written to the app's Documents folder.</li>
+    <li><strong>Photos of device labels.</strong> Saved to RackBeacon's app Documents folder for reference. They are not added to your iOS Photos library.</li>
+    <li><strong>Notes, serial numbers, MAC addresses, model strings.</strong> Local only. Never transmitted.</li>
+    <li><strong>Camera frames.</strong> Used in real time for on-device text and barcode recognition (Apple Vision and DataScannerViewController). Frames used only for OCR are never written to disk.</li>
+  </ul>
+  <p>You can delete any rack, device, plan, or photo at any time from inside the app. Uninstalling RackBeacon removes everything.</p>
+
+  <h2 class="mono">Permissions</h2>
+  <p>The app requests one permission, only when you first tap a feature that needs it:</p>
+  <ul>
+    <li><strong>Camera</strong> — used for on-device label scanning (serial / MAC / barcode OCR) and for Apple RoomPlan room capture. Frames are processed locally and either discarded immediately or, when you explicitly save a label photo, written to the app's own Documents folder.</li>
+  </ul>
+  <p>You can revoke this permission at any time in <em>Settings → RackBeacon → Camera</em>. The rest of the app continues to work without it.</p>
+
+  <h2 class="mono">Third-party services</h2>
+  <p>None. The app uses only Apple's built-in frameworks (SwiftUI, RoomPlan, Vision, AVFoundation, DataScannerViewController). There are no advertising SDKs, analytics SDKs, crash-reporting SDKs, or any other third-party libraries linked into the binary.</p>
+
+  <h2 class="mono">Device library</h2>
+  <p>The app bundles a static catalog of network and infrastructure hardware models — Aruba CX, Cisco Catalyst / Nexus / ISR / ASR / Firepower / UCS, Juniper EX/QFX/SRX/MX, Fortinet, Palo Alto PA, HPE ProLiant, APC Smart-UPS — used for U-size, port-layout, and faceplate rendering. This is factual product reference data; it does not contain personal information.</p>
+
+  <h2 class="mono">Children</h2>
+  <p>This app is rated 4+ and is appropriate for all ages. We do not knowingly collect any data from children, because we do not knowingly collect any data from anyone.</p>
+
+  <h2 class="mono">Changes</h2>
+  <p>If this policy ever changes, the updated version will appear at this URL. The effective date at the top will reflect the change.</p>
+
+  <h2 class="mono">Contact</h2>
+  <p>Questions? Email <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>.</p>
+</main>
+
+<footer>
+  <p class="ft">
+    © 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
+  </p>
+  <p class="ft row">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/rackbeacon/">RackBeacon</a>
+    <a href="support.html">Support</a>
+  </p>
+</footer>
+
+<script>
+const c=document.getElementById('n'),x=c.getContext('2d');
+let w,h;const N=30,P=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}
+addEventListener('resize',r);r();
+class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.r=Math.random()*1.2+.8}
+u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
+d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.35)';x.fill()}}
+for(let i=0;i<N;i++)P.push(new M());
+function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<170){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.04*(1-d/170)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
+A();
+</script>
+
+</body>
+</html>

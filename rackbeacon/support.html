@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — RackBeacon · Choate Labs</title>
+<meta name="description" content="Help, FAQ, and contact for RackBeacon. Email is the fastest path.">
+<meta name="theme-color" content="#0C0F14">
+<link rel="canonical" href="https://choatelabs.app/rackbeacon/support.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0C0F14;--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--slate:#5D7A8C}
+
+*{box-sizing:border-box;margin:0}
+body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.65;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.12;pointer-events:none}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.95) 0%,transparent 100%)}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
+.brand svg{width:30px;height:30px}
+.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
+.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
+.links{display:flex;gap:1.5rem;list-style:none}
+.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
+.links a:hover{opacity:1}
+.links a.on{opacity:1;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--mint)}
+@media(max-width:600px){.links{display:none}}
+
+main{position:relative;z-index:10;max-width:740px;margin:0 auto;padding:7rem 1.5rem 5rem}
+
+h1{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:.5rem;letter-spacing:-.03em}
+.lede{font-size:1.1rem;opacity:.7;margin:0 0 2rem}
+
+.contact-card{background:rgba(22,27,34,.6);border:1px solid rgba(244,246,240,.06);border-radius:10px;padding:1.75rem;margin:0 0 3rem;backdrop-filter:blur(10px)}
+.contact-card h2{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;text-transform:none;letter-spacing:-.01em;opacity:1;margin-bottom:.4rem}
+.contact-card p{margin:0 0 1rem;opacity:.7}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;background:var(--mint);color:var(--noir);border:1px solid var(--mint);transition:all .2s;border-radius:0}
+.btn:hover{background:transparent;color:var(--chalk)}
+
+h2{font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;opacity:.5;margin:2.5rem 0 1rem}
+p{margin-bottom:1rem;font-size:1rem;opacity:.85}
+
+details{background:rgba(22,27,34,.5);border:1px solid rgba(244,246,240,.06);border-radius:8px;padding:1rem 1.25rem;margin:.75rem 0;backdrop-filter:blur(10px);transition:border-color .2s}
+details[open]{border-color:rgba(88,214,141,.3)}
+details summary{font-weight:600;cursor:pointer;list-style:none;color:var(--chalk);font-size:1rem;display:flex;justify-content:space-between;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";font-family:'JetBrains Mono',monospace;color:var(--mint);font-weight:400;transition:transform .2s}
+details[open] summary::after{content:"\2212"}
+details p{margin:1rem 0 0;opacity:.7;font-size:.95rem}
+details ul{margin:1rem 0 0;padding-left:1.4rem}
+details ul li{margin:.4rem 0;opacity:.75;font-size:.95rem}
+details code{font-family:'JetBrains Mono',monospace;background:rgba(12,15,20,.7);padding:.15rem .4rem;border-radius:3px;font-size:.85em;color:var(--mint)}
+details a{color:var(--mint);text-decoration:none;border-bottom:1px solid rgba(88,214,141,.3)}
+details a:hover{border-color:var(--mint)}
+
+footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
+.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
+.ft a{color:var(--chalk);opacity:.7;text-decoration:none}
+.ft a:hover{opacity:1;text-decoration:underline}
+.ft .row{margin-top:.5rem}
+.ft .row a{margin:0 .6rem}
+</style>
+</head>
+<body>
+
+<canvas id="n"></canvas>
+
+<nav>
+  <a href="/" class="brand">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
+      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
+      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    </svg>
+    <div>
+      <span class="bw">Choate</span>
+      <span class="bl">Labs</span>
+    </div>
+  </a>
+  <ul class="links mono">
+    <li><a href="/rackbeacon/">RackBeacon</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="support.html" class="on">Support</a></li>
+  </ul>
+</nav>
+
+<main>
+  <h1>Support</h1>
+  <p class="lede">Questions, bugs, feature requests, and rack-layout weirdness — happy to help.</p>
+
+  <div class="contact-card">
+    <h2>Email is the fastest path.</h2>
+    <p>Choate Labs is a one-person studio. Email lands directly with the developer, usually answered within a day or two.</p>
+    <a class="btn" href="mailto:stephen.choate@choatelabs.com?subject=RackBeacon%20Support">Email Support</a>
+  </div>
+
+  <h2 class="mono">Frequently asked questions</h2>
+
+  <details>
+    <summary>How do I create my first rack?</summary>
+    <p>Tap the <strong>Racks</strong> tab, then the <code>+</code> button. Give the rack a name and pick a U size (4U through 52U). Tap any empty U slot to add a device — you can pick from the bundled library or create a custom entry. Devices snap to their actual U height; the faceplate renders automatically.</p>
+  </details>
+
+  <details>
+    <summary>Does the camera scanner work offline?</summary>
+    <p>Yes. OCR runs entirely on-device through Apple's Vision framework and DataScannerViewController. There is no network code in the app at all. It works on a plane, in a basement, or any closet that has lost its uplink.</p>
+  </details>
+
+  <details>
+    <summary>What devices are pre-loaded in the library?</summary>
+    <p>Out of the box, RackBeacon ships models for:</p>
+    <ul>
+      <li>Aruba CX 6000 / 8000 / 9000 / 10000 series</li>
+      <li>Cisco Catalyst 9k, Nexus, ISR, ASR, Firepower, UCS</li>
+      <li>Juniper EX, QFX, SRX, MX</li>
+      <li>Fortinet FortiGate and FortiSwitch</li>
+      <li>Palo Alto Networks PA series</li>
+      <li>HPE ProLiant servers</li>
+      <li>APC Smart-UPS</li>
+    </ul>
+    <p>Each entry includes U size and port layout so the faceplate renders correctly. If something you use isn't in the library, you can add a custom device — and email a request to get it added to the next bundled release.</p>
+  </details>
+
+  <details>
+    <summary>What devices do I need for room capture?</summary>
+    <p>Floor-plan capture uses Apple <strong>RoomPlan</strong>, which requires a LiDAR sensor. That means an iPhone Pro 12 or newer, or an iPad Pro 2020 or newer. This is a hardware limitation of Apple RoomPlan, not the app.</p>
+    <p>Everything else — racks, devices, the camera scanner, exports — works on any iPhone or iPad running iOS 18+.</p>
+  </details>
+
+  <details>
+    <summary>Can I export to NetBox?</summary>
+    <p>Yes. Use <strong>Export → CSV</strong> to get a NetBox-compatible CSV — one rack per file. The columns line up with NetBox's device-import schema. Full-site JSON export is also available, and floor plans export as SVG.</p>
+  </details>
+
+  <details>
+    <summary>Will my data sync across devices?</summary>
+    <p>Not in v1.0. Each device's data lives in its own RackBeacon Documents folder. iCloud sync is on the roadmap for v1.1. In the meantime, the JSON export is a clean way to move a project from iPhone to iPad or to back it up.</p>
+  </details>
+
+  <details>
+    <summary>The camera scan didn't read my label.</summary>
+    <p>Try these in order:</p>
+    <ul>
+      <li>Tap the label inside the reticle to focus.</li>
+      <li>Turn on the torch if the label is dim or chrome-finished.</li>
+      <li>Get closer — most equipment labels are tiny. The camera prefers about 4–8 inches.</li>
+      <li>Make sure the field you want (serial, MAC, IMEI) is fully visible inside the frame.</li>
+      <li>For a stubborn label, take a still photo and let the OCR run on the captured image instead.</li>
+    </ul>
+    <p>If OCR consistently fails on a label that's clearly readable to you, email a photo and we'll improve it.</p>
+  </details>
+
+  <details>
+    <summary>I have a feature request.</summary>
+    <p>Yes please. The roadmap is informal and friendly to suggestions from real users. Email <a href="mailto:stephen.choate@choatelabs.com?subject=RackBeacon%20Feature%20Request">stephen.choate@choatelabs.com</a> with what you'd like and how you'd use it.</p>
+  </details>
+
+  <details>
+    <summary>Something crashed.</summary>
+    <p>Email <a href="mailto:stephen.choate@choatelabs.com?subject=RackBeacon%20Bug">stephen.choate@choatelabs.com</a> with your iOS version, device model, and what you were doing when it happened. Screenshots or a screen recording make a real difference.</p>
+  </details>
+
+  <details>
+    <summary>What about MAC Vendor Lookup integration?</summary>
+    <p>RackBeacon doesn't currently look up MAC vendors via Shortcuts — that integration with the sibling app, <a href="/mac-vendor-lookup/">MAC Vendor Lookup</a>, is planned for v1.1. For now, copy a MAC out of RackBeacon and paste it into MAC Vendor Lookup when you need the OUI.</p>
+  </details>
+
+  <details>
+    <summary>What does the app collect about me?</summary>
+    <p>Nothing. See the <a href="privacy.html">privacy policy</a> for the full breakdown.</p>
+  </details>
+</main>
+
+<footer>
+  <p class="ft">
+    © 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
+  </p>
+  <p class="ft row">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/rackbeacon/">RackBeacon</a>
+    <a href="privacy.html">Privacy</a>
+  </p>
+</footer>
+
+<script>
+const c=document.getElementById('n'),x=c.getContext('2d');
+let w,h;const N=30,P=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}
+addEventListener('resize',r);r();
+class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.r=Math.random()*1.2+.8}
+u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
+d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.35)';x.fill()}}
+for(let i=0;i<N;i++)P.push(new M());
+function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<170){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.04*(1-d/170)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
+A();
+</script>
+
+</body>
+</html>
