@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RackBeacon — Offline rack, closet &amp; comms-room documentation · Choate Labs</title>
+<meta name="description" content="Document any rack, closet, or comms room from your iPhone. Camera-scan serials and MACs, build U-by-U rack layouts, capture floor plans with LiDAR — all offline. By Choate Labs.">
+<meta name="theme-color" content="#0C0F14">
+<link rel="canonical" href="https://choatelabs.app/rackbeacon/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0C0F14;--glass:rgba(22,27,34,.6);--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--amber:#F1C40F;--iris:#9B59B6;--slate:#5D7A8C}
+
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.18;pointer-events:none}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.95) 0%,transparent 100%)}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
+.brand svg{width:30px;height:30px}
+.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
+.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
+.links{display:flex;gap:1.5rem;list-style:none}
+.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
+.links a:hover{opacity:1}
+@media(max-width:600px){.links{display:none}}
+
+main{position:relative;z-index:10}
+
+.hero{padding:7rem 1.5rem 4rem;max-width:1100px;margin:0 auto;text-align:center}
+.app-badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .7rem;border-radius:999px;color:var(--mint);border:1px solid rgba(88,214,141,.35);display:inline-block;margin-bottom:1.5rem}
+.app-icon{width:96px;height:96px;margin:0 auto 1.5rem;display:block}
+.hero h1{font-size:clamp(2.4rem,5.5vw,3.8rem);line-height:1.1;letter-spacing:-.03em;max-width:18ch;margin:0 auto 1rem}
+.hero h1 .accent{color:var(--mint)}
+.hero p{font-size:clamp(1rem,1.8vw,1.2rem);max-width:54ch;opacity:.7;margin:0 auto 2rem}
+.meta-row{font-family:'JetBrains Mono',monospace;font-size:.75rem;opacity:.5;margin-bottom:2rem}
+.meta-row .dot{margin:0 .6rem}
+.cta{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .2s}
+.btn-mint{background:var(--mint);border-color:var(--mint);color:var(--noir)}
+.btn-mint:hover{background:transparent;color:var(--chalk)}
+.btn-disabled{background:transparent;border-color:rgba(88,214,141,.35);color:var(--mint);opacity:.7;cursor:not-allowed;pointer-events:none}
+.btn-ghost{border-color:rgba(244,246,240,.18);color:var(--chalk)}
+.btn-ghost:hover{border-color:var(--chalk)}
+
+.features{padding:4rem 1.5rem 2rem;max-width:1100px;margin:0 auto}
+.section-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.45;margin-bottom:2rem;text-align:center}
+.fgrid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.feature{background:var(--glass);border:1px solid rgba(244,246,240,.06);border-radius:10px;padding:1.6rem;backdrop-filter:blur(10px);transition:transform .2s,border-color .2s}
+.feature:hover{transform:translateY(-3px);border-color:rgba(244,246,240,.12)}
+.feature .ic{font-family:'JetBrains Mono',monospace;font-size:1.4rem;color:var(--mint);margin-bottom:.6rem;line-height:1}
+.feature h3{font-size:1.05rem;margin-bottom:.4rem;letter-spacing:-.01em}
+.feature p{font-size:.9rem;opacity:.65;margin:0;line-height:1.5}
+
+.privacy-block{padding:5rem 1.5rem;max-width:760px;margin:0 auto;text-align:center}
+.privacy-block h2{font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:1rem;letter-spacing:-.02em}
+.privacy-block p{opacity:.7;font-size:1.05rem;max-width:55ch;margin:0 auto 1.5rem}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:2rem}
+.tags span{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .8rem;border:1px solid rgba(88,214,141,.3);border-radius:999px;color:var(--mint)}
+.tags span::before{content:"\2713 ";opacity:.7}
+.privacy-block .more{margin-top:2rem}
+.privacy-block .more a{color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:.78rem;text-decoration:none;border-bottom:1px solid rgba(88,214,141,.3);padding-bottom:1px}
+.privacy-block .more a:hover{border-color:var(--mint)}
+
+.audience{padding:4rem 1.5rem;max-width:900px;margin:0 auto}
+.audience h2{font-size:clamp(1.6rem,3vw,2rem);text-align:center;margin-bottom:2rem;letter-spacing:-.02em}
+.aud-grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.aud-grid div{font-size:.95rem;opacity:.7;padding:1rem 1.2rem;border-left:2px solid var(--mint);background:rgba(22,27,34,.4);border-radius:0 6px 6px 0}
+
+footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
+.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
+.ft a{color:var(--chalk);opacity:.7;text-decoration:none}
+.ft a:hover{opacity:1;text-decoration:underline}
+.ft .row{margin-top:.5rem}
+.ft .row a{margin:0 .6rem}
+</style>
+</head>
+<body>
+
+<canvas id="n"></canvas>
+
+<nav>
+  <a href="/" class="brand">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
+      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
+      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    </svg>
+    <div>
+      <span class="bw">Choate</span>
+      <span class="bl">Labs</span>
+    </div>
+  </a>
+  <ul class="links mono">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <span class="app-badge">Specimen #002 · Asset</span>
+    <svg class="app-icon" viewBox="0 0 96 96" fill="none">
+      <rect x="2" y="2" width="92" height="92" rx="22" fill="#0C0F14" stroke="#1E2D5C" stroke-width="2"/>
+      <rect x="20" y="14" width="14" height="68" rx="2" stroke="#58D68D" stroke-width="2.5"/>
+      <rect x="40" y="26" width="14" height="56" rx="2" stroke="#58D68D" stroke-width="2.5"/>
+      <rect x="60" y="40" width="10" height="42" rx="2" stroke="#58D68D" stroke-width="2.5"/>
+      <circle cx="65" cy="22" r="7" fill="#58D68D"/>
+      <circle cx="65" cy="22" r="3" fill="#0C0F14"/>
+    </svg>
+    <h1>Document any rack, <span class="accent">any closet, any time</span>.</h1>
+    <p>RackBeacon turns your iPhone into the field tool you wish you'd had on day one — camera-scan serials and MACs, build U-by-U rack layouts, capture floor plans with LiDAR. All offline.</p>
+    <p class="meta-row mono">iPhone &amp; iPad <span class="dot">·</span> iOS 18+ <span class="dot">·</span> Coming Soon</p>
+    <div class="cta">
+      <span class="btn btn-disabled">Coming Soon to the App Store</span>
+      <a href="#features" class="btn btn-ghost">See Features</a>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <p class="section-title">Field Capabilities</p>
+    <div class="fgrid">
+
+      <div class="feature">
+        <div class="ic">▤</div>
+        <h3>Rack visualization</h3>
+        <p>Build racks from 4U to 52U with port-accurate faceplates — copper, SFP, SFP+, QSFP. Drag a device to its U, see exactly what plugs where.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⊟</div>
+        <h3>Pre-loaded device library</h3>
+        <p>Aruba CX 6000–10000, Cisco Catalyst 9k / Nexus / ISR / ASR / Firepower / UCS, Juniper EX/QFX/SRX/MX, Fortinet, Palo Alto PA, HPE ProLiant, APC Smart-UPS — already modeled.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">▢</div>
+        <h3>Camera scanner</h3>
+        <p>On-device Vision OCR pulls serial numbers, model strings, MACs, BLE MACs, and IMEIs straight off device labels. Code 128, Code 39, Data Matrix, QR.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⌖</div>
+        <h3>Floor plan capture</h3>
+        <p>Walk a comms room with a LiDAR-equipped iPhone Pro or iPad Pro and Apple RoomPlan returns a clean 3D plan. Multi-room scans stitch into one building.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⌬</div>
+        <h3>Annotations &amp; cable runs</h3>
+        <p>Drop racks, devices, notes, and cable runs onto the floor plan. The closet finally looks like a network, not a memory.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⇄</div>
+        <h3>CSV / JSON / SVG export</h3>
+        <p>Per-rack CSV (NetBox-friendly), full-site JSON, and floor plans as SVG. CSV import means round-trips with the rest of your tooling.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">◎</div>
+        <h3>100% offline</h3>
+        <p>No accounts. No analytics. No third-party SDKs. No network code in the binary. Your rack, your data, your device.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⊕</div>
+        <h3>Universal app</h3>
+        <p>iPhone for the field, iPad for the close-up. Same project file, same camera scanner, same export. Built native for both form factors.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="privacy-block">
+    <p class="section-title">No data leaves the lab.</p>
+    <h2>Built private by default.</h2>
+    <p>RackBeacon is fully offline. There is no network code in the binary. Your rack layouts, floor plans, photos of device labels, notes, and serials stay on your device.</p>
+    <div class="tags">
+      <span>No accounts</span>
+      <span>No tracking</span>
+      <span>No analytics</span>
+      <span>No third-party SDKs</span>
+      <span>No advertising</span>
+      <span>No telemetry</span>
+    </div>
+    <p class="more"><a href="privacy.html">Read the full privacy policy →</a></p>
+  </section>
+
+  <section class="audience">
+    <h2>Built for the comms room.</h2>
+    <div class="aud-grid">
+      <div>Network engineers documenting racks before, during, and after a refresh.</div>
+      <div>MSPs walking new customer sites who need a rack diagram by lunch.</div>
+      <div>Field techs labelling, scanning, and inventorying the gear they touch.</div>
+      <div>IT teams maintaining a living source of truth for closets and IDFs.</div>
+      <div>Sysadmins who'd rather scan a serial than type one with thumbs.</div>
+      <div>Anyone who has ever opened a rack and wished it had a manifest.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="ft">
+    © 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
+  </p>
+  <p class="ft row">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="support.html">Support</a>
+  </p>
+</footer>
+
+<script>
+const c=document.getElementById('n'),x=c.getContext('2d');
+let w,h;const N=40,P=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}
+addEventListener('resize',r);r();
+class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;this.r=Math.random()*1.4+.8}
+u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
+d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.4)';x.fill()}}
+for(let i=0;i<N;i++)P.push(new M());
+function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.05*(1-d/160)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
+A();
+</script>
+
+</body>
+</html>
