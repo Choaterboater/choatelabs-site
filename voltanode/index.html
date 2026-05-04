@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoltaNode — Multi-strategy paper-trading bot platform · Choate Labs</title>
+<meta name="description" content="A multi-strategy paper-trading bot platform — EMA / MACD / mean-reversion / news-sentiment bots ride 24/7 crypto and market-hours stocks through Alpaca, with an LLM advisor stitching fundamentals, technicals, macro and recent catalysts into one thesis. By Choate Labs.">
+<meta name="theme-color" content="#0C0F14">
+<link rel="canonical" href="https://choatelabs.app/voltanode/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0C0F14;--glass:rgba(22,27,34,.6);--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--amber:#F1C40F;--iris:#9B59B6;--slate:#5D7A8C}
+
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.18;pointer-events:none}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.95) 0%,transparent 100%)}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
+.brand svg{width:30px;height:30px}
+.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
+.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
+.links{display:flex;gap:1.5rem;list-style:none}
+.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
+.links a:hover{opacity:1}
+@media(max-width:600px){.links{display:none}}
+
+main{position:relative;z-index:10}
+
+.hero{padding:7rem 1.5rem 4rem;max-width:1100px;margin:0 auto;text-align:center}
+.app-badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .7rem;border-radius:999px;color:var(--copper);border:1px solid rgba(230,126,34,.4);display:inline-block;margin-bottom:1.5rem}
+.app-icon{width:96px;height:96px;margin:0 auto 1.5rem;display:block}
+.hero h1{font-size:clamp(2.4rem,5.5vw,3.8rem);line-height:1.1;letter-spacing:-.03em;max-width:18ch;margin:0 auto 1rem}
+.hero h1 .accent{color:var(--copper)}
+.hero p{font-size:clamp(1rem,1.8vw,1.2rem);max-width:54ch;opacity:.7;margin:0 auto 2rem}
+.meta-row{font-family:'JetBrains Mono',monospace;font-size:.75rem;opacity:.5;margin-bottom:2rem}
+.meta-row .dot{margin:0 .6rem}
+.cta{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .2s}
+.btn-copper{background:var(--copper);border-color:var(--copper);color:var(--noir)}
+.btn-copper:hover{background:transparent;color:var(--chalk)}
+.btn-disabled{background:transparent;border-color:rgba(230,126,34,.4);color:var(--copper);opacity:.7;cursor:not-allowed;pointer-events:none}
+.btn-ghost{border-color:rgba(244,246,240,.18);color:var(--chalk)}
+.btn-ghost:hover{border-color:var(--chalk)}
+
+.features{padding:4rem 1.5rem 2rem;max-width:1100px;margin:0 auto}
+.section-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.45;margin-bottom:2rem;text-align:center}
+.fgrid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.feature{background:var(--glass);border:1px solid rgba(244,246,240,.06);border-radius:10px;padding:1.6rem;backdrop-filter:blur(10px);transition:transform .2s,border-color .2s}
+.feature:hover{transform:translateY(-3px);border-color:rgba(244,246,240,.12)}
+.feature .ic{font-family:'JetBrains Mono',monospace;font-size:1.4rem;color:var(--copper);margin-bottom:.6rem;line-height:1}
+.feature h3{font-size:1.05rem;margin-bottom:.4rem;letter-spacing:-.01em}
+.feature p{font-size:.9rem;opacity:.65;margin:0;line-height:1.5}
+
+.stack{padding:4.5rem 1.5rem;max-width:900px;margin:0 auto;text-align:center}
+.stack h2{font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:1rem;letter-spacing:-.02em}
+.stack p{opacity:.7;font-size:1.05rem;max-width:60ch;margin:0 auto 2rem}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:2rem}
+.tags span{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem .8rem;border:1px solid rgba(230,126,34,.3);border-radius:999px;color:var(--copper)}
+
+.bots{padding:4rem 1.5rem;max-width:900px;margin:0 auto}
+.bots h2{font-size:clamp(1.6rem,3vw,2rem);text-align:center;margin-bottom:2rem;letter-spacing:-.02em}
+.bot-grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.bot-grid div{font-size:.95rem;padding:1rem 1.2rem;border-left:2px solid var(--copper);background:rgba(22,27,34,.4);border-radius:0 6px 6px 0}
+.bot-grid div strong{color:var(--copper);font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.02em;display:block;margin-bottom:.25rem}
+.bot-grid div span{opacity:.7}
+
+.disclaimer{padding:3rem 1.5rem 5rem;max-width:760px;margin:0 auto;text-align:center}
+.disclaimer p{opacity:.5;font-size:.85rem;font-family:'JetBrains Mono',monospace;line-height:1.7}
+
+footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
+.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
+.ft a{color:var(--chalk);opacity:.7;text-decoration:none}
+.ft a:hover{opacity:1;text-decoration:underline}
+.ft .row{margin-top:.5rem}
+.ft .row a{margin:0 .6rem}
+</style>
+</head>
+<body>
+
+<canvas id="n"></canvas>
+
+<nav>
+  <a href="/" class="brand">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
+      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
+      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    </svg>
+    <div>
+      <span class="bw">Choate</span>
+      <span class="bl">Labs</span>
+    </div>
+  </a>
+  <ul class="links mono">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="mailto:stephen.choate@choatelabs.com">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <span class="app-badge">Specimen #003 · Market</span>
+    <svg class="app-icon" viewBox="0 0 96 96" fill="none">
+      <rect x="2" y="2" width="92" height="92" rx="22" fill="#0C0F14" stroke="#3A2418" stroke-width="2"/>
+      <path d="M14 72 L30 56 L46 64 L62 30 L82 44" stroke="#E67E22" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="30" cy="56" r="5" fill="#E67E22"/>
+      <circle cx="46" cy="64" r="5" fill="#E67E22"/>
+      <circle cx="62" cy="30" r="6" fill="#F4F6F0"/>
+      <path d="M14 82 L82 82" stroke="#E67E22" stroke-width="1.5" opacity="0.25"/>
+    </svg>
+    <h1>A bench full of bots, <span class="accent">trading the topology</span>.</h1>
+    <p>VoltaNode is a multi-strategy paper-trading platform — momentum, MACD, mean-reversion, news-sentiment, and trend-follow bots ride 24/7 crypto and market-hours stocks through Alpaca, while an LLM advisor stitches fundamentals, technicals, macro, and recent catalysts into a single thesis.</p>
+    <p class="meta-row mono">Python &amp; FastAPI <span class="dot">·</span> React &amp; Vite <span class="dot">·</span> Alpaca paper <span class="dot">·</span> Live</p>
+    <div class="cta">
+      <span class="btn btn-disabled">Private Beta</span>
+      <a href="#features" class="btn btn-ghost">See What It Does</a>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <p class="section-title">What's on the bench</p>
+    <div class="fgrid">
+
+      <div class="feature">
+        <div class="ic">⏚</div>
+        <h3>Multi-strategy engine</h3>
+        <p>Momentum, MACD, mean-reversion, breakout, news-sentiment, ensemble-ML, and a permissive trend-follow bot — each running independently on its own ticker set.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⌬</div>
+        <h3>Crypto 24/7, stocks 9:30–16:00 ET</h3>
+        <p>The engine gates equity strategies to US-market hours and lets crypto strategies tick around the clock. No wasted broker calls when the floor is closed.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⊜</div>
+        <h3>LLM research advisor</h3>
+        <p>Claude Haiku for the fast lane, 1T-parameter free-tier models for the heavy lane. Reports fold fundamentals, technicals, sentiment, FRED macro, insider Form 4s, and last week's headlines into one Investment Thesis.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">◷</div>
+        <h3>Per-bar latch</h3>
+        <p>Strategies are evaluated every 5 seconds; bars roll daily. The latch keeps each strategy from re-firing the same crossover hundreds of times within a single bar.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⇩</div>
+        <h3>SELL clamp + dust skip</h3>
+        <p>If a bot signals a SELL larger than the held position, the engine clamps to what's actually owned. Sub-$10 dust gets a single rejection and goes silent for an hour.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⛌</div>
+        <h3>Order debounce</h3>
+        <p>Five-minute cooldown per (strategy, symbol, side) on rejected orders. One-hour suppression for structurally impossible orders. The broker sees signal, never spam.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">▤</div>
+        <h3>Honest dashboard</h3>
+        <p>Real allocation pie from real positions. Em-dashes for stats that need closed trades. No cosmetic fake equity curve climbing while you wait for the first round-trip.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">◉</div>
+        <h3>Macro signals strip</h3>
+        <p>Fear &amp; Greed, VIX, Fed Funds, 10Y, 10Y–2Y spread — pulled from FRED + alternative.me on the dashboard, also fed back into the bots as gates.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="bots">
+    <h2>The strategy roster.</h2>
+    <div class="bot-grid">
+      <div><strong>simple_trend</strong><span>Permissive workhorse — buys when price is above both EMAs, sells when below. One trade per signal flip per bar.</span></div>
+      <div><strong>momentum</strong><span>Classic 12/26 EMA crossover with a 200-EMA trend filter. Fires once per fresh golden / death cross.</span></div>
+      <div><strong>mean_reversion</strong><span>RSI &amp; Bollinger Band touch — buys oversold dips into the lower band, sells overbought touches at the upper.</span></div>
+      <div><strong>macd</strong><span>MACD line crossing the signal line with histogram confirmation. Both directions, per-bar latched.</span></div>
+      <div><strong>news_sentiment</strong><span>VADER local + LLM hybrid scoring on news headlines. Trades sharp shifts in tone with a trend confirmation.</span></div>
+      <div><strong>breakout</strong><span>Multi-timeframe channel breakouts. Buys new highs, shorts new lows on confirmed range exits.</span></div>
+      <div><strong>arbitrage</strong><span>Cross-venue spread detection (paper-mode placeholder until real multi-broker venue support lands).</span></div>
+      <div><strong>ensemble_ml</strong><span>Aggregates the other strategies' signals through a weighted scorer. The committee vote layer.</span></div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <p class="section-title">Built on</p>
+    <h2>Boring stack, careful glue.</h2>
+    <p>FastAPI for the backend, React + Vite for the dashboard, Alpaca for the broker, yfinance &amp; CoinGecko &amp; CoinMarketCap as the price feeds, FRED &amp; Finnhub &amp; alternative.me for the signals, OpenRouter for the LLM advisor.</p>
+    <div class="tags">
+      <span>FastAPI</span>
+      <span>Python 3.14</span>
+      <span>React</span>
+      <span>Vite + TypeScript</span>
+      <span>Alpaca</span>
+      <span>yfinance</span>
+      <span>CoinGecko</span>
+      <span>FRED</span>
+      <span>Finnhub</span>
+      <span>OpenRouter</span>
+      <span>Claude Haiku 4.5</span>
+    </div>
+  </section>
+
+  <section class="disclaimer">
+    <p>Paper trading only. No real money on the line. Not financial advice.<br>
+    Strategies and code are for research and observation, not for blind execution.<br>
+    The bots will lose money on something eventually. That's part of why they're on the bench.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p class="ft">
+    © 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
+  </p>
+  <p class="ft row">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="mailto:stephen.choate@choatelabs.com">Contact</a>
+  </p>
+</footer>
+
+<script>
+const c=document.getElementById('n'),x=c.getContext('2d');
+let w,h;const N=40,P=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}
+addEventListener('resize',r);r();
+class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;this.r=Math.random()*1.4+.8}
+u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
+d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.4)';x.fill()}}
+for(let i=0;i<N;i++)P.push(new M());
+function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.05*(1-d/160)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
+A();
+</script>
+
+</body>
+</html>
