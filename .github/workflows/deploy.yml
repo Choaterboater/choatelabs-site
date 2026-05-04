@@ -1,0 +1,33 @@
+name: Deploy to Cloudflare Pages
+
+# Triggers a Cloudflare Pages deploy whenever main is pushed. Avoids relying
+# on CF's GitHub-side webhook integration, which has been unreliable.
+#
+# Required repo secrets:
+#   CLOUDFLARE_API_TOKEN  - https://dash.cloudflare.com/profile/api-tokens
+#                           (Pages: Edit, Account.Cloudflare Pages: Edit)
+#   CLOUDFLARE_ACCOUNT_ID - https://dash.cloudflare.com/  (right sidebar)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: choatelabs
+          directory: .
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
