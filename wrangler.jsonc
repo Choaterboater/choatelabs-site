@@ -10,5 +10,12 @@
   },
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  "d1_databases": [
+    {
+      "binding": "LUMINA_DB",
+      "database_name": "lumina-leaderboard",
+      "database_id": "8fe6ce8f-73f5-4193-86ed-4d9cda29d24d"
+    }
   ]
 }
