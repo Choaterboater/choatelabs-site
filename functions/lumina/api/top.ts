@@ -5,7 +5,7 @@ import { Env, json, error } from './_shared';
 
 const MAX_LIMIT = 100;
 
-export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
+export async function handleTopGet(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const mode = url.searchParams.get('mode') === 'daily' ? 'daily' : 'global';
   const limit = Math.min(MAX_LIMIT, Math.max(1, Number(url.searchParams.get('limit')) || 50));
@@ -81,4 +81,4 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
       createdAt: r.created_at,
     })),
   });
-};
+}

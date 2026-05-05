@@ -7,7 +7,7 @@ const MIN_RUN_DURATION_MS = 3000;     // ignore impossibly short runs
 const RATE_LIMIT_WINDOW_MS = 30_000;  // 30s window
 const RATE_LIMIT_MAX = 6;             // max 6 submissions per player or per IP per window
 
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+export async function handleScorePost(request: Request, env: Env): Promise<Response> {
   let body: unknown;
   try {
     body = await request.json();
@@ -102,4 +102,4 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     .first<{ rank: number }>();
 
   return json({ ok: true, rank: rankRow?.rank ?? null, mode: 'global' });
-};
+}
