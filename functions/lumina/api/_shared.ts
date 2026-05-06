@@ -56,8 +56,12 @@ export function validateSubmission(body: unknown): ScoreSubmission | string {
   const playerId = typeof b.playerId === 'string' ? b.playerId.trim() : '';
   if (!/^[a-zA-Z0-9-]{8,64}$/.test(playerId)) return 'invalid playerId';
 
-  let initials = typeof b.initials === 'string' ? b.initials.trim().toUpperCase() : '';
-  if (!/^[A-Z]{1,3}$/.test(initials)) return 'invalid initials';
+  // Accept up to 16 chars: A-Z, 0-9, and single spaces between words.
+  // Names <3 chars are right-padded with underscores so display columns stay aligned.
+  let initials = typeof b.initials === 'string'
+    ? b.initials.trim().toUpperCase().replace(/\s+/g, ' ')
+    : '';
+  if (!/^[A-Z0-9](?:[A-Z0-9 ]{0,14}[A-Z0-9])?$/.test(initials)) return 'invalid initials';
   if (initials.length < 3) initials = initials.padEnd(3, '_');
 
   const score = Number(b.score);
