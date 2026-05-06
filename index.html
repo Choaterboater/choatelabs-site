@@ -61,6 +61,7 @@ nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;j
 .cat-asset{color:var(--mint);border-color:rgba(88,214,141,.35)}
 .cat-market{color:var(--copper);border-color:rgba(230,126,34,.35)}
 .cat-knowledge{color:var(--iris);border-color:rgba(155,89,182,.35)}
+.cat-arcade{color:#00F0FF;border-color:rgba(0,240,255,.4)}
 .cat-system{color:var(--slate);border-color:rgba(93,122,140,.35)}
 .stat-live{color:var(--mint);border:1px solid rgba(88,214,141,.25)}
 .stat-calf{color:var(--copper);border:1px dashed rgba(230,126,34,.4)}
@@ -125,11 +126,30 @@ footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);p
       <button class="fil" data-filter="asset">Asset</button>
       <button class="fil" data-filter="human">Human</button>
       <button class="fil" data-filter="market">Market</button>
+      <button class="fil" data-filter="arcade">Arcade</button>
       <button class="fil" data-filter="system">System</button>
     </div>
   </div>
 
   <div class="grid">
+
+    <a class="card" data-category="arcade" href="/lumina/">
+      <svg class="icon" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="18" stroke="#00F0FF" stroke-width="2" stroke-dasharray="3 4" opacity="0.6"/>
+        <circle cx="24" cy="24" r="7" fill="none" stroke="#FF00A0" stroke-width="2"/>
+        <circle cx="24" cy="24" r="2.5" fill="#FFFFFF"/>
+        <circle cx="42" cy="24" r="3.5" fill="#00F0FF"/>
+        <circle cx="36" cy="36" r="1.5" fill="#00F0FF" opacity="0.7"/>
+        <circle cx="30" cy="40" r="1" fill="#00F0FF" opacity="0.4"/>
+      </svg>
+      <div class="meta">
+        <span class="tag cat-arcade">Arcade</span>
+        <span class="tag stat-live">Live</span>
+      </div>
+      <h3>LUMINA: Neon Orbit</h3>
+      <p>One-touch arcade survival. Hold to reverse direction, sweep up energy, time your flips for triple-point Perfects. 6 skins, 4 trails, 5 upgrades, escalating waves. Web-native, no install.</p>
+      <span class="applink">Play now →</span>
+    </a>
 
     <a class="card" data-category="network" href="/mac-vendor-lookup/">
       <svg class="icon" viewBox="0 0 48 48" fill="none">
@@ -241,6 +261,7 @@ footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);p
   <p class="ft row">
     <a href="/">Home</a>
     <a href="/about.html">About</a>
+    <a href="/lumina/">LUMINA</a>
     <a href="/mac-vendor-lookup/">MAC Vendor Lookup</a>
   </p>
 </footer>

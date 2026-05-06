@@ -17,5 +17,12 @@ wrangler.toml
 node_modules/
 .cache/
 
+# Worker source + leaderboard handlers (run as code, not served as files)
+src/
+src/**
+functions/
+functions/**
+lumina-schema.sql
+
 # macOS
 .DS_Store
