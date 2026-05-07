@@ -1,7 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "choatelabs-site",
-  "compatibility_date": "2026-05-04",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-05-02",
   "observability": {
     "enabled": true
   },
