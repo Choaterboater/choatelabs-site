@@ -1,7 +1,7 @@
 // POST /lumina/api/score — submit a run's score (global or daily)
 // Returns the player's rank in the relevant leaderboard.
 
-import { Env, json, error, sha256Hex, validateSubmission } from './_shared';
+import { Env, json, error, sha256Hex, validateSubmission, todayUtc } from './_shared';
 
 const MIN_RUN_DURATION_MS = 3000;     // ignore impossibly short runs
 const RATE_LIMIT_WINDOW_MS = 30_000;  // 30s window
@@ -17,7 +17,9 @@ export async function handleScorePost(request: Request, env: Env): Promise<Respo
 
   const validated = validateSubmission(body);
   if (typeof validated === 'string') return error(validated);
-  const { playerId, initials, score, combo, durationMs, perfects, mode, challengeDate } = validated;
+  const { playerId, initials, score, combo, durationMs, perfects, mode } = validated;
+  // Server-derived: never trust client for the daily challenge date.
+  const challengeDate = todayUtc();
 
   if (durationMs < MIN_RUN_DURATION_MS) {
     return error('run too short to submit');
@@ -49,7 +51,7 @@ export async function handleScorePost(request: Request, env: Env): Promise<Respo
     .bind(playerId, ipHash, now)
     .run();
 
-  if (mode === 'daily' && challengeDate) {
+  if (mode === 'daily') {
     // Upsert: keep best score per (date, player)
     await env.LUMINA_DB.prepare(
       `INSERT INTO scores_daily

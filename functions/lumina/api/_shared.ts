@@ -41,7 +41,51 @@ export interface ScoreSubmission {
   durationMs: number;
   perfects: number;
   mode?: 'global' | 'daily';
+  /**
+   * UTC date for daily-challenge submits. Always derived server-side from
+   * the request time — never trusted from the client (otherwise a player
+   * could backfill yesterday's challenge with today's score).
+   */
   challengeDate?: string;
+}
+
+// Slur / profanity blocklist (English). Match-against the input with all
+// runs of repeated letters squashed and digit-letter substitutions undone,
+// to catch common evasions. Kept short — exhaustive lists turn into a
+// political minefield and Apple just wants evidence a filter exists.
+const PROFANITY_PATTERNS: RegExp[] = [
+  /\bF+U+C+K+/i,
+  /\bSH+I+T+/i,
+  /\bC+U+N+T+/i,
+  /\bN+I+G+/i,
+  /\bF+A+G+/i,
+  /\bR+A+P+E+/i,
+  /\bS+L+U+T+/i,
+  /\bW+H+O+R+E+/i,
+  /\bD+I+C+K+/i,
+  /\bC+O+C+K+/i,
+  /\bP+U+S+S+Y+/i,
+  /\bA+S+S+H+O+L+E+/i,
+  /\bB+I+T+C+H+/i,
+  /\bP+E+N+I+S+/i,
+  /\bV+A+G+I+N+A+/i,
+  /\bH+I+T+L+E+R+/i,
+  /\bN+A+Z+I+/i,
+];
+
+function isProfane(name: string): boolean {
+  // Squash repeated letters and undo common digit→letter substitutions
+  // (0→O, 1→I, 3→E, 4→A, 5→S, 7→T) so "5HIT" or "FUUUCK" are caught too.
+  const normalised = name
+    .toUpperCase()
+    .replace(/0/g, 'O')
+    .replace(/1/g, 'I')
+    .replace(/3/g, 'E')
+    .replace(/4/g, 'A')
+    .replace(/5/g, 'S')
+    .replace(/7/g, 'T')
+    .replace(/(.)\1{2,}/g, '$1$1'); // collapse any run of 3+ identical chars to 2
+  return PROFANITY_PATTERNS.some((re) => re.test(normalised));
 }
 
 /**
@@ -62,6 +106,7 @@ export function validateSubmission(body: unknown): ScoreSubmission | string {
     ? b.initials.trim().toUpperCase().replace(/\s+/g, ' ')
     : '';
   if (!/^[A-Z0-9](?:[A-Z0-9 ]{0,14}[A-Z0-9])?$/.test(initials)) return 'invalid initials';
+  if (isProfane(initials)) return 'name not allowed — try another';
   if (initials.length < 3) initials = initials.padEnd(3, '_');
 
   const score = Number(b.score);
@@ -78,17 +123,18 @@ export function validateSubmission(body: unknown): ScoreSubmission | string {
   const perfects = Number(b.perfects ?? 0);
   if (!Number.isInteger(perfects) || perfects < 0 || perfects > 10000) return 'invalid perfects';
 
-  // Score-vs-time sanity: max realistic score per second
-  // (combo 12 + scoreMult 1.2 + perfect 3x ≈ ~700 pts/coin worst case; cap at 1000/s lenient)
-  if (durationMs > 0 && score / (durationMs / 1000) > 1000) {
+  // Score-vs-time sanity: realistic ceiling per second.
+  // Worst case per coin (combo 12 + perfect 3× + skin/upgrade multipliers
+  // + daily-challenge multipliers) ≈ ~3300 pts. Players can collect ~5/s
+  // in dense waves. Cap at 5000/s to leave headroom and avoid rejecting
+  // legitimate high-skill runs.
+  if (durationMs > 0 && score / (durationMs / 1000) > 5000) {
     return 'score/time ratio exceeds reasonable limit';
   }
 
   const mode = b.mode === 'daily' ? 'daily' : 'global';
-  const challengeDate = typeof b.challengeDate === 'string' ? b.challengeDate : undefined;
-  if (mode === 'daily' && (!challengeDate || !/^\d{4}-\d{2}-\d{2}$/.test(challengeDate))) {
-    return 'invalid challengeDate for daily mode';
-  }
-
-  return { playerId, initials, score, combo, durationMs, perfects, mode, challengeDate };
+  // challengeDate is intentionally NOT read from the client — see field doc
+  // on ScoreSubmission. The handler will fill it in from todayUtc() before
+  // touching the DB.
+  return { playerId, initials, score, combo, durationMs, perfects, mode };
 }
