@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0A0A1A" />
+    <title>LUMINA: Neon Orbit — Download on the App Store</title>
+    <meta name="description" content="LUMINA: Neon Orbit — one-touch neon arcade survival. Hold to flip, dodge geometry, chase Perfects. Free on the App Store." />
+    <meta property="og:title" content="LUMINA: Neon Orbit" />
+    <meta property="og:description" content="One-touch neon arcade survival. Free on the App Store." />
+    <meta property="og:image" content="https://choatelabs.app/lumina/icon-1024.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://choatelabs.app/lumina/install" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/lumina/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/lumina/icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(ellipse 80% 60% at 50% 20%, rgba(0, 240, 255, 0.10) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 50% at 80% 90%, rgba(255, 0, 160, 0.08) 0%, transparent 60%),
+          linear-gradient(180deg, #050510 0%, #0A0A1A 50%, #1a0a2e 100%);
+        color: #E4E4F0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.5;
+        padding: 48px 24px 96px;
+        min-height: 100dvh;
+      }
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .icon {
+        width: 144px;
+        height: 144px;
+        border-radius: 32px;
+        margin: 0 auto 24px;
+        box-shadow: 0 24px 80px rgba(0, 240, 255, 0.25), 0 12px 40px rgba(0, 0, 0, 0.6);
+        display: block;
+      }
+      h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 900;
+        font-size: 56px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin: 0 0 8px;
+        background: linear-gradient(135deg, #00F0FF 0%, #C8A8FF 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 60px rgba(0, 240, 255, 0.3);
+      }
+      .tagline {
+        font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: #A0A0C0;
+        font-size: 12px;
+        margin: 0 0 32px;
+      }
+      .pitch {
+        font-size: 18px;
+        max-width: 540px;
+        margin: 0 auto 40px;
+        color: #C8C8DA;
+      }
+      .badge-row {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 56px;
+      }
+      .app-store-link {
+        display: inline-block;
+        transition: transform 0.15s ease;
+      }
+      .app-store-link:hover { transform: translateY(-2px); }
+      .app-store-link img { height: 56px; display: block; }
+      .play-now {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #00F0FF 0%, rgba(0, 240, 255, 0.7) 100%);
+        color: #0A0A1A;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 14px;
+        text-decoration: none;
+        border-radius: 999px;
+        box-shadow: 0 0 30px rgba(0, 240, 255, 0.4), 0 4px 16px rgba(0, 0, 0, 0.4);
+        height: 56px;
+      }
+      .play-now:hover { transform: translateY(-2px); }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-bottom: 56px;
+        text-align: left;
+      }
+      .feature {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(0, 240, 255, 0.15);
+        border-radius: 16px;
+        padding: 20px 18px;
+      }
+      .feature h3 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #00F0FF;
+        margin: 0 0 6px;
+      }
+      .feature p {
+        margin: 0;
+        font-size: 14px;
+        color: #C8C8DA;
+        line-height: 1.5;
+      }
+      .screenshots {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        padding: 8px 4px 24px;
+        margin: 0 -24px 56px;
+        scroll-padding: 24px;
+        scroll-snap-type: x mandatory;
+      }
+      .screenshots::-webkit-scrollbar { height: 6px; }
+      .screenshots::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.3); border-radius: 3px; }
+      .screenshot {
+        flex: 0 0 auto;
+        width: 240px;
+        scroll-snap-align: center;
+      }
+      .screenshot:first-child { margin-left: 24px; }
+      .screenshot:last-child { margin-right: 24px; }
+      .screenshot img {
+        width: 100%;
+        height: auto;
+        border-radius: 24px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 240, 255, 0.1);
+        display: block;
+      }
+      .footer-links {
+        margin-top: 56px;
+        padding-top: 32px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 13px;
+        color: #6F6F8C;
+      }
+      .footer-links a { color: #00F0FF; text-decoration: none; margin: 0 12px; }
+      .footer-links a:hover { text-decoration: underline; }
+      @media (max-width: 600px) {
+        h1 { font-size: 40px; letter-spacing: 3px; }
+        .pitch { font-size: 16px; }
+        .icon { width: 112px; height: 112px; border-radius: 24px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/lumina/icon-1024.png" alt="LUMINA: Neon Orbit app icon" class="icon" />
+      <h1>LUMINA</h1>
+      <p class="tagline">Neon Orbit Arcade</p>
+      <p class="pitch">
+        One-touch neon arcade survival. Hold to flip your orbit, dodge geometry,
+        chase Perfects for triple points. New skins, daily challenges, and a
+        global leaderboard built for the high-score chase.
+      </p>
+
+      <div class="badge-row">
+        <a class="app-store-link" href="https://apps.apple.com/us/app/lumina-neon-orbit/id6769130541" aria-label="Download LUMINA on the App Store">
+          <!-- Official Apple App Store badge SVG (linear-gradient, dark variant) -->
+          <img alt="Download on the App Store" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" />
+        </a>
+        <a class="play-now" href="/lumina/" aria-label="Play LUMINA in your browser">▶ Play in browser</a>
+      </div>
+
+      <section class="features">
+        <div class="feature">
+          <h3>One-Touch</h3>
+          <p>Tap and hold to reverse your orbit. Let go to flip back. That's it.</p>
+        </div>
+        <div class="feature">
+          <h3>Perfect Hits</h3>
+          <p>Flip the instant a coin reaches your orb — score 3× points and hear the chime.</p>
+        </div>
+        <div class="feature">
+          <h3>Daily Challenge</h3>
+          <p>A fresh modifier every UTC day — speed demon, glass cannon, swarm, more.</p>
+        </div>
+        <div class="feature">
+          <h3>Global Leaderboard</h3>
+          <p>Pick a nickname, climb the ranks. Your run, your name, your spot.</p>
+        </div>
+        <div class="feature">
+          <h3>Unlock Everything</h3>
+          <p>6 skins with unique perks, 4 trails, 5 upgrades, 8 achievements.</p>
+        </div>
+        <div class="feature">
+          <h3>No Ads, No IAP</h3>
+          <p>No tracking, no paywalls, no purchases. Just pure arcade survival.</p>
+        </div>
+      </section>
+
+      <div class="screenshots" aria-label="Screenshots">
+        <div class="screenshot"><img src="https://choatelabs.app/lumina/screenshot-1.png" alt="LUMINA menu" onerror="this.parentElement.style.display='none'" /></div>
+        <div class="screenshot"><img src="https://choatelabs.app/lumina/screenshot-2.png" alt="LUMINA gameplay" onerror="this.parentElement.style.display='none'" /></div>
+        <div class="screenshot"><img src="https://choatelabs.app/lumina/screenshot-3.png" alt="LUMINA victory" onerror="this.parentElement.style.display='none'" /></div>
+        <div class="screenshot"><img src="https://choatelabs.app/lumina/screenshot-4.png" alt="LUMINA leaderboard" onerror="this.parentElement.style.display='none'" /></div>
+        <div class="screenshot"><img src="https://choatelabs.app/lumina/screenshot-5.png" alt="LUMINA shop" onerror="this.parentElement.style.display='none'" /></div>
+      </div>
+
+      <div class="footer-links">
+        <a href="/lumina/">Play web version</a> ·
+        <a href="/lumina/privacy">Privacy Policy</a> ·
+        <a href="mailto:choate85@gmail.com">Contact</a>
+      </div>
+    </main>
+  </body>
+</html>
