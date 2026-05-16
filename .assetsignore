@@ -8,6 +8,11 @@
 
 # Documentation, not for the live site
 DEPLOY.md
+README.md
+CONTRIBUTING.md
+LICENSE
+docs/
+docs/**
 
 # Wrangler internals (auto-generated during build)
 .wrangler/
