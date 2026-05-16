@@ -17,6 +17,7 @@ Source for [**choatelabs.app**](https://choatelabs.app/) — the public-facing s
 | `mac-vendor-lookup/`          | `choatelabs.app/mac-vendor-lookup/`        | Landing + privacy/support pages for the MAC Vendor Lookup iOS app          |
 | `rackbeacon/`                 | `choatelabs.app/rackbeacon/`               | Landing + privacy/support pages for RackBeacon                             |
 | `voltanode/`                  | `choatelabs.app/voltanode/`                | Landing page for VoltaNode                                                 |
+| `choatelab/`                  | `choatelabs.app/choatelab/`                | Landing page for [ChoateLab](https://github.com/Choaterboater/ChoateLab) (self-hosted home-lab dashboard) |
 | `src/worker.ts`               | Cloudflare Worker entry                    | Routes `/lumina/api/*` → leaderboard handlers; everything else → static    |
 | `functions/lumina/api/`       | bound to Worker                            | `score.ts`, `top.ts`, `_shared.ts` — D1-backed leaderboard handlers        |
 | `lumina-schema.sql`           | (run via wrangler)                         | D1 schema for `scores`, `scores_daily`, `submit_log`                       |
@@ -36,6 +37,7 @@ The Swift apps and App Store listings reference these exact paths. **Don't renam
 | **MAC Vendor Lookup**         | Network  | Live          | `/mac-vendor-lookup/` — iOS app          |
 | **RackBeacon**                | Asset    | Calibrating   | `/rackbeacon/` — iOS app                 |
 | **VoltaNode**                 | Market   | Live          | `/voltanode/` — multi-strategy bot platform |
+| **ChoateLab**                 | System   | Calibrating   | `/choatelab/` — self-hosted home-lab dashboard, source on GitHub |
 | **Threadback**                | Human    | Coming Soon   | grid card only                           |
 | **Clearing**, **Experiment #006** | Knowledge / System | placeholders | grid cards only                |
 
