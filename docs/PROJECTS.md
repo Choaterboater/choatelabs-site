@@ -33,6 +33,10 @@ Same three-page layout: `index.html`, `privacy.html`, `support.html`.
 
 Multi-strategy paper-trading bot platform. EMA / MACD / mean-reversion / news-sentiment bots ride 24/7 crypto + market-hours stocks through Alpaca, with an LLM advisor stitching fundamentals, technicals, macro, and recent catalysts into a single thesis. Landing page only.
 
+## ChoateLab (`/choatelab/`)
+
+Self-hosted dashboard for the home lab — a single drag-and-drop home page for Docker, the *arr stack, Pi-hole, Home Assistant, Aruba, and 15+ other services. Source at [github.com/Choaterboater/ChoateLab](https://github.com/Choaterboater/ChoateLab). Status: *Calibrating*. The landing page at `/choatelab/index.html` mirrors the format of the other project pages and links out to the GitHub repo for code and docs.
+
 ## Threadback, Clearing, Experiment #006
 
 Grid cards on `index.html` only — no subdirectory yet. Status: *Coming Soon* / placeholders.
