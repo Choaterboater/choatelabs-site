@@ -107,7 +107,7 @@ The site references `stephen.choate@choatelabs.com`. Set this up before going pu
 1. Porkbun Domain Management → click `choatelabs.com` → **Email Forwarding**.
 2. Create a forward:
    - **From:** `stephen.choate`  (the part before `@choatelabs.com`)
-   - **To:** `choate85@gmail.com`
+   - **To:** your personal gmail address (the one you read mail in)
 3. Save. Porkbun's email forwarding is free for any domain registered with them.
 4. Optional catchall:
    - **From:** leave blank → forwards everything `*@choatelabs.com` to your gmail.
