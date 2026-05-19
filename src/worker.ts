@@ -3,6 +3,7 @@
 
 import { handleScorePost } from '../functions/lumina/api/score';
 import { handleTopGet } from '../functions/lumina/api/top';
+import { handleAroundGet } from '../functions/lumina/api/around';
 
 export interface Env {
   LUMINA_DB: D1Database;
@@ -59,6 +60,9 @@ export default {
     }
     if (url.pathname === '/lumina/api/top' && request.method === 'GET') {
       return withCors(await handleTopGet(request, env), origin);
+    }
+    if (url.pathname === '/lumina/api/around' && request.method === 'GET') {
+      return withCors(await handleAroundGet(request, env), origin);
     }
     if (url.pathname.startsWith('/lumina/api/')) {
       return withCors(new Response('not found', { status: 404 }), origin);
