@@ -1,14 +1,16 @@
-// GET /lumina/api/top?mode=global|daily&date=YYYY-MM-DD&limit=50
-// Returns top N entries for the requested leaderboard.
+// GET /lumina/api/top?mode=global|daily&date=YYYY-MM-DD&limit=50&offset=0
+// Returns a slice of the requested leaderboard. Ranks in the response are
+// absolute (offset + index + 1) so paging clients can render correct numbers.
 
 import { Env, json, error } from './_shared';
 
-const MAX_LIMIT = 100;
+const MAX_LIMIT = 500;
 
 export async function handleTopGet(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const mode = url.searchParams.get('mode') === 'daily' ? 'daily' : 'global';
   const limit = Math.min(MAX_LIMIT, Math.max(1, Number(url.searchParams.get('limit')) || 50));
+  const offset = Math.max(0, Number(url.searchParams.get('offset')) || 0);
 
   if (mode === 'daily') {
     const date = url.searchParams.get('date');
@@ -20,9 +22,9 @@ export async function handleTopGet(request: Request, env: Env): Promise<Response
        FROM scores_daily
        WHERE challenge_date = ?1
        ORDER BY score DESC, created_at ASC
-       LIMIT ?2`
+       LIMIT ?2 OFFSET ?3`
     )
-      .bind(date, limit)
+      .bind(date, limit, offset)
       .all<{
         player_id: string;
         initials: string;
@@ -37,7 +39,7 @@ export async function handleTopGet(request: Request, env: Env): Promise<Response
       mode: 'daily',
       date,
       entries: (rows.results ?? []).map((r, i) => ({
-        rank: i + 1,
+        rank: offset + i + 1,
         playerId: r.player_id,
         initials: r.initials,
         score: r.score,
@@ -55,9 +57,9 @@ export async function handleTopGet(request: Request, env: Env): Promise<Response
      FROM scores
      GROUP BY player_id
      ORDER BY score DESC, created_at ASC
-     LIMIT ?1`
+     LIMIT ?1 OFFSET ?2`
   )
-    .bind(limit)
+    .bind(limit, offset)
     .all<{
       player_id: string;
       initials: string;
@@ -71,7 +73,7 @@ export async function handleTopGet(request: Request, env: Env): Promise<Response
   return json({
     mode: 'global',
     entries: (rows.results ?? []).map((r, i) => ({
-      rank: i + 1,
+      rank: offset + i + 1,
       playerId: r.player_id,
       initials: r.initials,
       score: r.score,
