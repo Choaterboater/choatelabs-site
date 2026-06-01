@@ -178,6 +178,30 @@ footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);p
         <p>Fear &amp; Greed, VIX, Fed Funds, 10Y, 10Y–2Y spread — pulled from FRED + alternative.me on the dashboard, also fed back into the bots as gates.</p>
       </div>
 
+      <div class="feature">
+        <div class="ic">⊗</div>
+        <h3>Circuit breakers that fire</h3>
+        <p>Equity-aware exposure, position-size, daily-loss and order-rate limits — checked before every order and re-checked after each fill. A latched kill switch halts the whole engine, not just one bot.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⊨</div>
+        <h3>A backtest that won't lie</h3>
+        <p>Equity is cash plus signed market value, sells only deposit on a real exit, buys cap to available cash, stops and targets actually fire. Built so the numbers can't flatter themselves.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⊘</div>
+        <h3>Out-of-sample promotion gate</h3>
+        <p>Combinatorial purged cross-validation and a Deflated Sharpe Ratio decide what gets promoted — so a strategy has to clear out-of-sample bars, not just curve-fit the past.</p>
+      </div>
+
+      <div class="feature">
+        <div class="ic">⟲</div>
+        <h3>A lab that learns</h3>
+        <p>Every closed trade is logged with its setup and outcome to a searchable memory, surfacing the worst-performing patterns so the next decision is informed by the last one.</p>
+      </div>
+
     </div>
   </section>
 
