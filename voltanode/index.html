@@ -47,10 +47,13 @@ main{position:relative;z-index:10}
 .btn-disabled{background:transparent;border-color:rgba(230,126,34,.4);color:var(--copper);opacity:.7;cursor:not-allowed;pointer-events:none}
 .btn-ghost{border-color:rgba(244,246,240,.18);color:var(--chalk)}
 .btn-ghost:hover{border-color:var(--chalk)}
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--copper);outline-offset:2px;border-radius:2px}
 
 .features{padding:4rem 1.5rem 2rem;max-width:1100px;margin:0 auto}
-.section-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.45;margin-bottom:2rem;text-align:center}
+.section-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.6;margin-bottom:2rem;text-align:center}
 .fgrid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.fgrid-2{max-width:760px;margin-left:auto;margin-right:auto;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+@media(min-width:560px){.fgrid-2{grid-template-columns:repeat(2,1fr)}}
 .feature{background:var(--glass);border:1px solid rgba(244,246,240,.06);border-radius:10px;padding:1.6rem;backdrop-filter:blur(10px);transition:transform .2s,border-color .2s}
 .feature:hover{transform:translateY(-3px);border-color:rgba(244,246,240,.12)}
 .feature .ic{font-family:'JetBrains Mono',monospace;font-size:1.4rem;color:var(--copper);margin-bottom:.6rem;line-height:1}
@@ -74,20 +77,21 @@ main{position:relative;z-index:10}
 .disclaimer p{opacity:.5;font-size:.85rem;font-family:'JetBrains Mono',monospace;line-height:1.7}
 
 footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
-.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
+.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.6}
 .ft a{color:var(--chalk);opacity:.7;text-decoration:none}
 .ft a:hover{opacity:1;text-decoration:underline}
-.ft .row{margin-top:.5rem}
-.ft .row a{margin:0 .6rem}
+.ft .row{margin-top:.85rem}
+.ft .row a{display:inline-block;padding:.4rem .6rem;margin:0 .2rem}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.feature{transition:none}}
 </style>
 </head>
 <body>
 
-<canvas id="n"></canvas>
+<canvas id="n" aria-hidden="true"></canvas>
 
 <nav>
   <a href="/" class="brand">
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
       <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
       <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
@@ -109,7 +113,7 @@ footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);p
 
   <section class="hero">
     <span class="app-badge">Specimen #003 · Market</span>
-    <svg class="app-icon" viewBox="0 0 96 96" fill="none">
+    <svg class="app-icon" viewBox="0 0 96 96" fill="none" aria-hidden="true">
       <rect x="2" y="2" width="92" height="92" rx="22" fill="#0C0F14" stroke="#3A2418" stroke-width="2"/>
       <path d="M14 72 L30 56 L46 64 L62 30 L82 44" stroke="#E67E22" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="30" cy="56" r="5" fill="#E67E22"/>
@@ -118,7 +122,7 @@ footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);p
       <path d="M14 82 L82 82" stroke="#E67E22" stroke-width="1.5" opacity="0.25"/>
     </svg>
     <h1>A bench full of bots, <span class="accent">trading the topology</span>.</h1>
-    <p>VoltaNode is a multi-strategy paper-trading platform — momentum, MACD, mean-reversion, news-sentiment, and trend-follow bots ride 24/7 crypto and market-hours stocks through Alpaca, while an LLM advisor stitches fundamentals, technicals, macro, and recent catalysts into a single thesis.</p>
+    <p>VoltaNode is a multi-strategy paper-trading platform — a bench of fifteen strategy bots, from momentum and MACD to mean-reversion, news-sentiment and a permissive trend-follow, ride 24/7 crypto and market-hours stocks through Alpaca, while an LLM advisor stitches fundamentals, technicals, macro, and recent catalysts into a single thesis.</p>
     <p class="meta-row mono">Python &amp; FastAPI <span class="dot">·</span> React &amp; Vite <span class="dot">·</span> Alpaca paper <span class="dot">·</span> Live</p>
     <div class="cta">
       <span class="btn btn-disabled">Private Beta</span>
@@ -127,84 +131,84 @@ footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);p
   </section>
 
   <section class="features" id="features">
-    <p class="section-title">What's on the bench</p>
+    <h2 class="section-title">What's on the bench</h2>
     <div class="fgrid">
 
       <div class="feature">
-        <div class="ic">⏚</div>
+        <div class="ic" aria-hidden="true">⏚</div>
         <h3>Multi-strategy engine</h3>
         <p>Momentum, MACD, mean-reversion, breakout, news-sentiment, ensemble-ML, and a permissive trend-follow bot — each running independently on its own ticker set.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">⌬</div>
+        <div class="ic" aria-hidden="true">⌬</div>
         <h3>Crypto 24/7, stocks 9:30–16:00 ET</h3>
         <p>The engine gates equity strategies to US-market hours and lets crypto strategies tick around the clock. No wasted broker calls when the floor is closed.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">⊜</div>
+        <div class="ic" aria-hidden="true">⊜</div>
         <h3>LLM research advisor</h3>
         <p>Claude Haiku for the fast lane, 1T-parameter free-tier models for the heavy lane. Reports fold fundamentals, technicals, sentiment, FRED macro, insider Form 4s, and last week's headlines into one Investment Thesis.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">◷</div>
+        <div class="ic" aria-hidden="true">◷</div>
         <h3>Per-bar latch</h3>
         <p>Strategies are evaluated every 5 seconds; bars roll daily. The latch keeps each strategy from re-firing the same crossover hundreds of times within a single bar.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">⇩</div>
+        <div class="ic" aria-hidden="true">⇩</div>
         <h3>SELL clamp + dust skip</h3>
         <p>If a bot signals a SELL larger than the held position, the engine clamps to what's actually owned. Sub-$10 dust gets a single rejection and goes silent for an hour.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">⛌</div>
+        <div class="ic" aria-hidden="true">⛌</div>
         <h3>Order debounce</h3>
         <p>Five-minute cooldown per (strategy, symbol, side) on rejected orders. One-hour suppression for structurally impossible orders. The broker sees signal, never spam.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">▤</div>
+        <div class="ic" aria-hidden="true">▤</div>
         <h3>Honest dashboard</h3>
         <p>Real allocation pie from real positions. Em-dashes for stats that need closed trades. No cosmetic fake equity curve climbing while you wait for the first round-trip.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">◉</div>
+        <div class="ic" aria-hidden="true">◉</div>
         <h3>Macro signals strip</h3>
         <p>Fear &amp; Greed, VIX, Fed Funds, 10Y, 10Y–2Y spread — pulled from FRED + alternative.me on the dashboard, also fed back into the bots as gates.</p>
       </div>
 
     </div>
 
-    <p class="section-title" style="margin-top:3.5rem">Built to not fool itself</p>
-    <div class="fgrid">
+    <h2 class="section-title" style="margin-top:3.5rem">Built to not fool itself</h2>
+    <div class="fgrid fgrid-2">
 
       <div class="feature">
-        <div class="ic">⊗</div>
-        <h3>Circuit breakers that fire</h3>
-        <p>Equity-aware exposure, position-size, daily-loss and order-rate limits — checked before every order and re-checked after each fill. A latched kill switch halts the whole engine, not just one bot.</p>
+        <div class="ic" aria-hidden="true">⊗</div>
+        <h3>Circuit breakers</h3>
+        <p>Equity-aware exposure, position-size, daily-loss and order-rate limits — checked before every order, re-checked after each fill. A latched kill switch halts the whole engine, not one bot.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">⊨</div>
-        <h3>A backtest that won't lie</h3>
-        <p>Equity is cash plus signed market value, sells only deposit on a real exit, buys cap to available cash, stops and targets actually fire. Built so the numbers can't flatter themselves.</p>
+        <div class="ic" aria-hidden="true">⊨</div>
+        <h3>Backtest that can't flatter itself</h3>
+        <p>Equity is cash plus signed market value. Sells only deposit on a real exit, buys cap to available cash, stops and targets actually fire. Hard to fool.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">⊘</div>
+        <div class="ic" aria-hidden="true">⊘</div>
         <h3>Out-of-sample promotion gate</h3>
         <p>Combinatorial purged cross-validation and a Deflated Sharpe Ratio decide what gets promoted — so a strategy has to clear out-of-sample bars, not just curve-fit the past.</p>
       </div>
 
       <div class="feature">
-        <div class="ic">⟲</div>
-        <h3>A lab that learns</h3>
-        <p>Every closed trade is logged with its setup and outcome to a searchable memory, surfacing the worst-performing patterns so the next decision is informed by the last one.</p>
+        <div class="ic" aria-hidden="true">⟲</div>
+        <h3>Searchable trade memory</h3>
+        <p>Every closed trade is logged with its setup and outcome to a searchable memory. The worst-performing patterns surface first, so the next decision learns from the last.</p>
       </div>
 
     </div>
@@ -219,9 +223,10 @@ footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);p
       <div><strong>macd</strong><span>MACD line crossing the signal line with histogram confirmation. Both directions, per-bar latched.</span></div>
       <div><strong>news_sentiment</strong><span>VADER local + LLM hybrid scoring on news headlines. Trades sharp shifts in tone with a trend confirmation.</span></div>
       <div><strong>breakout</strong><span>Multi-timeframe channel breakouts. Buys new highs, shorts new lows on confirmed range exits.</span></div>
-      <div><strong>arbitrage</strong><span>Cross-venue spread detection (paper-mode placeholder until real multi-broker venue support lands).</span></div>
+      <div><strong>arbitrage</strong><span>Scaffold for cross-venue spread trading. Runs against a single synthetic counter-market — no real second venue is wired yet — so it's a structural placeholder, not a live edge.</span></div>
       <div><strong>ensemble_ml</strong><span>Aggregates the other strategies' signals through a weighted scorer. The committee vote layer.</span></div>
     </div>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;opacity:.55;text-align:center;margin-top:1.5rem;line-height:1.6">Eight of fifteen registered strategies. The rest — multi_coin, auto_discovery, squeeze, funding_carry, bband_rsi, swing_high_to_sky, grid — round out the bench.</p>
   </section>
 
   <section class="stack">
@@ -272,7 +277,7 @@ u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<
 d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.4)';x.fill()}}
 for(let i=0;i<N;i++)P.push(new M());
 function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.05*(1-d/160)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
-A();
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)A();
 </script>
 
 </body>
