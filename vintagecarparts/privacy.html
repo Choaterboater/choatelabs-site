@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VintageCarParts Privacy Policy · Choate Labs</title>
+<meta name="description" content="Privacy policy for the VintageCarParts iOS app by ChoateLabs.">
+<link rel="canonical" href="https://choatelabs.app/vintagecarparts/privacy.html">
+<style>
+  :root {
+    --vintage-red: #B92A2A;
+    --warm-cream: #FDF6E3;
+    --dark-rust: #3D2B1F;
+    --rule: rgba(61, 43, 31, 0.18);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--warm-cream);
+    color: var(--dark-rust);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  header {
+    background: var(--vintage-red);
+    color: var(--warm-cream);
+    padding: 32px 24px;
+    border-bottom: 4px solid var(--dark-rust);
+  }
+  header .wrap { max-width: 720px; margin: 0 auto; }
+  header h1 {
+    margin: 0 0 4px 0;
+    font-size: 1.8rem;
+    letter-spacing: 0.5px;
+  }
+  header .sub {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.92;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 24px 64px 24px;
+  }
+  h2 {
+    color: var(--vintage-red);
+    margin-top: 2em;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 6px;
+    font-size: 1.25rem;
+  }
+  h3 {
+    color: var(--dark-rust);
+    margin-top: 1.5em;
+    font-size: 1.05rem;
+  }
+  p, li { font-size: 1rem; }
+  a {
+    color: var(--vintage-red);
+    text-decoration: underline;
+  }
+  a:hover { color: var(--dark-rust); }
+  code {
+    background: rgba(61, 43, 31, 0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.92em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  ul { padding-left: 1.25em; }
+  .updated {
+    display: inline-block;
+    background: rgba(253, 246, 227, 0.18);
+    border: 1px solid rgba(253, 246, 227, 0.45);
+    border-radius: 4px;
+    padding: 2px 10px;
+    margin-top: 10px;
+    font-size: 0.85rem;
+  }
+  footer {
+    text-align: center;
+    color: rgba(61, 43, 31, 0.65);
+    font-size: 0.85rem;
+    padding: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  footer a { color: rgba(61, 43, 31, 0.65); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>VintageCarParts Privacy Policy</h1>
+    <p class="sub">An iOS app by ChoateLabs</p>
+    <span class="updated">Last updated: June 3, 2026</span>
+  </div>
+</header>
+
+<main>
+
+<p>VintageCarParts ("the app") is built by ChoateLabs. This policy explains, in
+plain English, what the app does with your data. The short version: almost
+everything stays on your device, and the one thing that doesn't — a photo you
+explicitly choose to analyze with Expert Scan — is sent only to produce your
+identification and nothing else.</p>
+
+<h2>What the app does</h2>
+<p>VintageCarParts helps you identify vintage and classic car parts by pointing
+your iPhone camera at them, look up casting numbers, browse a built-in parts
+catalog, save a list of your vehicles to check whether a scanned part is
+compatible, and jump to sold-price listings for a part.</p>
+
+<h2>Data we collect</h2>
+<p>We do not run our own user accounts, servers, or analytics for this app. The
+only data the app touches falls into these categories:</p>
+
+<h3>1. Live camera feed (on-device only)</h3>
+<p>When you use the scanner, your live camera feed is processed entirely on your
+iPhone using Apple's Vision framework. Frames are turned into a numerical
+"feature print" and matched against a local part database that ships inside
+the app, and on-device OCR reads casting numbers off the part. <strong>The
+live camera feed is never uploaded anywhere, and we run no servers that
+receive your images.</strong> The one exception — a photo you explicitly
+submit for AI identification — is described in the next section.</p>
+
+<h3>2. Photos you choose to analyze with Expert Scan (sent to an AI provider)</h3>
+<p>If you run an <strong>Expert Scan</strong> (the deeper AI identification),
+the photo you selected for that scan is sent over HTTPS from your phone
+directly to the AI service, <strong>OpenRouter</strong>, to produce the
+identification. This only happens when you initiate it.</p>
+<ul>
+  <li>Only the part photo and the text of the identification request are
+      sent — never your name, Apple ID, email, location, or device
+      identifiers.</li>
+  <li>OpenRouter's handling of submitted content is governed by its own
+      policy at <a href="https://openrouter.ai/privacy">openrouter.ai/privacy</a>.</li>
+  <li>If you supply your own OpenRouter API key in Settings, it is stored in
+      the iOS <strong>Keychain</strong> on your device and used only to
+      authenticate your own scans.</li>
+  <li>Don't include anything in the photo you wouldn't want a third-party
+      service to process — crop to the part.</li>
+</ul>
+
+<h3>3. Scan history (on-device only)</h3>
+<p>After a scan, the captured image and its result are saved locally:</p>
+<ul>
+  <li>The image file is written to the app's <code>Documents/ScanImages/</code> directory.</li>
+  <li>The result metadata (part name, confidence, timestamp) is stored in
+      <code>UserDefaults</code> on the device.</li>
+</ul>
+<p>Scan history is never uploaded. Deleting the app removes it. You can clear
+individual scans from the History tab at any time.</p>
+
+<h3>4. Vehicle profiles you add manually (on-device, with optional VIN lookup)</h3>
+<p>If you add a vehicle by VIN, the app sends only the 17-character VIN to the
+<strong>U.S. National Highway Traffic Safety Administration (NHTSA) public
+vPIC API</strong> at <code>https://vpic.nhtsa.dot.gov</code> to translate it
+into year/make/model. This is a free, public, government-operated lookup —
+no API key, no account.</p>
+<ul>
+  <li>The NHTSA service is governed by NHTSA's own privacy policy at
+      <a href="https://www.nhtsa.gov/privacy-policy">nhtsa.gov/privacy-policy</a>.</li>
+  <li>We do not send your name, your Apple ID, your location, or anything
+      else alongside the VIN.</li>
+  <li>The decoded result is cached in <code>UserDefaults</code> on your
+      device so we don't re-query the same VIN.</li>
+</ul>
+<p>If you skip VIN entry, no network call is made.</p>
+
+<h3>5. Settings and filters (on-device only)</h3>
+<p>Era filters, your confidence threshold, and which vehicle is your "primary"
+are stored in <code>UserDefaults</code>. An OpenRouter API key you enter
+yourself is stored in the iOS Keychain. None of it leaves the device.</p>
+
+<h2>Third-party services</h2>
+
+<h3>OpenRouter — AI identification (active, only when you run an Expert Scan)</h3>
+<p>Described in section 2 above. Used solely to identify the part in the photo
+you submit; the request carries no account or identity information about
+you.</p>
+
+<h3>NHTSA vPIC API (active, only when you look up a VIN)</h3>
+<p>Used only when you choose to look up a VIN. See above. We do not control
+NHTSA's logging — assume any web request to a U.S. government endpoint may
+be logged on their side per their policy.</p>
+
+<h3>Replicate — reference illustrations (disabled in this build)</h3>
+<p>The app contains an optional feature that generates a studio-style
+<em>illustration</em> of a part using Replicate's image-generation API.
+<strong>In the version you have installed this feature is disabled.</strong>
+If a future build enables it: only a short <em>text description</em> of the
+part (e.g. "Holley 4150 carburetor, studio product photography") is sent —
+<strong>never your photos</strong>. Replicate's practices are described at
+<a href="https://replicate.com/privacy">replicate.com/privacy</a>.</p>
+
+<h3>Firebase (not enabled in this build)</h3>
+<p>The app contains scaffolding for an optional community feature backed by
+Google Firebase (Authentication + Firestore). <strong>In the version you
+have installed, Firebase is disabled and all community data shown in the UI
+is local mock data.</strong> No Firebase SDK calls are made.</p>
+<p>If a future build enables Firebase:</p>
+<ul>
+  <li>A new account would be created via <strong>Firebase Anonymous
+      Authentication</strong>. This generates a random user ID; we never
+      receive your email, name, or Apple ID unless you explicitly choose
+      Sign in with Apple in a later release.</li>
+  <li>Contributions you choose to publish (photos you submit to the
+      community, text corrections, comments) would be stored in
+      <strong>Cloud Firestore</strong> under that anonymous ID.</li>
+  <li>Firebase's own privacy practices apply:
+      <a href="https://firebase.google.com/support/privacy">firebase.google.com/support/privacy</a>.</li>
+  <li>Anything you publish to the community is, by definition, public.
+      Don't upload photos you don't want others to see.</li>
+</ul>
+<p>We will update this policy and the in-app About section before turning
+Firebase on for real.</p>
+
+<h3>Outbound links (eBay / Amazon / RockAuto)</h3>
+<p>The app shows links for sourcing and pricing parts — for example, "See sold
+prices" opens an eBay search for completed listings. Tapping any of these
+opens the partner's site in your browser; the app itself sends them nothing
+beyond the link you tapped, and once there the partner's own privacy policy
+applies.</p>
+
+<h2>What we do NOT collect</h2>
+<ul>
+  <li>We do not collect your location.</li>
+  <li>We do not collect contacts, calendars, photos library, or microphone.</li>
+  <li>We do not use third-party analytics, ad networks, or crash reporters
+      in this build.</li>
+  <li>We do not sell, rent, or share data with marketers. We have no data
+      to sell.</li>
+</ul>
+
+<h2>Children</h2>
+<p>The app is not directed at children under 13 and we do not knowingly
+collect information from them.</p>
+
+<h2>Your rights and controls</h2>
+<p>Because nearly all data lives on your device, you control it directly:</p>
+<ul>
+  <li><strong>Delete a scan</strong>: swipe to delete in the History tab.</li>
+  <li><strong>Remove a vehicle</strong>: swipe to delete in
+      Settings &rarr; My Vehicles.</li>
+  <li><strong>Remove your API key</strong>: clear it in Settings; it is
+      deleted from the Keychain.</li>
+  <li><strong>Clear the VIN cache</strong>: delete and reinstall the app.</li>
+  <li><strong>Revoke camera access</strong>: iOS Settings &rarr;
+      VintageCarParts &rarr; Camera.</li>
+  <li><strong>Erase everything</strong>: delete the app from your iPhone.</li>
+</ul>
+<p>Photos submitted to OpenRouter are processed to produce your identification;
+retention on their side is governed by their policy linked above. If a future
+version stores data with us (e.g., community contributions via Firebase), you
+will be able to request deletion by emailing the address below, and we will
+honor applicable requests under GDPR, CCPA, and similar laws.</p>
+
+<h2>Security</h2>
+<p>Local data is protected by iOS's standard app sandbox and, when your
+device is locked with a passcode, by iOS data protection. API keys you
+enter live in the iOS Keychain. All network calls — VIN lookup and Expert
+Scan — use HTTPS.</p>
+
+<h2>Changes to this policy</h2>
+<p>If we make material changes, we'll update the "Last updated" date at the
+top and, when relevant, surface a notice in the app. Continued use after
+an update means you accept the revised policy.</p>
+
+<h2>Contact</h2>
+<p><strong>ChoateLabs</strong> &mdash;
+   <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a></p>
+
+</main>
+
+<footer>
+  &copy; 2026 Choate Labs &middot; VintageCarParts &middot;
+  <a href="/vintagecarparts/">About the app</a> &middot;
+  <a href="/vintagecarparts/support.html">Support</a> &middot;
+  <a href="/">choatelabs.app</a>
+</footer>
+
+</body>
+</html>
