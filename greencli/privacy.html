@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — GreenCli · Choate Labs</title>
+<meta name="description" content="GreenCli stores everything locally. No cloud sync, no telemetry, no third-party SDKs. Your network credentials and configs never leave your Mac.">
+<meta name="theme-color" content="#0C0F14">
+<link rel="canonical" href="https://choatelabs.app/greencli/privacy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0C0F14;--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--slate:#5D7A8C}
+*{box-sizing:border-box;margin:0}
+body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.65;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.12;pointer-events:none}
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.95) 0%,transparent 100%)}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
+.brand svg{width:30px;height:30px}
+.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
+.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
+.links{display:flex;gap:1.5rem;list-style:none}
+.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
+.links a:hover{opacity:1}
+.links a.on{opacity:1;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--mint)}
+@media(max-width:600px){.links{display:none}}
+main{position:relative;z-index:10;max-width:740px;margin:0 auto;padding:7rem 1.5rem 5rem}
+h1{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:.5rem;letter-spacing:-.03em}
+.lede{font-size:1.1rem;opacity:.7;margin:0 0 2.5rem}
+h2{font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;opacity:.5;margin:2.5rem 0 1rem}
+p{margin-bottom:1rem;font-size:1rem;opacity:.85}
+ul{padding-left:1.4rem;margin-bottom:1rem}
+ul li{margin:.4rem 0;opacity:.75;font-size:.95rem}
+.callout{background:rgba(88,214,141,.07);border:1px solid rgba(88,214,141,.2);border-radius:8px;padding:1.25rem 1.5rem;margin:2rem 0;font-size:.95rem;opacity:.9}
+footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
+.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
+.ft a{color:var(--chalk);opacity:.7;text-decoration:none}
+.ft a:hover{opacity:1;text-decoration:underline}
+.ft .row{margin-top:.5rem}
+.ft .row a{margin:0 .6rem}
+</style>
+</head>
+<body>
+<canvas id="n"></canvas>
+<nav>
+  <a href="/" class="brand">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
+      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
+      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    </svg>
+    <div><span class="bw">Choate</span><span class="bl">Labs</span></div>
+  </a>
+  <ul class="links mono">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="index.html">GreenCli</a></li>
+    <li><a href="privacy.html" class="on">Privacy</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+</nav>
+<main>
+  <h1>Privacy Policy</h1>
+  <p class="lede">GreenCli — Choate Labs · Effective June 2026</p>
+
+  <div class="callout">
+    Short version: GreenCli stores everything on your Mac. Nothing is sent to Choate Labs. Ever.
+  </div>
+
+  <h2>What we collect</h2>
+  <p>Nothing. Choate Labs collects no data from GreenCli. There are no analytics, no crash reporters, and no usage metrics that phone home to us.</p>
+
+  <h2>What the app stores locally</h2>
+  <p>GreenCli stores the following data on your machine only:</p>
+  <ul>
+    <li>Session credentials (hostnames, usernames, passwords, SSH keys) — encrypted at rest with AES-256-GCM + Argon2</li>
+    <li>Session metadata (folders, tags, connection history)</li>
+    <li>App settings and preferences (stored in macOS app data directory)</li>
+    <li>SSH known hosts cache</li>
+    <li>AI API keys you configure — stored locally, never sent to Choate Labs</li>
+  </ul>
+
+  <h2>AI providers</h2>
+  <p>If you use the AI assistant, GreenCli sends your prompts and (optionally) terminal output directly from your Mac to your chosen AI provider — Anthropic, an OpenAI-compatible endpoint, or a local Ollama instance. Choate Labs is never in that path. Review your chosen provider's privacy policy for how they handle requests.</p>
+
+  <h2>MCP servers</h2>
+  <p>If you connect to external MCP servers (such as centralmcp for Aruba Central), data flows directly between your Mac and that server. Choate Labs is not involved. You configure and trust those connections yourself.</p>
+
+  <h2>Network connections</h2>
+  <p>GreenCli makes outbound connections only to:</p>
+  <ul>
+    <li>Hosts you explicitly connect to (SSH, Telnet, Serial)</li>
+    <li>AI API endpoints you configure</li>
+    <li>MCP servers you configure</li>
+    <li>REST API endpoints you configure in the API explorer</li>
+  </ul>
+  <p>It does not contact Choate Labs servers, DNS, or any update service.</p>
+
+  <h2>Third-party SDKs</h2>
+  <p>GreenCli includes no third-party analytics, advertising, or tracking SDKs.</p>
+
+  <h2>Contact</h2>
+  <p>Questions: <a href="mailto:stephen.choate@choatelabs.com" style="color:var(--mint)">stephen.choate@choatelabs.com</a></p>
+</main>
+<footer>
+  <p class="ft">© 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a></p>
+  <p class="ft row">
+    <a href="/">Home</a>
+    <a href="index.html">GreenCli</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="support.html">Support</a>
+  </p>
+</footer>
+<script>
+const c=document.getElementById('n'),x=c.getContext('2d');let w,h;const N=30,P=[];
+function r(){w=c.width=innerWidth;h=c.height=innerHeight}addEventListener('resize',r);r();
+class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.r=Math.random()*1.2+.6}
+u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
+d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(88,214,141,.3)';x.fill()}}
+for(let i=0;i<N;i++)P.push(new M());
+function A(){x.clearRect(0,0,w,h);P.forEach((p,i)=>{p.u();p.d();for(let j=i+1;j<P.length;j++){const dx=p.x-P[j].x,dy=p.y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<140){x.beginPath();x.moveTo(p.x,p.y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(88,214,141,${.03*(1-d/140)})`;x.lineWidth=.6;x.stroke()}}});requestAnimationFrame(A)}A();
+</script>
+</body>
+</html>
