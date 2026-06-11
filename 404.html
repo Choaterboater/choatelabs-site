@@ -3,33 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Specimen Not Found — Choate Labs</title>
-<meta name="theme-color" content="#0C0F14">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<title>404 · Choate Labs</title>
+<meta name="theme-color" content="#0F0D09">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='none'%3E%3Cstyle%3Epath%7Bstroke:%23A8501C%7Dcircle%7Bfill:%231C1B18%7D@media(prefers-color-scheme:dark)%7Bpath%7Bstroke:%23D8804A%7Dcircle%7Bfill:%23ECE8DD%7D%7D%3C/style%3E%3Cpath%20d='M70%2020%20Q%2010%2020%2020%2050%20Q%2010%2080%2070%2080'%20stroke-width='9'%20stroke-linecap='round'/%3E%3Ccircle%20cx='70'%20cy='20'%20r='9'/%3E%3Ccircle%20cx='20'%20cy='50'%20r='10'/%3E%3Ccircle%20cx='70'%20cy='80'%20r='11'/%3E%3C/svg%3E">
 <style>
-body{background:#0C0F14;color:#F4F6F0;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;text-align:center;padding:1.5rem}
-.mono{font-family:'JetBrains Mono',monospace}
-.flask{font-size:3rem;margin-bottom:1rem;opacity:.85}
-h1{font-size:4rem;margin-bottom:.6rem;letter-spacing:-.03em;font-weight:700}
-p{opacity:.55;margin-bottom:2rem;max-width:42ch;margin-left:auto;margin-right:auto}
-.actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-a{color:#E67E22;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;border:1px solid rgba(230,126,34,.35);padding:.7rem 1.2rem;transition:all .2s}
-a:hover{border-color:#E67E22;background:rgba(230,126,34,.1)}
-a.ghost{color:#F4F6F0;border-color:rgba(244,246,240,.18)}
-a.ghost:hover{border-color:#F4F6F0;background:transparent}
+/* Self-contained on purpose: this page is served on bad routes,
+   so it carries its own copy of the site tokens. */
+:root {
+  color-scheme: dark;
+  --paper: #0F0D09;
+  --ink: #EAE3D2;
+  --ink-soft: rgba(234, 227, 210, 0.6);
+  --line: rgba(234, 227, 210, 0.14);
+  --accent: #E08146;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.65;
+}
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color 150ms ease;
+}
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+::selection { background: var(--accent); color: var(--paper); }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+.wrap { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; }
+header.wrap {
+  border-bottom: 1px solid var(--line);
+  padding-top: 1.75rem;
+  padding-bottom: 1.1rem;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ink);
+  text-decoration: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  line-height: 1;
+}
+.brand:hover { color: var(--ink); }
+.brand svg { width: 27px; height: 27px; flex: none; display: block; }
+main.wrap { padding-top: 4rem; padding-bottom: 4rem; }
+.doodle { display: block; color: var(--ink); margin-bottom: 0.9rem; }
+.fig-label {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  margin: 0 0 2.25rem;
+}
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+p { margin: 0 0 1.1rem; max-width: 50ch; }
+.links { display: flex; gap: 1.5rem; margin-top: 1.6rem; }
 </style>
 </head>
 <body>
-<div>
-  <div class="flask">🧪</div>
+
+<header class="wrap">
+  <a href="/" class="brand">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="currentColor"/>
+      <circle cx="20" cy="50" r="6.5" fill="currentColor"/>
+      <circle cx="70" cy="80" r="7.5" fill="currentColor"/>
+    </svg>
+    Choate Labs
+  </a>
+</header>
+
+<main class="wrap">
+  <svg class="doodle" viewBox="0 0 220 64" width="220" height="64" role="img" aria-label="A filled node connected by a dashed line to an empty dashed circle">
+    <circle cx="22" cy="32" r="8" fill="currentColor"/>
+    <line x1="34" y1="32" x2="168" y2="32" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="186" cy="32" r="11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 5" opacity="0.6"/>
+  </svg>
+  <p class="fig-label">fig. 404 &middot; node not found</p>
+
   <h1>404</h1>
-  <p class="mono">Experiment failed. Specimen not found on the bench.</p>
-  <div class="actions">
-    <a href="/">Return to the Bench</a>
-    <a href="/about.html" class="ghost">About</a>
-  </div>
-</div>
+  <p>There&rsquo;s no page at this address. It may have moved, or I may never have built it.</p>
+  <p class="links">
+    <a href="/">Back to the homepage</a>
+    <a href="/#projects">Projects</a>
+  </p>
+</main>
+
 </body>
 </html>
