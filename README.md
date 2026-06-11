@@ -1,8 +1,8 @@
 # choatelabs-site
 
-Source for [**choatelabs.app**](https://choatelabs.app/) — the public-facing site for Choate Labs and its iOS / web projects. Static HTML/CSS/JS deployed to Cloudflare Workers (with an `ASSETS` static-assets binding) plus a tiny Worker that serves the LUMINA leaderboard API.
+Source for [**choatelabs.app**](https://choatelabs.app/) — the personal site of Stephen Choate and the landing pages for Choate Labs projects. Static HTML/CSS/JS deployed to Cloudflare Workers (with an `ASSETS` static-assets binding) plus a tiny Worker that serves the LUMINA leaderboard API.
 
-> "Every connection leaves a trace." Native iOS tools for mapping connection — human networks, asset graphs, market topology, and the systems that bind them.
+No build step, no framework. The homepage centerpiece is an interactive Three.js graph of the projects (`assets/lab-graph.js`, with Three.js vendored under `assets/vendor/` so there's no CDN dependency).
 
 ---
 
@@ -10,9 +10,10 @@ Source for [**choatelabs.app**](https://choatelabs.app/) — the public-facing s
 
 | Path                          | Lives at                                   | What it is                                                                 |
 | ----------------------------- | ------------------------------------------ | -------------------------------------------------------------------------- |
-| `index.html`                  | `choatelabs.app/`                          | Landing page — "Specimens on the Bench" grid of projects                   |
-| `about.html`                  | `choatelabs.app/about.html`                | About / philosophy page                                                    |
+| `index.html`                  | `choatelabs.app/`                          | Landing page — intro, interactive project graph, numbered project index   |
+| `about.html`                  | `choatelabs.app/about.html`                | About page                                                                 |
 | `404.html`                    | served on unknown paths                    | Custom 404                                                                 |
+| `assets/`                     | `choatelabs.app/assets/`                   | Shared stylesheet (`site.css`), project graph (`lab-graph.js`), vendored Three.js |
 | `lumina/`                     | `choatelabs.app/lumina/`                   | LUMINA: Neon Orbit — web-native arcade game (PWA, App Store linked)        |
 | `mac-vendor-lookup/`          | `choatelabs.app/mac-vendor-lookup/`        | Landing + privacy/support pages for the MAC Vendor Lookup iOS app          |
 | `rackbeacon/`                 | `choatelabs.app/rackbeacon/`               | Landing + privacy/support pages for RackBeacon                             |
@@ -31,17 +32,18 @@ The Swift apps and App Store listings reference these exact paths. **Don't renam
 
 ## Featured projects on the site
 
-| Project                       | Category | Status        | Where                                    |
-| ----------------------------- | -------- | ------------- | ---------------------------------------- |
-| **LUMINA: Neon Orbit**        | Arcade   | Live          | `/lumina/` — web game + iOS App Store    |
-| **MAC Vendor Lookup**         | Network  | Live          | `/mac-vendor-lookup/` — iOS app          |
-| **RackBeacon**                | Asset    | Calibrating   | `/rackbeacon/` — iOS app                 |
-| **VoltaNode**                 | Market   | Live          | `/voltanode/` — multi-strategy bot platform |
-| **ChoateLab**                 | System   | Calibrating   | `/choatelab/` — self-hosted home-lab dashboard, source on GitHub |
-| **Threadback**                | Human    | Coming Soon   | grid card only                           |
-| **Clearing**, **Experiment #006** | Knowledge / System | placeholders | grid cards only                |
+| Project                       | Status         | Where                                    |
+| ----------------------------- | -------------- | ---------------------------------------- |
+| **GreenCli**                  | v1.0 shipped   | `/greencli/` — macOS + Windows desktop terminal for Aruba/HPE networks |
+| **LUMINA: Neon Orbit**        | Live           | `/lumina/` — web game + iOS App Store    |
+| **MAC Vendor Lookup**         | Live           | `/mac-vendor-lookup/` — iOS app          |
+| **VoltaNode**                 | Running        | `/voltanode/` — multi-strategy paper-trading bot platform |
+| **RackBeacon**                | In development | `/rackbeacon/` — iOS app                 |
+| **VintageCarParts**           | In development | `/vintagecarparts/` — iOS app            |
+| **ChoateLab**                 | In development | `/choatelab/` — self-hosted home-lab dashboard, source on GitHub |
+| **Threadback**, **Clearing**  | Ideas          | mentioned on the homepage, no pages yet  |
 
-The grid in `index.html` is filterable by category (Network / Asset / Human / Market / Arcade / System).
+Projects appear twice on `index.html`: as a numbered entry in the project index, and as a node in the interactive graph. Both are plain markup/data in that one file — see [docs/PROJECTS.md](docs/PROJECTS.md) for the add-a-project checklist.
 
 ---
 
@@ -113,6 +115,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for a deeper walk-through and [
 ```
 choatelabs-site/
 ├── index.html, about.html, 404.html      # site shell
+├── assets/                                # shared site.css, lab-graph.js, vendored Three.js
 ├── lumina/                                # LUMINA web game (PWA)
 ├── mac-vendor-lookup/                     # iOS app landing + privacy/support
 ├── rackbeacon/                            # iOS app landing + privacy/support
