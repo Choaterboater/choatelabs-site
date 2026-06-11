@@ -85,9 +85,16 @@ a:hover {
 /* ---- fixed graph stage (index only) ----
    z-stack: 0 graph canvas · 1 scrim · 2 content · 10 header */
 
+/* Sized to the large viewport (not inset: 0) so the collapsing mobile
+   URL bar never changes the element's height — a height change here
+   forces a WebGL framebuffer resize mid-scroll, which stutters. */
 #graph-stage {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100lvh;
   z-index: 0;
 }
 
@@ -101,7 +108,11 @@ a:hover {
 /* Vignette so type stays legible over the linework. Gradients only. */
 .stage-scrim {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100lvh;
   z-index: 1;
   pointer-events: none;
   background:
@@ -239,15 +250,6 @@ main {
   text-shadow:
     0 0 16px var(--paper),
     0 2px 40px rgba(15, 13, 9, 0.9);
-}
-
-.hero-sub {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.3rem, 2.2vw, 1.55rem);
-  color: var(--ink-soft);
-  margin: 1.1rem 0 0;
-  text-shadow: 0 1px 14px var(--paper);
 }
 
 /* corner annotations */

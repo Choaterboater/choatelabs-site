@@ -1102,13 +1102,18 @@ export function mountLabGraph(element, options) {
 
   /* ---------------- observers + media queries ---------------- */
 
+  let viewDpr = 0;
   function resize() {
     const w = element.clientWidth;
     const h = element.clientHeight;
     if (!w || !h) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // A GL resize reallocates the framebuffer; doing that mid-scroll
+    // stutters, so skip when nothing actually changed.
+    if (w === viewW && h === viewH && dpr === viewDpr) return;
     viewW = w;
     viewH = h;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    viewDpr = dpr;
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
     // gl_PointSize is in device px; keep specks at their CSS-px size
