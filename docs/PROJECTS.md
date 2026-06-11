@@ -57,8 +57,8 @@ Ideas mentioned in the "in the notebook" aside on `index.html` and shown as fain
 
 1. Make `<project>/index.html` (and `privacy.html` / `support.html` if it's an iOS app).
 2. In `index.html` at the repo root:
-   - Copy one of the `<article class="project">` blocks in the project index, renumber it, and write the entry (name, mono status line, one short paragraph, link to `/<project>/`).
-   - Add a node to the graph data in the `<script type="module">` block at the bottom of the file: `{ id: '<project>', label: '<project>', href: '/<project>/', group: '<network|asset|market|play|idea>' }`. Nodes without `href` render as faint "idea" nodes. Edges are computed automatically (hub spokes + same-group links).
+   - Copy one of the ledger rows (`<a class="project" data-node="..." href="/<project>/">`) in the project index, renumber it, and fill in the name, one-liner, and mono status.
+   - Add a node to the graph data in the `<script type="module">` block at the bottom of the file: `{ id: '<project>', label: '<project>', href: '/<project>/', group: '<network|asset|market|play|idea>' }`. The row's `data-node` must match the node `id` (that's what drives the scroll/hover sync). Nodes without `href` render as faint "idea" nodes. Edges are computed automatically (hub spokes + same-group links).
    - Add the project to the footer link row.
 3. If the project needs server-side endpoints:
    - Put handlers in `functions/<project>/api/*.ts`.

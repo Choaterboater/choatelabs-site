@@ -4,28 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>404 · Choate Labs</title>
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F1E9">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#181611">
+<meta name="theme-color" content="#0F0D09">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='none'%3E%3Cstyle%3Epath%7Bstroke:%23A8501C%7Dcircle%7Bfill:%231C1B18%7D@media(prefers-color-scheme:dark)%7Bpath%7Bstroke:%23D8804A%7Dcircle%7Bfill:%23ECE8DD%7D%7D%3C/style%3E%3Cpath%20d='M70%2020%20Q%2010%2020%2020%2050%20Q%2010%2080%2070%2080'%20stroke-width='9'%20stroke-linecap='round'/%3E%3Ccircle%20cx='70'%20cy='20'%20r='9'/%3E%3Ccircle%20cx='20'%20cy='50'%20r='10'/%3E%3Ccircle%20cx='70'%20cy='80'%20r='11'/%3E%3C/svg%3E">
 <style>
 /* Self-contained on purpose: this page is served on bad routes,
    so it carries its own copy of the site tokens. */
 :root {
-  color-scheme: light dark;
-  --paper: #F4F1E9;
-  --ink: #1C1B18;
-  --ink-soft: rgba(28, 27, 24, 0.62);
-  --line: rgba(28, 27, 24, 0.16);
-  --accent: #A8501C;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #181611;
-    --ink: #ECE8DD;
-    --ink-soft: rgba(236, 232, 221, 0.62);
-    --line: rgba(236, 232, 221, 0.16);
-    --accent: #D8804A;
-  }
+  color-scheme: dark;
+  --paper: #0F0D09;
+  --ink: #EAE3D2;
+  --ink-soft: rgba(234, 227, 210, 0.6);
+  --line: rgba(234, 227, 210, 0.14);
+  --accent: #E08146;
 }
 * { box-sizing: border-box; }
 body {
@@ -44,6 +34,7 @@ a {
 }
 a:hover { color: var(--ink); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+::selection { background: var(--accent); color: var(--paper); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
