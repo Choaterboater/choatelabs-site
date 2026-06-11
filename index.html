@@ -3,355 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Choate Labs — Every connection leaves a trace</title>
-<meta name="description" content="Choate Labs builds native iOS tools for mapping connection — human networks, asset graphs, market topology, and the systems that bind them.">
-<meta name="theme-color" content="#0C0F14">
+<title>Choate Labs · software by Stephen Choate</title>
+<meta name="description" content="Independent software by Stephen Choate. Network tools for iOS and desktop, a terminal for Aruba networks, and one arcade game.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F1E9">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#181611">
 <link rel="canonical" href="https://choatelabs.app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='none'%3E%3Cstyle%3Epath%7Bstroke:%23A8501C%7Dcircle%7Bfill:%231C1B18%7D@media(prefers-color-scheme:dark)%7Bpath%7Bstroke:%23D8804A%7Dcircle%7Bfill:%23ECE8DD%7D%7D%3C/style%3E%3Cpath%20d='M70%2020%20Q%2010%2020%2020%2050%20Q%2010%2080%2070%2080'%20stroke-width='9'%20stroke-linecap='round'/%3E%3Ccircle%20cx='70'%20cy='20'%20r='9'/%3E%3Ccircle%20cx='20'%20cy='50'%20r='10'/%3E%3Ccircle%20cx='70'%20cy='80'%20r='11'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<style>
-:root{--noir:#0C0F14;--glass:rgba(22,27,34,.6);--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--amber:#F1C40F;--iris:#9B59B6;--slate:#5D7A8C}
-
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;overflow-x:hidden}
-.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
-
-#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.3;pointer-events:none}
-
-nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.9) 0%,transparent 100%)}
-.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
-.brand svg{width:30px;height:30px}
-.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
-.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
-.links{display:flex;gap:1.5rem;list-style:none}
-.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
-.links a:hover{opacity:1}
-@media(max-width:600px){.links{display:none}}
-
-.hero{position:relative;z-index:10;display:flex;flex-direction:column;justify-content:center;padding:8rem 1.5rem 3.5rem;max-width:1100px;margin:0 auto}
-.hero h1{font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;letter-spacing:-.03em;max-width:14ch;margin-bottom:1.1rem}
-.hero p{font-size:clamp(1rem,2vw,1.25rem);max-width:52ch;opacity:.7;margin-bottom:1.75rem}
-.cta{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .2s}
-.btn-copper{background:transparent;border-color:var(--copper);color:var(--chalk)}
-.btn-copper:hover{background:var(--copper);color:var(--noir)}
-.btn-ghost{border-color:rgba(244,246,240,.18);color:var(--chalk)}
-.btn-ghost:hover{border-color:var(--chalk)}
-
-.bench{position:relative;z-index:10;padding:0 1.5rem 4.5rem;max-width:1100px;margin:0 auto}
-.bench-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem}
-.bench-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.45}
-.filters{display:flex;gap:.5rem;flex-wrap:wrap}
-.fil{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;padding:.35rem .7rem;background:transparent;border:1px solid rgba(244,246,240,.08);color:var(--chalk);cursor:pointer;transition:all .15s;border-radius:999px}
-.fil:hover{border-color:rgba(244,246,240,.3)}
-.fil.on{background:rgba(244,246,240,.08);border-color:rgba(244,246,240,.25)}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.9rem}
-
-.card{position:relative;background:var(--glass);border:1px solid rgba(244,246,240,.06);padding:1.4rem;border-radius:10px;backdrop-filter:blur(10px);transition:transform .2s,border-color .2s;text-decoration:none;color:var(--chalk);display:block}
-.card:hover{transform:translateY(-3px);border-color:rgba(244,246,240,.12)}
-.card.hide{display:none}
-.icon{width:42px;height:42px;margin-bottom:.75rem;display:block}
-.meta{position:absolute;top:1.35rem;right:1.35rem;display:flex;gap:.45rem;flex-wrap:wrap;justify-content:flex-end;max-width:65%}
-.tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;padding:.25rem .5rem;border-radius:999px;border:1px solid transparent}
-.cat-network{color:var(--copper);border-color:rgba(230,126,34,.35)}
-.cat-human{color:var(--amber);border-color:rgba(241,196,15,.35)}
-.cat-asset{color:var(--mint);border-color:rgba(88,214,141,.35)}
-.cat-market{color:var(--copper);border-color:rgba(230,126,34,.35)}
-.cat-knowledge{color:var(--iris);border-color:rgba(155,89,182,.35)}
-.cat-arcade{color:#00F0FF;border-color:rgba(0,240,255,.4)}
-.cat-system{color:var(--slate);border-color:rgba(93,122,140,.35)}
-.stat-live{color:var(--mint);border:1px solid rgba(88,214,141,.25);background:rgba(88,214,141,.07)}
-.stat-live::before{content:"● ";font-size:.5rem;vertical-align:middle}
-.stat-calf{color:var(--copper);border:1px dashed rgba(230,126,34,.4);background:rgba(230,126,34,.05)}
-.stat-arch{color:var(--slate);border:1px solid rgba(93,122,140,.2);opacity:.7}
-.stat-soon{color:var(--slate);border:1px solid rgba(93,122,140,.25);opacity:.8;background:rgba(93,122,140,.06)}
-.card h3{font-size:1.3rem;margin-bottom:.35rem;letter-spacing:-.01em}
-.card p{font-size:.9rem;opacity:.65;line-height:1.5;margin-bottom:1rem}
-.applink{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--chalk);text-decoration:none;border-bottom:1px solid rgba(244,246,240,.15);padding-bottom:1px;transition:border-color .2s}
-.applink:hover{border-color:var(--chalk)}
-.applink.nope{opacity:.35;border:none}
-
-footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2rem 1.5rem;text-align:center}
-.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
-.ft a{color:var(--chalk);opacity:.7;text-decoration:none}
-.ft a:hover{opacity:1;text-decoration:underline}
-.ft .row{margin-top:.5rem}
-.ft .row a{margin:0 .6rem}
-
-.goat{position:fixed;bottom:12%;left:-60px;font-size:2.8rem;z-index:100;pointer-events:none}
-@keyframes run{to{left:110vw}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 
-<canvas id="n"></canvas>
-
-<nav>
+<header class="site-header wrap">
   <a href="/" class="brand">
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
-      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
-      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="70" cy="20" r="5.5" fill="currentColor"/>
+      <circle cx="20" cy="50" r="6.5" fill="currentColor"/>
+      <circle cx="70" cy="80" r="7.5" fill="currentColor"/>
     </svg>
-    <div>
-      <span class="bw">Choate</span>
-      <span class="bl">Labs</span>
-    </div>
+    Choate Labs
   </a>
-  <ul class="links mono">
-    <li><a href="#bench">Work</a></li>
-    <li><a href="/about.html">About</a></li>
-    <li><a href="mailto:stephen.choate@choatelabs.com">Contact</a></li>
-  </ul>
-</nav>
+  <nav class="site-nav" aria-label="Site">
+    <a href="/#projects">Projects</a>
+    <a href="/about.html">About</a>
+    <a href="mailto:stephen.choate@choatelabs.com">Email</a>
+  </nav>
+</header>
 
-<section class="hero">
-  <h1>Every connection leaves a trace.</h1>
-  <p>Choate Labs builds native iOS tools for mapping them. Network topology, asset graphs, and the systems that bind them. Built in the dark, shipped at dawn.</p>
-  <div class="cta">
-    <a href="#bench" class="btn btn-copper">Open the Lab</a>
-    <a href="/about.html" class="btn btn-ghost">About the Lab</a>
-  </div>
-</section>
+<main class="wrap">
 
-<section class="bench" id="bench">
-  <div class="bench-head">
-    <p class="bench-title">Specimens on the Bench</p>
-    <div class="filters">
-      <button class="fil on" data-filter="all">All</button>
-      <button class="fil" data-filter="network">Network</button>
-      <button class="fil" data-filter="asset">Asset</button>
-      <button class="fil" data-filter="human">Human</button>
-      <button class="fil" data-filter="market">Market</button>
-      <button class="fil" data-filter="arcade">Arcade</button>
-      <button class="fil" data-filter="system">System</button>
-    </div>
-  </div>
+  <section class="intro">
+    <h1>Choate Labs</h1>
+    <p>This is the workshop of Stephen Choate. I&rsquo;ve spent my career around enterprise networks, and most of what&rsquo;s here began as a tool I needed on the job: a faster way to identify MAC addresses, a terminal that takes Aruba gear seriously, a way to document a rack without a clipboard and a camera roll full of mystery photos.</p>
+    <p>Some of these grew into real products on the App Store. One turned into a game. Everything here is built and maintained by one person, and the email at the bottom of the page reaches me directly.</p>
+  </section>
 
-  <div class="grid">
+  <figure class="fig" id="fig-graph">
+    <p class="fig-label">fig. 1 &middot; the lab, as a graph</p>
+    <div id="graph-mount"></div>
+    <figcaption>Every project on this site, plotted by what it shares. Drag to spin it. Click a node to jump in.</figcaption>
+  </figure>
 
-    <a class="card" data-category="arcade" href="/lumina/">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <circle cx="24" cy="24" r="18" stroke="#00F0FF" stroke-width="2" stroke-dasharray="3 4" opacity="0.6"/>
-        <circle cx="24" cy="24" r="7" fill="none" stroke="#FF00A0" stroke-width="2"/>
-        <circle cx="24" cy="24" r="2.5" fill="#FFFFFF"/>
-        <circle cx="42" cy="24" r="3.5" fill="#00F0FF"/>
-        <circle cx="36" cy="36" r="1.5" fill="#00F0FF" opacity="0.7"/>
-        <circle cx="30" cy="40" r="1" fill="#00F0FF" opacity="0.4"/>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-arcade">Arcade</span>
-        <span class="tag stat-live">Live</span>
+  <section class="projects" id="projects">
+    <h2>Projects</h2>
+
+    <!-- To add a project: copy one of the <article class="project"> blocks below, renumber it, and add a matching node in the graph data at the bottom of this file. -->
+
+    <article class="project">
+      <span class="project-num" aria-hidden="true">01</span>
+      <div>
+        <h3>GreenCli</h3>
+        <p class="status">macOS &amp; Windows &middot; v1.0 out now</p>
+        <p class="desc">A desktop terminal for people who run Aruba and HPE networks. SSH, Telnet, and serial in one window, syntax highlighting that knows more than one vendor, an encrypted credential vault, and an AI assistant for the days the exact command escapes you. Signed and notarized builds for macOS and Windows.</p>
+        <p class="project-links"><a href="/greencli/">Download GreenCli</a></p>
       </div>
-      <h3>LUMINA: Neon Orbit</h3>
-      <p>One-touch arcade survival. Hold to reverse direction, sweep up energy, time your flips for triple-point Perfects. 6 skins, 4 trails, 5 upgrades, escalating waves. Web-native, no install.</p>
-      <span class="applink">Play now →</span>
-    </a>
-
-    <a class="card" data-category="network" href="/mac-vendor-lookup/">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <circle cx="24" cy="24" r="14" stroke="#E67E22" stroke-width="2.5"/>
-        <circle cx="24" cy="24" r="3.5" fill="#E67E22"/>
-        <path d="M34 34 L42 42" stroke="#E67E22" stroke-width="2.5" stroke-linecap="round"/>
-        <text x="24" y="27" text-anchor="middle" fill="#F4F6F0" font-family="JetBrains Mono,monospace" font-size="6" font-weight="700">OUI</text>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-network">Network</span>
-        <span class="tag stat-live">Live</span>
-      </div>
-      <h3>MAC Vendor Lookup</h3>
-      <p>Identify the manufacturer behind any MAC address. Camera scan, bulk paste, full IEEE OUI database — 100% offline.</p>
-      <span class="applink">Learn more →</span>
-    </a>
-
-    <a class="card" data-category="network" href="/greencli/">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <rect x="6" y="10" width="36" height="28" rx="4" stroke="#3EB489" stroke-width="2"/>
-        <circle cx="14" cy="19" r="2" fill="#3EB489" opacity="0.6"/>
-        <circle cx="20" cy="19" r="2" fill="#3EB489" opacity="0.4"/>
-        <path d="M10 28 L16 28" stroke="#3EB489" stroke-width="2" stroke-linecap="round"/>
-        <path d="M20 28 L34 28" stroke="#3EB489" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-        <path d="M10 34 L22 34" stroke="#3EB489" stroke-width="2" stroke-linecap="round"/>
-        <path d="M26 34 L36 34" stroke="#F1C40F" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-network">Network</span>
-        <span class="tag stat-live">Live</span>
-      </div>
-      <h3>GreenCli</h3>
-      <p>AI-powered terminal for Aruba HPE networks. Multi-vendor management, real-time monitoring, and an AI assistant that speaks your language. Native macOS &amp; Windows.</p>
-      <span class="applink">Download →</span>
-    </a>
-
-    <a class="card" data-category="asset" href="/rackbeacon/">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="6" width="10" height="36" rx="2" stroke="#58D68D" stroke-width="2"/>
-        <rect x="22" y="14" width="10" height="28" rx="2" stroke="#58D68D" stroke-width="2"/>
-        <rect x="36" y="22" width="6" height="20" rx="1" stroke="#58D68D" stroke-width="2"/>
-        <circle cx="39" cy="12" r="5" fill="#58D68D"/>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-asset">Asset</span>
-        <span class="tag stat-calf">Calibrating</span>
-      </div>
-      <h3>RackBeacon</h3>
-      <p>Document any rack, closet, or comms room. Scan device labels, place gear in the rack, capture rooms with LiDAR — all on-device.</p>
-      <span class="applink">Learn more →</span>
-    </a>
-
-    <a class="card" data-category="asset" href="/vintagecarparts/">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <rect x="14" y="6" width="20" height="14" rx="2" stroke="#58D68D" stroke-width="2.5"/>
-        <path d="M17 11 H31 M17 16 H31" stroke="#58D68D" stroke-width="1.5" opacity="0.5"/>
-        <path d="M24 20 V28 L30 36" stroke="#58D68D" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="32" cy="39" r="4.5" stroke="#58D68D" stroke-width="2.5"/>
-        <circle cx="32" cy="39" r="1.5" fill="#E67E22"/>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-asset">Asset</span>
-        <span class="tag stat-calf">Calibrating</span>
-      </div>
-      <h3>VintageCarParts</h3>
-      <p>Point your camera at a vintage car part and know what it is, what it fits, and what it's worth. Casting-number OCR, a 216-part reference catalog, VIN-aware fitment, real eBay sold prices.</p>
-      <span class="applink">Learn more →</span>
-    </a>
-
-    <article class="card" data-category="human">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <path d="M12 38 Q 24 10 36 38" stroke="#F1C40F" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="12" cy="38" r="4" fill="#F1C40F"/>
-        <circle cx="24" cy="22" r="4" fill="#F1C40F"/>
-        <circle cx="36" cy="38" r="4" fill="#F1C40F"/>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-human">Human</span>
-        <span class="tag stat-soon">Coming Soon</span>
-      </div>
-      <h3>Threadback</h3>
-      <p>Map generations without touching a spreadsheet. Genealogy as a graph, native to your pocket.</p>
-      <span class="applink nope">In Progress</span>
     </article>
 
-    <a class="card" data-category="market" href="/voltanode/">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <path d="M6 36 L16 28 L24 32 L32 14 L42 22" stroke="#E67E22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="16" cy="28" r="3" fill="#E67E22"/>
-        <circle cx="24" cy="32" r="3" fill="#E67E22"/>
-        <circle cx="32" cy="14" r="3.5" fill="#F4F6F0"/>
-        <path d="M6 42 L42 42" stroke="#E67E22" stroke-width="1.5" opacity="0.25"/>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-market">Market</span>
-        <span class="tag stat-live">Live</span>
+    <article class="project">
+      <span class="project-num" aria-hidden="true">02</span>
+      <div>
+        <h3>LUMINA: Neon Orbit</h3>
+        <p class="status">web &amp; iOS &middot; playable now</p>
+        <p class="desc">A one-touch arcade game. You orbit, you flip direction, you try not to die. It started as a weekend canvas experiment and somehow ended up with six skins, a global leaderboard, and an App Store release. No install needed, it runs in the browser.</p>
+        <p class="project-links"><a href="/lumina/">Play LUMINA</a></p>
       </div>
-      <h3>VoltaNode</h3>
-      <p>Multi-strategy paper-trading bot platform. EMA, MACD, mean-reversion, and news-sentiment bots ride crypto and stocks through Alpaca, with an LLM advisor stitching fundamentals, technicals, and macro into one thesis.</p>
-      <span class="applink">Learn more →</span>
-    </a>
-
-    <article class="card" data-category="market">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <path d="M6 42 L24 6 L42 42" stroke="#E67E22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 30 H36" stroke="#E67E22" stroke-width="1.5" opacity="0.4"/>
-        <circle cx="24" cy="6" r="4" fill="#E67E22"/>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-market">Market</span>
-        <span class="tag stat-soon">Coming Soon</span>
-      </div>
-      <h3>Clearing</h3>
-      <p>The market is a graph. Real-time topology and order-flow visualization for the curious retail trader.</p>
-      <span class="applink nope">In Calibration</span>
     </article>
 
-    <a class="card" data-category="system" href="/choatelab/">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <rect x="6" y="10" width="36" height="28" rx="3" stroke="#5D7A8C" stroke-width="2"/>
-        <path d="M6 18 H42" stroke="#5D7A8C" stroke-width="1.5" opacity="0.5"/>
-        <circle cx="10" cy="14" r="1.2" fill="#5D7A8C"/>
-        <circle cx="14" cy="14" r="1.2" fill="#5D7A8C"/>
-        <rect x="10" y="22" width="10" height="6" rx="1" fill="#5D7A8C" opacity="0.8"/>
-        <rect x="22" y="22" width="6" height="6" rx="1" stroke="#5D7A8C" stroke-width="1.2"/>
-        <rect x="30" y="22" width="8" height="6" rx="1" stroke="#5D7A8C" stroke-width="1.2"/>
-        <rect x="10" y="30" width="6" height="4" rx="1" stroke="#5D7A8C" stroke-width="1.2"/>
-        <rect x="18" y="30" width="12" height="4" rx="1" fill="#5D7A8C" opacity="0.6"/>
-        <rect x="32" y="30" width="6" height="4" rx="1" stroke="#5D7A8C" stroke-width="1.2"/>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-system">System</span>
-        <span class="tag stat-calf">Calibrating</span>
+    <article class="project">
+      <span class="project-num" aria-hidden="true">03</span>
+      <div>
+        <h3>MAC Vendor Lookup</h3>
+        <p class="status">iOS &middot; on the App Store</p>
+        <p class="desc">Type, paste, or scan a MAC address and get the manufacturer. The full IEEE OUI database lives on the phone, so it works in a basement with no signal, which is exactly where you tend to need it. Built because I was tired of pasting OUIs into a search engine.</p>
+        <p class="project-links"><a href="/mac-vendor-lookup/">About the app</a></p>
       </div>
-      <h3>ChoateLab</h3>
-      <p>Self-hosted dashboard for the home lab. Docker, Plex, Sonarr, Pi-hole, Home Assistant, Aruba — drag the cards you care about onto your home screen, ignore the rest.</p>
-      <span class="applink">Learn more →</span>
-    </a>
+    </article>
 
-    <a class="card" data-category="network" href="/greencli/">
-      <svg class="icon" viewBox="0 0 48 48" fill="none">
-        <rect x="4" y="8" width="40" height="32" rx="4" stroke="#58D68D" stroke-width="2"/>
-        <circle cx="11" cy="15" r="1.8" fill="#58D68D" opacity="0.5"/>
-        <circle cx="17" cy="15" r="1.8" fill="#58D68D" opacity="0.5"/>
-        <path d="M4 20 H44" stroke="#58D68D" stroke-width="1.5" opacity="0.3"/>
-        <path d="M10 28 L16 31 L10 34" stroke="#58D68D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="19" y="29" width="8" height="3" rx="1" fill="#58D68D" opacity="0.8"/>
-        <circle cx="37" cy="26" r="2.5" fill="#E67E22"/>
-        <circle cx="37" cy="33" r="1.8" fill="#E67E22" opacity="0.5"/>
-        <path d="M37 28.5 V31.2" stroke="#E67E22" stroke-width="1.5" opacity="0.4" stroke-dasharray="1.5 1.5"/>
-      </svg>
-      <div class="meta">
-        <span class="tag cat-network">Network</span>
-        <span class="tag stat-calf">Calibrating</span>
+    <article class="project">
+      <span class="project-num" aria-hidden="true">04</span>
+      <div>
+        <h3>VoltaNode</h3>
+        <p class="status">web &middot; running</p>
+        <p class="desc">A paper-trading platform where strategy bots trade against live markets through Alpaca. EMA, MACD, mean reversion, and news sentiment, with an LLM advisor that pulls fundamentals, technicals, and macro into a single thesis. Paper money only. The lessons are real, the losses are not.</p>
+        <p class="project-links"><a href="/voltanode/">How it works</a></p>
       </div>
-      <h3>GreenCli</h3>
-      <p>One cockpit for Aruba, Juniper, and Mist. SSH/Telnet/Serial with multi-vendor syntax highlighting, AI assistant, encrypted vault, and MCP-powered Aruba Central integration. macOS desktop.</p>
-      <span class="applink">Learn more →</span>
-    </a>
+    </article>
 
-  </div>
-</section>
+    <article class="project">
+      <span class="project-num" aria-hidden="true">05</span>
+      <div>
+        <h3>RackBeacon</h3>
+        <p class="status">iOS &middot; in development</p>
+        <p class="desc">Documentation for racks, closets, and comms rooms. Scan device labels, place gear in a rack diagram, capture the room with LiDAR. Everything stays on the device.</p>
+        <p class="project-links"><a href="/rackbeacon/">Project page</a></p>
+      </div>
+    </article>
 
-<footer>
-  <p class="ft">
-    © 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
-  </p>
-  <p class="ft row">
+    <article class="project">
+      <span class="project-num" aria-hidden="true">06</span>
+      <div>
+        <h3>VintageCarParts</h3>
+        <p class="status">iOS &middot; in development</p>
+        <p class="desc">Point the camera at an old car part and find out what it is, what it fits, and roughly what it&rsquo;s worth. OCR for casting numbers, a 216-part reference catalog, and real eBay sold prices instead of wishful asking prices.</p>
+        <p class="project-links"><a href="/vintagecarparts/">Project page</a></p>
+      </div>
+    </article>
+
+    <article class="project">
+      <span class="project-num" aria-hidden="true">07</span>
+      <div>
+        <h3>ChoateLab</h3>
+        <p class="status">self-hosted &middot; in development</p>
+        <p class="desc">A dashboard for the home lab. Docker, Plex, Pi-hole, Home Assistant, the *arr stack, and whatever else you run, arranged on one drag-and-drop home screen. Open source.</p>
+        <p class="project-links"><a href="/choatelab/">Project page</a> <a href="https://github.com/Choaterboater/ChoateLab">Source on GitHub</a></p>
+      </div>
+    </article>
+
+    <aside class="notebook">
+      <p class="fig-label">in the notebook</p>
+      <p>Two more ideas, further back: Threadback, an attempt at genealogy software that doesn&rsquo;t feel like doing taxes, and Clearing, a live map of market order flow. Neither has a page yet.</p>
+    </aside>
+
+  </section>
+
+</main>
+
+<footer class="site-footer wrap">
+  <p>&copy; 2026 Stephen Choate &middot; <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a></p>
+  <p class="footer-links">
     <a href="/">Home</a>
     <a href="/about.html">About</a>
+    <a href="/greencli/">GreenCli</a>
     <a href="/lumina/">LUMINA</a>
     <a href="/mac-vendor-lookup/">MAC Vendor Lookup</a>
+    <a href="/rackbeacon/">RackBeacon</a>
     <a href="/vintagecarparts/">VintageCarParts</a>
+    <a href="/voltanode/">VoltaNode</a>
     <a href="/choatelab/">ChoateLab</a>
-    <a href="/greencli/">GreenCli</a>
   </p>
+  <p class="fine">Static files, no trackers, no analytics.</p>
 </footer>
 
-<script>
-const c=document.getElementById('n'),x=c.getContext('2d');
-let w,h;const N=50,P=[];
-function r(){w=c.width=innerWidth;h=c.height=innerHeight}
-addEventListener('resize',r);r();
-class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.5;this.vy=(Math.random()-.5)*.5;this.r=Math.random()*1.6+.9}
-u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
-d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.45)';x.fill()}}
-for(let i=0;i<N;i++)P.push(new M());
-function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<150){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.06*(1-d/150)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
-A();
-
-document.querySelectorAll('.fil').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.fil').forEach(f=>f.classList.remove('on'));
-  b.classList.add('on');
-  const k=b.dataset.filter;
-  document.querySelectorAll('.card').forEach(C=>C.classList.toggle('hide',k!=='all'&&C.dataset.category!==k));
-}));
-
-console.log('%cChoate Labs','color:#E67E22;font-size:14px;font-weight:bold;','\nNice terminal. We respect the inspect element.');
-
-const K=[38,38,40,40,37,39,37,39,66,65];let p=0;
-addEventListener('keydown',e=>{if(e.keyCode===K[p]){p++;if(p===K.length){const g=document.createElement('div');g.className='goat';g.textContent='🐐';g.style.animation='run 3s linear forwards';document.body.appendChild(g);setTimeout(()=>g.remove(),3000);p=0}}else p=0;});
+<script type="module">
+  try {
+    const { mountLabGraph } = await import('/assets/lab-graph.js');
+    mountLabGraph(document.getElementById('graph-mount'), {
+      hub: { id: 'lab', label: 'choatelabs.app' },
+      nodes: [
+        { id: 'greencli',   label: 'greencli',          href: '/greencli/',          group: 'network' },
+        { id: 'lumina',     label: 'lumina',            href: '/lumina/',            group: 'play'    },
+        { id: 'mac',        label: 'mac vendor lookup', href: '/mac-vendor-lookup/', group: 'network' },
+        { id: 'voltanode',  label: 'voltanode',         href: '/voltanode/',         group: 'market'  },
+        { id: 'rackbeacon', label: 'rackbeacon',        href: '/rackbeacon/',        group: 'asset'   },
+        { id: 'vintage',    label: 'vintagecarparts',   href: '/vintagecarparts/',   group: 'asset'   },
+        { id: 'choatelab',  label: 'choatelab',         href: '/choatelab/',         group: 'network' },
+        { id: 'threadback', label: 'threadback',                                     group: 'idea'    },
+        { id: 'clearing',   label: 'clearing',                                       group: 'idea'    }
+      ]
+    });
+  } catch (err) {
+    document.getElementById('fig-graph').hidden = true;
+  }
 </script>
 
 </body>
