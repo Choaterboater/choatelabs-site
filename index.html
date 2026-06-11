@@ -42,7 +42,6 @@
   <section class="hero">
     <div class="wrap hero-inner">
       <h1>Choate Labs</h1>
-      <p class="hero-sub">An independent software lab. Network tools, field instruments, and one arcade game.</p>
     </div>
     <p class="hero-fig" id="fig-lines">
       <span>fig. 1 &middot; the lab, as a graph</span>
@@ -60,7 +59,7 @@
     <section class="intro">
       <div class="wrap">
         <p>Choate Labs is an independent software lab. Most of the catalog is tools for people who work with networks: a desktop terminal that takes Aruba gear seriously, MAC address lookup that works in a basement with no signal, rack documentation built around LiDAR.</p>
-        <p>The rest escaped from the lab notebook: a trading-bot platform, a self-hosted dashboard for the home lab, and an arcade game. Everything ships from a one-person operation. The about page has the story.</p>
+        <p>The rest escaped from the lab notebook: a trading-bot platform, a self-hosted dashboard for the home lab, and an arcade game. Everything ships from a one-person operation.</p>
       </div>
     </section>
 
@@ -197,7 +196,14 @@
     const inBand = new Set();
     let ioPick = null;    // the observer's current choice
     let hoverPick = null; // the row under the pointer, if any
-    const apply = () => controls?.focus?.(hoverPick ?? ioPick);
+    let applied = null;   // last id handed to focus(); re-sending it would
+                          // restart the easing mid-flight and stutter the graph
+    const apply = () => {
+      const next = hoverPick ?? ioPick;
+      if (next === applied) return;
+      applied = next;
+      controls?.focus?.(next);
+    };
     const pick = () => {
       let best = null;
       let bestDist = Infinity;
