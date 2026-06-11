@@ -5,194 +5,218 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Support — VintageCarParts · Choate Labs</title>
 <meta name="description" content="Help, FAQ, and contact for VintageCarParts. Email is the fastest path.">
-<meta name="theme-color" content="#0C0F14">
+<meta name="theme-color" content="#0F0D09">
 <link rel="canonical" href="https://choatelabs.app/vintagecarparts/support.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='none'%3E%3Cstyle%3Epath%7Bstroke:%23A8501C%7Dcircle%7Bfill:%231C1B18%7D@media(prefers-color-scheme:dark)%7Bpath%7Bstroke:%23D8804A%7Dcircle%7Bfill:%23ECE8DD%7D%7D%3C/style%3E%3Cpath%20d='M70%2020%20Q%2010%2020%2020%2050%20Q%2010%2080%2070%2080'%20stroke-width='9'%20stroke-linecap='round'/%3E%3Ccircle%20cx='70'%20cy='20'%20r='9'/%3E%3Ccircle%20cx='20'%20cy='50'%20r='10'/%3E%3Ccircle%20cx='70'%20cy='80'%20r='11'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 <style>
-:root{--noir:#0C0F14;--chalk:#F4F6F0;--copper:#E67E22;--mint:#58D68D;--slate:#5D7A8C}
-
-*{box-sizing:border-box;margin:0}
-body{background:var(--noir);color:var(--chalk);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.65;overflow-x:hidden}
-.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
-
-#n{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.12;pointer-events:none}
-
-nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:linear-gradient(180deg,rgba(12,15,20,.95) 0%,transparent 100%)}
-.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--chalk)}
-.brand svg{width:30px;height:30px}
-.bw{font-weight:700;font-size:1.1rem;letter-spacing:-.02em}
-.bl{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;opacity:.5}
-.links{display:flex;gap:1.5rem;list-style:none}
-.links a{color:var(--chalk);text-decoration:none;font-size:.85rem;opacity:.7;transition:opacity .2s}
-.links a:hover{opacity:1}
-.links a.on{opacity:1;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--mint)}
-@media(max-width:600px){.links{display:none}}
-
-main{position:relative;z-index:10;max-width:740px;margin:0 auto;padding:7rem 1.5rem 5rem}
-
-h1{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:.5rem;letter-spacing:-.03em}
-.lede{font-size:1.1rem;opacity:.7;margin:0 0 2rem}
-
-.contact-card{background:rgba(22,27,34,.6);border:1px solid rgba(244,246,240,.06);border-radius:10px;padding:1.75rem;margin:0 0 3rem;backdrop-filter:blur(10px)}
-.contact-card h2{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;text-transform:none;letter-spacing:-.01em;opacity:1;margin-bottom:.4rem}
-.contact-card p{margin:0 0 1rem;opacity:.7}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;background:var(--mint);color:var(--noir);border:1px solid var(--mint);transition:all .2s;border-radius:0}
-.btn:hover{background:transparent;color:var(--chalk)}
-
-h2{font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;opacity:.5;margin:2.5rem 0 1rem}
-p{margin-bottom:1rem;font-size:1rem;opacity:.85}
-
-details{background:rgba(22,27,34,.5);border:1px solid rgba(244,246,240,.06);border-radius:8px;padding:1rem 1.25rem;margin:.75rem 0;backdrop-filter:blur(10px);transition:border-color .2s}
-details[open]{border-color:rgba(88,214,141,.3)}
-details summary{font-weight:600;cursor:pointer;list-style:none;color:var(--chalk);font-size:1rem;display:flex;justify-content:space-between;align-items:center}
-details summary::-webkit-details-marker{display:none}
-details summary::after{content:"+";font-family:'JetBrains Mono',monospace;color:var(--mint);font-weight:400;transition:transform .2s}
-details[open] summary::after{content:"\2212"}
-details p{margin:1rem 0 0;opacity:.7;font-size:.95rem}
-details ul{margin:1rem 0 0;padding-left:1.4rem}
-details ul li{margin:.4rem 0;opacity:.75;font-size:.95rem}
-details code{font-family:'JetBrains Mono',monospace;background:rgba(12,15,20,.7);padding:.15rem .4rem;border-radius:3px;font-size:.85em;color:var(--mint)}
-details a{color:var(--mint);text-decoration:none;border-bottom:1px solid rgba(88,214,141,.3)}
-details a:hover{border-color:var(--mint)}
-
-footer{position:relative;z-index:10;border-top:1px solid rgba(244,246,240,.06);padding:2.5rem 1.5rem;text-align:center}
-.ft{font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.45}
-.ft a{color:var(--chalk);opacity:.7;text-decoration:none}
-.ft a:hover{opacity:1;text-decoration:underline}
-.ft .row{margin-top:.5rem}
-.ft .row a{margin:0 .6rem}
+main { pointer-events: auto; }
+.doc { max-width: 760px; margin: 0 auto; padding-top: 8.5rem; padding-bottom: 3rem; }
+.crumb {
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .02em;
+  color: var(--ink-soft);
+  margin: 0 0 1.4rem;
+}
+.crumb a { color: var(--ink-soft); text-decoration: none; }
+.crumb a:hover { color: var(--ink); }
+.doc h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 5.5vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 .8rem;
+}
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  margin: 0 0 2.4rem;
+}
+.doc h2 { font-size: 1.4rem; margin: 2.6rem 0 1.1rem; }
+.doc p { max-width: 64ch; }
+.contact-card {
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--accent);
+  padding: 1.4rem 1.5rem 1.5rem;
+  margin: 0 0 2.4rem;
+}
+.contact-card h2 { margin: 0 0 .5rem; font-size: 1.3rem; }
+.contact-card p { margin: 0 0 1.1rem; color: var(--ink-soft); }
+.btn {
+  display: inline-block;
+  padding: .72rem 1.4rem;
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .04em;
+  text-decoration: none;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--paper);
+}
+.btn:hover { background: transparent; color: var(--accent); }
+details { border-top: 1px solid var(--line); padding: 1.05rem 0; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+details summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: "+"; font-family: var(--mono); color: var(--accent); flex: none; }
+details[open] summary::after { content: "−"; }
+details p, details li { color: var(--ink-soft); font-size: .96rem; }
+details p { margin: .9rem 0 0; max-width: 64ch; }
+details ul { margin: .9rem 0 0; padding-left: 1.3rem; }
+details li { margin: .4rem 0; }
+details code {
+  font-family: var(--mono);
+  font-size: .88em;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: .08rem .35rem;
+}
 </style>
 </head>
 <body>
 
-<canvas id="n"></canvas>
-
-<nav>
-  <a href="/" class="brand">
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="70" cy="20" r="5.5" fill="#F4F6F0"/>
-      <circle cx="20" cy="50" r="6.5" fill="#58D68D"/>
-      <circle cx="70" cy="80" r="7.5" fill="#E67E22"/>
-    </svg>
-    <div>
-      <span class="bw">Choate</span>
-      <span class="bl">Labs</span>
-    </div>
-  </a>
-  <ul class="links mono">
-    <li><a href="/vintagecarparts/">VintageCarParts</a></li>
-    <li><a href="privacy.html">Privacy</a></li>
-    <li><a href="support.html" class="on">Support</a></li>
-  </ul>
-</nav>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="/" class="brand">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="70" cy="20" r="5.5" fill="currentColor"/>
+        <circle cx="20" cy="50" r="6.5" fill="currentColor"/>
+        <circle cx="70" cy="80" r="7.5" fill="currentColor"/>
+      </svg>
+      Choate Labs
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/#projects">Projects</a>
+      <a href="/about.html">About</a>
+      <a href="mailto:stephen.choate@choatelabs.com">Email</a>
+    </nav>
+  </div>
+</header>
 
 <main>
-  <h1>Support</h1>
-  <p class="lede">Questions, bugs, feature requests, and "what carburetor is this" disputes — happy to help.</p>
+  <div class="wrap doc">
+    <p class="crumb"><a href="/">choatelabs.app</a> / <a href="/vintagecarparts/">vintagecarparts</a> / support</p>
+    <h1>Support</h1>
+    <p class="lede">Questions, bugs, feature requests, and "what carburetor is this" disputes — happy to help.</p>
 
-  <div class="contact-card">
-    <h2>Email is the fastest path.</h2>
-    <p>Choate Labs is a one-person studio. Email lands directly with the developer, usually answered within a day or two.</p>
-    <a class="btn" href="mailto:stephen.choate@choatelabs.com?subject=VintageCarParts%20Support">Email Support</a>
+    <div class="contact-card">
+      <h2>Email is the fastest path.</h2>
+      <p>Choate Labs is a one-person studio. Email lands directly with the developer, usually answered within a day or two.</p>
+      <a class="btn" href="mailto:stephen.choate@choatelabs.com?subject=VintageCarParts%20Support">Email Support</a>
+    </div>
+
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>How does identification work?</summary>
+      <p>Two layers. The live scanner runs entirely on your iPhone — Apple's Vision framework turns what the camera sees into a feature print and matches it against the bundled 216-part catalog, while on-device OCR picks casting numbers off the part. For rare or rough parts, <strong>Expert Scan</strong> sends the photo you choose to an AI service for a deeper read: identification, era, applications, and condition notes.</p>
+    </details>
+
+    <details>
+      <summary>Does it work offline?</summary>
+      <p>Mostly, yes. Catalog browsing, the live scanner, casting-number lookup, your garage, and scan history all work with no connection. Three things need internet: <strong>Expert Scan</strong> (AI identification), <strong>VIN decode</strong> when adding a vehicle, and the <strong>sold-prices</strong> link (it opens eBay).</p>
+    </details>
+
+    <details>
+      <summary>What casting numbers does it understand?</summary>
+      <p>The big three American formats:</p>
+      <ul>
+        <li><strong>Ford</strong> — e.g. <code>C6AE-6015-A</code> (decade letter, year digit, line, part, revision)</li>
+        <li><strong>GM</strong> — 7-digit castings like <code>3927184</code> or <code>7028207</code></li>
+        <li><strong>Mopar</strong> — 7-digit castings from the same era</li>
+      </ul>
+      <p>The scanner reads them off the part automatically, and there's a manual lookup with a live "this looks like a Ford engine casting" hint as you type.</p>
+    </details>
+
+    <details>
+      <summary>What's in the catalog?</summary>
+      <p>216 vintage parts across eleven systems — carburetion, ignition, engine, cooling, fuel, exhaust, brakes, suspension, steering, electrical, transmission, and body/interior — centered on the American muscle era, with classic European and Japanese entries (Solex, Hitachi, Bosch CIS, and friends). Every part has a studio reference image, specs, and applications. It grows with each release.</p>
+    </details>
+
+    <details>
+      <summary>How do fitment verdicts work?</summary>
+      <p>Add your cars in the <strong>Garage</strong> — type a VIN and the app decodes year/make/model automatically through the free public NHTSA database, or enter it manually for pre-1981 vehicles. When a part is identified, its application list is checked against your saved cars and you get a verdict on the spot.</p>
+    </details>
+
+    <details>
+      <summary>Where do the prices come from?</summary>
+      <p>The <strong>"See sold prices"</strong> button opens eBay's completed-and-sold listings for the identified part — real transaction prices, not asking prices. The app doesn't set or estimate values itself; it shows you the market.</p>
+    </details>
+
+    <details>
+      <summary>The identification looks wrong.</summary>
+      <p>It happens — sixty-year-old parts are hard, even for the AI. Try these:</p>
+      <ul>
+        <li>Get the <strong>casting number in frame</strong> — it's the single strongest signal.</li>
+        <li>Wipe the part down; raised numbers under grease read poorly.</li>
+        <li>Shoot in good light, fill the frame with the part.</li>
+        <li>Run an <strong>Expert Scan</strong> for the deeper AI read.</li>
+      </ul>
+      <p>Still wrong? Email a screenshot and what the part actually is — real corrections directly improve the catalog.</p>
+    </details>
+
+    <details>
+      <summary>Do I need an account or API key?</summary>
+      <p>No account, ever. Expert Scan works out of the box; if you prefer to run scans on your own OpenRouter API key, you can paste one in Settings and it's stored in the iOS Keychain on your device.</p>
+    </details>
+
+    <details>
+      <summary>I have a feature request.</summary>
+      <p>Yes please. The roadmap is informal and friendly to suggestions from real users. Email <a href="mailto:stephen.choate@choatelabs.com?subject=VintageCarParts%20Feature%20Request">stephen.choate@choatelabs.com</a> with what you'd like and how you'd use it — "add the parts for my car" requests are especially welcome.</p>
+    </details>
+
+    <details>
+      <summary>Something crashed.</summary>
+      <p>Email <a href="mailto:stephen.choate@choatelabs.com?subject=VintageCarParts%20Bug">stephen.choate@choatelabs.com</a> with your iOS version, device model, and what you were doing when it happened. Screenshots or a screen recording make a real difference.</p>
+    </details>
+
+    <details>
+      <summary>What does the app collect about me?</summary>
+      <p>Almost nothing — no accounts, no analytics, no tracking. Live scanning is on-device; an Expert Scan sends only the photo you chose. See the <a href="privacy.html">privacy policy</a> for the full breakdown.</p>
+    </details>
   </div>
-
-  <h2 class="mono">Frequently asked questions</h2>
-
-  <details>
-    <summary>How does identification work?</summary>
-    <p>Two layers. The live scanner runs entirely on your iPhone — Apple's Vision framework turns what the camera sees into a feature print and matches it against the bundled 216-part catalog, while on-device OCR picks casting numbers off the part. For rare or rough parts, <strong>Expert Scan</strong> sends the photo you choose to an AI service for a deeper read: identification, era, applications, and condition notes.</p>
-  </details>
-
-  <details>
-    <summary>Does it work offline?</summary>
-    <p>Mostly, yes. Catalog browsing, the live scanner, casting-number lookup, your garage, and scan history all work with no connection. Three things need internet: <strong>Expert Scan</strong> (AI identification), <strong>VIN decode</strong> when adding a vehicle, and the <strong>sold-prices</strong> link (it opens eBay).</p>
-  </details>
-
-  <details>
-    <summary>What casting numbers does it understand?</summary>
-    <p>The big three American formats:</p>
-    <ul>
-      <li><strong>Ford</strong> — e.g. <code>C6AE-6015-A</code> (decade letter, year digit, line, part, revision)</li>
-      <li><strong>GM</strong> — 7-digit castings like <code>3927184</code> or <code>7028207</code></li>
-      <li><strong>Mopar</strong> — 7-digit castings from the same era</li>
-    </ul>
-    <p>The scanner reads them off the part automatically, and there's a manual lookup with a live "this looks like a Ford engine casting" hint as you type.</p>
-  </details>
-
-  <details>
-    <summary>What's in the catalog?</summary>
-    <p>216 vintage parts across eleven systems — carburetion, ignition, engine, cooling, fuel, exhaust, brakes, suspension, steering, electrical, transmission, and body/interior — centered on the American muscle era, with classic European and Japanese entries (Solex, Hitachi, Bosch CIS, and friends). Every part has a studio reference image, specs, and applications. It grows with each release.</p>
-  </details>
-
-  <details>
-    <summary>How do fitment verdicts work?</summary>
-    <p>Add your cars in the <strong>Garage</strong> — type a VIN and the app decodes year/make/model automatically through the free public NHTSA database, or enter it manually for pre-1981 vehicles. When a part is identified, its application list is checked against your saved cars and you get a verdict on the spot.</p>
-  </details>
-
-  <details>
-    <summary>Where do the prices come from?</summary>
-    <p>The <strong>"See sold prices"</strong> button opens eBay's completed-and-sold listings for the identified part — real transaction prices, not asking prices. The app doesn't set or estimate values itself; it shows you the market.</p>
-  </details>
-
-  <details>
-    <summary>The identification looks wrong.</summary>
-    <p>It happens — sixty-year-old parts are hard, even for the AI. Try these:</p>
-    <ul>
-      <li>Get the <strong>casting number in frame</strong> — it's the single strongest signal.</li>
-      <li>Wipe the part down; raised numbers under grease read poorly.</li>
-      <li>Shoot in good light, fill the frame with the part.</li>
-      <li>Run an <strong>Expert Scan</strong> for the deeper AI read.</li>
-    </ul>
-    <p>Still wrong? Email a screenshot and what the part actually is — real corrections directly improve the catalog.</p>
-  </details>
-
-  <details>
-    <summary>Do I need an account or API key?</summary>
-    <p>No account, ever. Expert Scan works out of the box; if you prefer to run scans on your own OpenRouter API key, you can paste one in Settings and it's stored in the iOS Keychain on your device.</p>
-  </details>
-
-  <details>
-    <summary>I have a feature request.</summary>
-    <p>Yes please. The roadmap is informal and friendly to suggestions from real users. Email <a href="mailto:stephen.choate@choatelabs.com?subject=VintageCarParts%20Feature%20Request">stephen.choate@choatelabs.com</a> with what you'd like and how you'd use it — "add the parts for my car" requests are especially welcome.</p>
-  </details>
-
-  <details>
-    <summary>Something crashed.</summary>
-    <p>Email <a href="mailto:stephen.choate@choatelabs.com?subject=VintageCarParts%20Bug">stephen.choate@choatelabs.com</a> with your iOS version, device model, and what you were doing when it happened. Screenshots or a screen recording make a real difference.</p>
-  </details>
-
-  <details>
-    <summary>What does the app collect about me?</summary>
-    <p>Almost nothing — no accounts, no analytics, no tracking. Live scanning is on-device; an Expert Scan sends only the photo you chose. See the <a href="privacy.html">privacy policy</a> for the full breakdown.</p>
-  </details>
 </main>
 
-<footer>
-  <p class="ft">
-    © 2026 Choate Labs · <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a>
-  </p>
-  <p class="ft row">
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/vintagecarparts/">VintageCarParts</a>
-    <a href="privacy.html">Privacy</a>
-  </p>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; 2026 Stephen Choate &middot; <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a></p>
+    <p class="footer-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/vintagecarparts/">VintageCarParts</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="support.html">Support</a>
+    </p>
+    <p class="fine">Static files, no trackers, no analytics.</p>
+  </div>
 </footer>
 
 <script>
-const c=document.getElementById('n'),x=c.getContext('2d');
-let w,h;const N=30,P=[];
-function r(){w=c.width=innerWidth;h=c.height=innerHeight}
-addEventListener('resize',r);r();
-class M{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.r=Math.random()*1.2+.8}
-u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
-d(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle='rgba(244,246,240,.35)';x.fill()}}
-for(let i=0;i<N;i++)P.push(new M());
-function A(){x.clearRect(0,0,w,h);for(let i=0;i<P.length;i++){P[i].u();P[i].d();for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<170){x.beginPath();x.moveTo(P[i].x,P[i].y);x.lineTo(P[j].x,P[j].y);x.strokeStyle=`rgba(244,246,240,${.04*(1-d/170)})`;x.lineWidth=.7;x.stroke()}}}requestAnimationFrame(A)}
-A();
+  (function () {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    function update() {
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
 </script>
 
 </body>
