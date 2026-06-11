@@ -10,7 +10,7 @@ No build step, no framework. The homepage centerpiece is an interactive Three.js
 
 | Path                          | Lives at                                   | What it is                                                                 |
 | ----------------------------- | ------------------------------------------ | -------------------------------------------------------------------------- |
-| `index.html`                  | `choatelabs.app/`                          | Landing page — intro, interactive project graph, numbered project index   |
+| `index.html`                  | `choatelabs.app/`                          | Landing page — full-viewport interactive project graph + ledger index      |
 | `about.html`                  | `choatelabs.app/about.html`                | About page                                                                 |
 | `404.html`                    | served on unknown paths                    | Custom 404                                                                 |
 | `assets/`                     | `choatelabs.app/assets/`                   | Shared stylesheet (`site.css`), project graph (`lab-graph.js`), vendored Three.js |

@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About · Choate Labs</title>
 <meta name="description" content="Choate Labs is the one-person software workshop of Stephen Choate.">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F1E9">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#181611">
+<meta name="theme-color" content="#0F0D09">
 <link rel="canonical" href="https://choatelabs.app/about.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='none'%3E%3Cstyle%3Epath%7Bstroke:%23A8501C%7Dcircle%7Bfill:%231C1B18%7D@media(prefers-color-scheme:dark)%7Bpath%7Bstroke:%23D8804A%7Dcircle%7Bfill:%23ECE8DD%7D%7D%3C/style%3E%3Cpath%20d='M70%2020%20Q%2010%2020%2020%2050%20Q%2010%2080%2070%2080'%20stroke-width='9'%20stroke-linecap='round'/%3E%3Ccircle%20cx='70'%20cy='20'%20r='9'/%3E%3Ccircle%20cx='20'%20cy='50'%20r='10'/%3E%3Ccircle%20cx='70'%20cy='80'%20r='11'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,21 +15,23 @@
 </head>
 <body>
 
-<header class="site-header wrap">
-  <a href="/" class="brand">
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="70" cy="20" r="5.5" fill="currentColor"/>
-      <circle cx="20" cy="50" r="6.5" fill="currentColor"/>
-      <circle cx="70" cy="80" r="7.5" fill="currentColor"/>
-    </svg>
-    Choate Labs
-  </a>
-  <nav class="site-nav" aria-label="Site">
-    <a href="/#projects">Projects</a>
-    <a href="/about.html" aria-current="page">About</a>
-    <a href="mailto:stephen.choate@choatelabs.com">Email</a>
-  </nav>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="/" class="brand">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="70" cy="20" r="5.5" fill="currentColor"/>
+        <circle cx="20" cy="50" r="6.5" fill="currentColor"/>
+        <circle cx="70" cy="80" r="7.5" fill="currentColor"/>
+      </svg>
+      Choate Labs
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/#projects">Projects</a>
+      <a href="/about.html" aria-current="page">About</a>
+      <a href="mailto:stephen.choate@choatelabs.com">Email</a>
+    </nav>
+  </div>
 </header>
 
 <main class="wrap">
@@ -38,10 +39,10 @@
   <section class="about">
     <h1>About</h1>
     <p>Choate Labs is one person. The plural is aspirational.</p>
-    <p>I&rsquo;m Stephen Choate. My background is in enterprise networking, which explains most of the catalog: spend enough years around switches, racks, and MAC tables and you collect a list of small daily irritations that software could fix. Nobody was going to build a good offline OUI lookup or a terminal that treats Aruba syntax as a first-class citizen, so I did.</p>
+    <p>I&rsquo;m Stephen Choate. I&rsquo;ve spent my career around enterprise networks, which explains most of the catalog: a faster way to identify MAC addresses, a terminal that takes Aruba gear seriously, a way to document a rack without a clipboard and a camera roll full of mystery photos. Spend enough years around switches and you collect a list of small daily irritations that software could fix, so I fix them.</p>
     <p>A few rules I try to hold myself to. An app shouldn&rsquo;t need a tutorial. Data stays on your device unless there&rsquo;s a very good reason for it to leave. Shipping something imperfect beats polishing something forever.</p>
     <p>The game is the exception to every pattern on this site. LUMINA exists because I wanted to know whether I could make something genuinely fun with a browser canvas. The answer, after six skins and a global leaderboard, is apparently yes.</p>
-    <p>And yes, like the boarding school. No relation. I get asked more often than you&rsquo;d think.</p>
+    <p>Everything here is designed, built, and maintained by me alone. If something breaks, the email below reaches me directly.</p>
 
     <div class="contact">
       <p class="name">Stephen Choate</p>
@@ -52,21 +53,35 @@
 
 </main>
 
-<footer class="site-footer wrap">
-  <p>&copy; 2026 Stephen Choate &middot; <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a></p>
-  <p class="footer-links">
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/greencli/">GreenCli</a>
-    <a href="/lumina/">LUMINA</a>
-    <a href="/mac-vendor-lookup/">MAC Vendor Lookup</a>
-    <a href="/rackbeacon/">RackBeacon</a>
-    <a href="/vintagecarparts/">VintageCarParts</a>
-    <a href="/voltanode/">VoltaNode</a>
-    <a href="/choatelab/">ChoateLab</a>
-  </p>
-  <p class="fine">Static files, no trackers, no analytics.</p>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; 2026 Stephen Choate &middot; <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a></p>
+    <p class="footer-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/greencli/">GreenCli</a>
+      <a href="/lumina/">LUMINA</a>
+      <a href="/mac-vendor-lookup/">MAC Vendor Lookup</a>
+      <a href="/rackbeacon/">RackBeacon</a>
+      <a href="/vintagecarparts/">VintageCarParts</a>
+      <a href="/voltanode/">VoltaNode</a>
+      <a href="/choatelab/">ChoateLab</a>
+    </p>
+    <p class="fine">Static files, no trackers, no analytics.</p>
+  </div>
 </footer>
+
+<script>
+  (function () {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    function update() {
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
 
 </body>
 </html>
