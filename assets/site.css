@@ -335,6 +335,39 @@ main {
     rgba(15, 13, 9, 0.95) 38rem);
 }
 
+/* ---- phone readability ----
+   The graph is a fixed full-viewport backdrop. The desktop scrim is
+   left-weighted (dark where the hero text sits, clear on the right for
+   the figure), which leaves nothing to protect full-width centered phone
+   copy — so on portrait the node labels collide with the hero title and
+   bleed through the top of the body text. Deepen the veil so the figure
+   reads as a faint backdrop while type stays crisp. Desktop is untouched. */
+@media (max-width: 720px) {
+  .stage-scrim {
+    background:
+      /* bottom-anchored dim for the hero title + corner annotations */
+      linear-gradient(to top,
+        rgba(15, 13, 9, 0.93) 0%,
+        rgba(15, 13, 9, 0.62) 22%,
+        rgba(15, 13, 9, 0.24) 52%,
+        rgba(15, 13, 9, 0.36) 100%),
+      /* center vignette so labels around the title fall back */
+      radial-gradient(125% 78% at 50% 40%,
+        rgba(15, 13, 9, 0) 0%,
+        rgba(15, 13, 9, 0.28) 58%,
+        rgba(15, 13, 9, 0.60) 100%);
+  }
+
+  /* Body copy begins nearly opaque so the intro never reads over live
+     linework (base ramp stays transparent for ~a full phone screen). */
+  .page-body {
+    background: linear-gradient(to bottom,
+      rgba(15, 13, 9, 0.42) 0,
+      rgba(15, 13, 9, 0.90) 7rem,
+      rgba(15, 13, 9, 0.97) 15rem);
+  }
+}
+
 /* ---- intro ---- */
 
 .intro {
