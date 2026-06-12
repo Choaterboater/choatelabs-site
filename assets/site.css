@@ -323,6 +323,12 @@ main {
   .hero-cue .cue-line {
     height: 32px;
   }
+  /* The az readout is a desktop drag-feedback flourish; on a phone its
+     orange text overprints the "drag to spin…" caption on the opposite
+     corner. Drop it — the fig caption alone reads cleanly. */
+  .hero-az {
+    display: none !important;
+  }
 }
 
 /* ---- readability ramp: transparent at the intro, near-solid by the
