@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Choate Labs">
+  <rect width="1024" height="1024" fill="#0F0D09"/>
+  <radialGradient id="v" cx="50%" cy="44%" r="62%">
+    <stop offset="0%" stop-color="#1A140C"/>
+    <stop offset="62%" stop-color="#0F0D09"/>
+    <stop offset="100%" stop-color="#0F0D09"/>
+  </radialGradient>
+  <rect width="1024" height="1024" fill="url(#v)"/>
+  <g transform="translate(193.5 155.0) scale(7)">
+  <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80"
+        fill="none" stroke="#E08146" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="70" cy="20" r="9"  fill="#EAE3D2"/>
+  <circle cx="20" cy="50" r="10" fill="#EAE3D2"/>
+  <circle cx="70" cy="80" r="11" fill="#EAE3D2"/></g>
+</svg>
