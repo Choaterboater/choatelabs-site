@@ -1132,6 +1132,30 @@ export function mountLabGraph(element, options) {
   });
   io.observe(element);
 
+  // The stage is position:fixed, so the IntersectionObserver above always
+  // reports "visible" — it never pauses the loop. Gate on tab visibility
+  // instead so the WebGL render loop stops draining GPU/battery in a
+  // backgrounded tab, and resumes when the tab is shown again.
+  const onVisibilityChange = () => {
+    if (document.hidden) stopLoop();
+    else requestRender();
+  };
+  document.addEventListener('visibilitychange', onVisibilityChange);
+
+  // On GPU context loss the canvas would otherwise keep "rendering" into a
+  // dead context (blank canvas + per-frame console errors). Stop the loop on
+  // loss; on restore, rebuild framebuffer sizing/theme and resume.
+  const onContextLost = (e) => { e.preventDefault(); stopLoop(); };
+  const onContextRestored = () => {
+    if (destroyed) return;
+    viewW = viewH = viewDpr = 0;
+    resize();
+    applyTheme();
+    requestRender();
+  };
+  canvas.addEventListener('webglcontextlost', onContextLost);
+  canvas.addEventListener('webglcontextrestored', onContextRestored);
+
   const mqDark = window.matchMedia('(prefers-color-scheme: dark)');
   // Re-read the CSS variables after the page's own media queries apply.
   // (Single dark theme now, but the re-read is harmless and future-proof.)
@@ -1167,6 +1191,9 @@ export function mountLabGraph(element, options) {
     stopLoop();
     ro.disconnect();
     io.disconnect();
+    document.removeEventListener('visibilitychange', onVisibilityChange);
+    canvas.removeEventListener('webglcontextlost', onContextLost);
+    canvas.removeEventListener('webglcontextrestored', onContextRestored);
     mqDark.removeEventListener('change', onSchemeChange);
     mqMotion.removeEventListener('change', onMotionChange);
     canvas.removeEventListener('pointerdown', onPointerDown);
