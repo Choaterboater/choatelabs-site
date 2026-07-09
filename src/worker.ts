@@ -44,31 +44,69 @@ function withCors(response: Response, origin: string | null): Response {
   });
 }
 
+// Baseline hardening headers for served static assets. No auth/cookies/PII
+// here, so this is defense-in-depth: block MIME sniffing, disallow cross-origin
+// framing, and trim the referer sent to third parties.
+const SECURITY_HEADERS: Record<string, string> = {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'SAMEORIGIN',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+};
+
+function withSecurityHeaders(response: Response): Response {
+  const headers = new Headers(response.headers);
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) {
+    headers.set(k, v);
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
+// JSON 500 that stays CORS-safe, so a thrown handler/D1 error reaches the
+// Capacitor WebView as a diagnosable error instead of an opaque CORS failure.
+function internalError(origin: string | null): Response {
+  const body = JSON.stringify({ error: 'internal error' });
+  return withCors(
+    new Response(body, {
+      status: 500,
+      headers: { 'content-type': 'application/json; charset=utf-8' },
+    }),
+    origin
+  );
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const origin = request.headers.get('origin');
 
-    // CORS preflight for any /lumina/api/* call.
-    if (url.pathname.startsWith('/lumina/api/') && request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: corsHeaders(origin) });
-    }
+    try {
+      // CORS preflight for any /lumina/api/* call.
+      if (url.pathname.startsWith('/lumina/api/') && request.method === 'OPTIONS') {
+        return new Response(null, { status: 204, headers: corsHeaders(origin) });
+      }
 
-    // Leaderboard API routes
-    if (url.pathname === '/lumina/api/score' && request.method === 'POST') {
-      return withCors(await handleScorePost(request, env), origin);
-    }
-    if (url.pathname === '/lumina/api/top' && request.method === 'GET') {
-      return withCors(await handleTopGet(request, env), origin);
-    }
-    if (url.pathname === '/lumina/api/around' && request.method === 'GET') {
-      return withCors(await handleAroundGet(request, env), origin);
-    }
-    if (url.pathname.startsWith('/lumina/api/')) {
-      return withCors(new Response('not found', { status: 404 }), origin);
-    }
+      // Leaderboard API routes
+      if (url.pathname === '/lumina/api/score' && request.method === 'POST') {
+        return withCors(await handleScorePost(request, env), origin);
+      }
+      if (url.pathname === '/lumina/api/top' && request.method === 'GET') {
+        return withCors(await handleTopGet(request, env), origin);
+      }
+      if (url.pathname === '/lumina/api/around' && request.method === 'GET') {
+        return withCors(await handleAroundGet(request, env), origin);
+      }
+      if (url.pathname.startsWith('/lumina/api/')) {
+        return withCors(new Response('not found', { status: 404 }), origin);
+      }
 
-    // Everything else → static assets (index.html, /lumina/*, etc.)
-    return env.ASSETS.fetch(request);
+      // Everything else → static assets (index.html, /lumina/*, etc.)
+      return withSecurityHeaders(await env.ASSETS.fetch(request));
+    } catch {
+      return internalError(origin);
+    }
   },
 };
