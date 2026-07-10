@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GreenText — Network config editor · Choate Labs</title>
-<meta name="description" content="A massive upgrade over generic text editors. Features multi-vendor syntax highlighting, auto-formatting, SSH terminal, encrypted vault, and Model Context Protocol (MCP). By Choate Labs.">
+<meta name="description" content="A desktop text and network config editor for engineers. Multi-vendor aware editing, power text tools, regex playground, interactive diff, SSH terminal, SFTP, encrypted vault, and MCP integration. By Choate Labs.">
 <meta name="theme-color" content="#0F0D09">
 <link rel="canonical" href="https://choatelabs.app/greentext/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='none'%3E%3Cstyle%3Epath%7Bstroke:%23A8501C%7Dcircle%7Bfill:%231C1B18%7D@media(prefers-color-scheme:dark)%7Bpath%7Bstroke:%23D8804A%7Dcircle%7Bfill:%23ECE8DD%7D%7D%3C/style%3E%3Cpath%20d='M70%2020%20Q%2010%2020%2020%2050%20Q%2010%2080%2070%2080'%20stroke-width='9'%20stroke-linecap='round'/%3E%3Ccircle%20cx='70'%20cy='20'%20r='9'/%3E%3Ccircle%20cx='20'%20cy='50'%20r='10'/%3E%3Ccircle%20cx='70'%20cy='80'%20r='11'/%3E%3C/svg%3E">
@@ -39,124 +39,211 @@ main { pointer-events: auto; }
   font-size: clamp(2.7rem, 6.5vw, 4.6rem);
   line-height: 1.05;
   letter-spacing: -0.015em;
-  margin: 0 0 .6rem;
+  margin: 0 0 1.2rem;
+  max-width: 16ch;
+}
+.page h1 .accent { color: var(--accent); }
+.standfirst { font-size: 1.18rem; line-height: 1.7; max-width: 60ch; margin: 0 0 1.4rem; }
+.meta-row {
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .02em;
+  color: var(--ink-soft);
+  margin: 0 0 2.2rem;
+}
+.cta { display: flex; flex-wrap: wrap; gap: .8rem; }
+.btn {
+  display: inline-block;
+  padding: .72rem 1.4rem;
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .04em;
+  text-decoration: none;
+  border: 1px solid var(--line);
   color: var(--ink);
 }
-.page .lead {
-  font-size: clamp(1.05rem, 3.2vw, 1.45rem);
-  line-height: 1.45;
+.btn:hover { border-color: var(--accent); color: var(--ink); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.btn-primary:hover { background: transparent; color: var(--accent); }
+.note {
+  font-family: var(--mono);
+  font-size: .72rem;
+  line-height: 1.7;
   color: var(--ink-soft);
-  margin: 0 0 2.8rem;
-  max-width: 38ch;
+  margin: 1.4rem 0 0;
+  max-width: 64ch;
 }
-.prose { max-width: 48ch; font-size: 1.05rem; line-height: 1.6; color: var(--ink); margin-bottom: 4rem; }
-.prose h2 { font-family: var(--serif); font-weight: 500; font-size: 1.6rem; margin: 2.8rem 0 1rem; color: var(--ink); }
-.prose p { margin: 0 0 1.2rem; }
-.prose ul { padding-left: 1.2rem; margin: 0 0 1.5rem; }
-.prose li { margin-bottom: .4rem; }
-.prose strong { font-weight: 600; color: var(--ink-heavy); }
-.prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s; }
-.prose a:hover { border-bottom-color: var(--accent); }
-
-.dl-grid { display: grid; gap: 1rem; margin-bottom: 4rem; }
-.dl-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-  padding: .8rem 1.1rem;
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--paper);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: .95rem;
-  transition: transform .15s, opacity .15s;
+.block { border-top: 1px solid var(--line); margin-top: 3.2rem; padding-top: 2.2rem; }
+.block .fig-label { margin-bottom: 1.6rem; }
+.block h2 { font-size: clamp(1.6rem, 2.4vw, 2rem); max-width: 30ch; }
+.block > p { max-width: 62ch; }
+.feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 0 3rem; }
+.feature-list > div { border-top: 1px solid var(--line); padding: 1.15rem 0 1.4rem; }
+.feature-list .ic { font-family: var(--mono); font-size: .95rem; color: var(--accent); line-height: 1; margin: 0 0 .55rem; }
+.feature-list h3 { font-family: var(--serif); font-weight: 500; font-size: 1.22rem; line-height: 1.25; margin: 0 0 .4rem; }
+.feature-list p { margin: 0; font-size: .95rem; color: var(--ink-soft); }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem; }
+.chips span {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .02em;
+  padding: .35rem .75rem;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
 }
-.dl-btn:hover { opacity: .9; transform: translateY(-1px); }
-.dl-btn svg { width: 18px; height: 18px; }
-.dl-meta { font-size: .75rem; color: var(--ink-soft); margin-top: .4rem; font-family: var(--mono); }
-
-.screens { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 4rem; }
-.screens img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); }
-.screens figcaption { font-size: .8rem; color: var(--ink-soft); margin-top: .6rem; text-align: center; }
-
-@media (min-width: 768px) {
-  .page { padding-top: 11rem; }
-  .dl-grid { grid-template-columns: repeat(2, max-content); }
-}
+.plain-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0 3rem; }
+.plain-list > div { border-top: 1px solid var(--line); padding: .95rem 0 1.15rem; font-size: .95rem; color: var(--ink-soft); }
+.more { margin-top: 1.8rem; font-size: .95rem; }
 </style>
 </head>
 <body>
 
-<canvas id="noise" aria-hidden="true"></canvas>
-
 <header class="site-header">
-  <div class="header-inner wrap">
-    <a href="/" class="brand-link" aria-label="Choate Labs Home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-        <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke-width="9" stroke-linecap="round"/>
-        <circle cx="70" cy="20" r="9"/>
-        <circle cx="20" cy="50" r="10"/>
-        <circle cx="70" cy="80" r="11"/>
+  <div class="wrap header-inner">
+    <a href="/" class="brand">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="70" cy="20" r="5.5" fill="currentColor"/>
+        <circle cx="20" cy="50" r="6.5" fill="currentColor"/>
+        <circle cx="70" cy="80" r="7.5" fill="currentColor"/>
       </svg>
-      <span>Choate Labs</span>
+      Choate Labs
     </a>
     <nav class="site-nav" aria-label="Site">
+      <a href="/#projects">Projects</a>
       <a href="/about.html">About</a>
+      <a href="mailto:stephen.choate@choatelabs.com">Email</a>
     </nav>
   </div>
 </header>
 
-<main class="page wrap">
-  <div class="crumb"><a href="/">Index</a> / GreenText</div>
-  
-  <svg class="app-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100" height="100" rx="22" fill="#1C1B18"/>
-    <path d="M28 32h44M28 50h32M28 68h20" stroke="#01A982" stroke-width="8" stroke-linecap="round"/>
-  </svg>
+<main>
+  <div class="wrap page">
 
-  <h1>GreenText</h1>
-  <p class="lead">A massive upgrade over generic text editors, built for network engineers.</p>
-  
-  <p class="spec">macOS / Windows · Rust + React · v0.1.0</p>
+    <section class="hero-block">
+      <p class="crumb"><a href="/">choatelabs.app</a> / greentext</p>
+      <p class="spec">Project 02 · macOS &amp; Windows</p>
+      <svg class="app-icon" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="92" height="92" rx="22" style="fill:var(--paper);stroke:var(--line)" stroke-width="2"/>
+        <path d="M22 30 H74" style="stroke:var(--ink)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M22 44 H62" style="stroke:var(--ink-soft)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M22 58 H68" style="stroke:var(--ink-soft)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M22 72 H50" style="stroke:var(--ink-soft)" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+        <circle cx="74" cy="66" r="10" style="fill:var(--accent)"/>
+        <path d="M70 66 L73 69 L79 62" style="stroke:var(--paper)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>The editor that <span class="accent">speaks network.</span></h1>
+      <p class="standfirst">GreenText is a desktop text and configuration editor built for network engineers. Massive config payloads, multi-vendor awareness, power text tools, and a live terminal — in one Deep-Slate workspace.</p>
+      <p class="meta-row">macOS &amp; Windows · Tauri Desktop · Rust + React</p>
+      <div class="cta">
+        <a href="https://github.com/Choaterboater/GreenText" class="btn btn-primary" target="_blank" rel="noopener">View source on GitHub</a>
+      </div>
+      <p class="note">
+        Public repository — build from source with the Tauri toolchain. Signed release builds coming soon.
+      </p>
+    </section>
 
-  <div class="dl-grid">
-    <div>
-      <a href="https://github.com/Choaterboater/GreenText" class="dl-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-        Source on GitHub
-      </a>
-      <div class="dl-meta">Public repository</div>
-    </div>
+    <section class="block">
+      <p class="fig-label">Built for</p>
+      <div class="chips">
+        <span>Aruba CX</span>
+        <span>Aruba AOS-S</span>
+        <span>Juniper JunOS</span>
+        <span>Mist</span>
+        <span>Firewall policy dumps</span>
+        <span>Log &amp; capture files</span>
+        <span>Generic text &amp; code</span>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="fig-label">What's under the hood</h2>
+      <div class="feature-list">
+
+        <div>
+          <div class="ic" aria-hidden="true">&#9707;</div>
+          <h3>Monaco editor engine</h3>
+          <p>The same editor core as VS Code, tuned for massive text payloads. Paste thousands of lines of config or logs without the app choking.</p>
+        </div>
+
+        <div>
+          <div class="ic" aria-hidden="true">&#9906;</div>
+          <h3>Power text tools</h3>
+          <p>One-click Pretty Indent, Zap Gremlins, process duplicate lines, reverse, sort, trim whitespace, and change case — all from the command palette.</p>
+        </div>
+
+        <div>
+          <div class="ic" aria-hidden="true">&#8214;</div>
+          <h3>Regex pattern playground</h3>
+          <p>Live-test complex patterns with immediate visual feedback on matches and capture groups before you run them across a file.</p>
+        </div>
+
+        <div>
+          <div class="ic" aria-hidden="true">&#8646;</div>
+          <h3>Interactive diff engine</h3>
+          <p>Compare dirty configs against saved files, review changes side by side, and cherry-pick lines to keep or discard.</p>
+        </div>
+
+        <div>
+          <div class="ic" aria-hidden="true">&#9707;</div>
+          <h3>Multi-file workspace</h3>
+          <p>Open whole directories and search across them instantly with Rust-powered regex. Tabs, split view, and fuzzy file jump built in.</p>
+        </div>
+
+        <div>
+          <div class="ic" aria-hidden="true">&#9002;</div>
+          <h3>SSH terminal</h3>
+          <p>Drop into a WebGL-accelerated xterm.js terminal to hit remote boxes natively, right next to the file you are editing.</p>
+        </div>
+
+        <div>
+          <div class="ic" aria-hidden="true">&#128193;</div>
+          <h3>SFTP browser</h3>
+          <p>Graphically browse remote filesystems over SSH and pull files straight into editor tabs — no context switching.</p>
+        </div>
+
+        <div>
+          <div class="ic" aria-hidden="true">&#128274;</div>
+          <h3>Encrypted vault</h3>
+          <p>AES-256-GCM local storage for credentials and API keys. Nothing leaves the machine unencrypted.</p>
+        </div>
+
+        <div>
+          <div class="ic" aria-hidden="true">&#9903;</div>
+          <h3>MCP integration</h3>
+          <p>Spin up Model Context Protocol servers to securely power AI automation against your own tools and data.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="block">
+      <p class="fig-label">No cloud required.</p>
+      <h2>Your configs stay your configs.</h2>
+      <p>GreenText runs entirely on your machine. Files, credentials, and terminal sessions never touch a server you don't control. No accounts, no telemetry, no sync.</p>
+      <div class="chips">
+        <span>No accounts</span>
+        <span>No cloud sync</span>
+        <span>No telemetry</span>
+        <span>Local vault</span>
+        <span>Offline capable</span>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Built for the network engineer.</h2>
+      <div class="plain-list">
+        <div>Engineers who paste huge firewall policies into editors that grind to a halt.</div>
+        <div>Multi-vendor teams moving between Aruba, Juniper, and Mist configs in the same shift.</div>
+        <div>Anyone cleaning up log dumps full of control characters and inconsistent whitespace.</div>
+        <div>Config authors who want a real diff and regex workbench next to a live terminal.</div>
+        <div>People who want AI automation without shipping their configs to a third-party cloud.</div>
+        <div>Anyone who thinks a generic code editor is the wrong tool for network work.</div>
+      </div>
+      <p class="more"><a href="https://github.com/Choaterboater/GreenText">Read the full documentation on GitHub &#8594;</a></p>
+    </section>
+
   </div>
-
-  <div class="prose">
-    <p>Standard text editors break when you paste massive firewall policies or dump thousands of lines of log files containing weird control characters. GreenText is a standalone desktop text and network configuration editor built specifically for network engineers working with <strong>Aruba</strong>, <strong>Juniper</strong>, and <strong>Mist</strong>.</p>
-
-    <h2>Why GreenText?</h2>
-    <p>It's a lightning-fast combination of BBEdit and Termius, integrating text manipulation, configuration intent, and remote system management into a single Deep-Slate UI:</p>
-
-    <ul>
-      <li><strong>Monaco Editor Engine:</strong> Parsing optimizations specifically built for massive text payloads.</li>
-      <li><strong>Multi-File Workspace:</strong> Handles directories gracefully with instant Rust-powered regex search.</li>
-      <li><strong>Text Tools:</strong> One-click commands to <em>Pretty Indent</em> configs, <em>Zap Gremlins</em>, <em>Process Duplicate Lines</em>, and normalize case.</li>
-      <li><strong>Regex Pattern Playground:</strong> Live-test complex regex patterns with immediate visual feedback on capture groups.</li>
-      <li><strong>Interactive Diff Engine:</strong> Compare dirty configs against saved files and cherry-pick lines.</li>
-    </ul>
-
-    <h2>Connected Workflows</h2>
-    <p>GreenText isn't just an offline text editor. It acts as your networking cockpit:</p>
-
-    <ul>
-      <li><strong>SSH Terminal:</strong> Drop into a WebGL-accelerated <code>xterm.js</code> terminal to hit remote boxes natively.</li>
-      <li><strong>SFTP Browser:</strong> Graphically browse remote file systems over SSH and pull files right into tabs.</li>
-      <li><strong>Encrypted Vault:</strong> AES-256-GCM local storage for credentials and API keys.</li>
-      <li><strong>MCP Integration:</strong> Spin up Model Context Protocol servers (GitHub, local tools) to securely power AI automation scripts.</li>
-    </ul>
-
-    <p>We built this because network engineers deserve better tools than generic code editors overloaded with web development plugins.</p>
-  </div>
-
 </main>
 
 <footer class="site-footer">
@@ -165,14 +252,7 @@ main { pointer-events: auto; }
     <p class="footer-links">
       <a href="/">Home</a>
       <a href="/about.html">About</a>
-      <a href="/greencli/">GreenCli</a>
-      <a href="/greentext/">GreenText</a>
-      <a href="/lumina/">LUMINA</a>
-      <a href="/mac-vendor-lookup/">MAC Vendor Lookup</a>
-      <a href="/rackbeacon/">RackBeacon</a>
-      <a href="/vintagecarparts/">VintageCarParts</a>
-      <a href="/voltanode/">VoltaNode</a>
-      <a href="/choatelab/">ChoateLab</a>
+      <a href="mailto:stephen.choate@choatelabs.com">Contact</a>
     </p>
     <p class="fine">Static files, no trackers, no analytics.</p>
   </div>
