@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreenText — Network config editor · Choate Labs</title>
+<meta name="description" content="A massive upgrade over generic text editors. Features multi-vendor syntax highlighting, auto-formatting, SSH terminal, encrypted vault, and Model Context Protocol (MCP). By Choate Labs.">
+<meta name="theme-color" content="#0F0D09">
+<link rel="canonical" href="https://choatelabs.app/greentext/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='none'%3E%3Cstyle%3Epath%7Bstroke:%23A8501C%7Dcircle%7Bfill:%231C1B18%7D@media(prefers-color-scheme:dark)%7Bpath%7Bstroke:%23D8804A%7Dcircle%7Bfill:%23ECE8DD%7D%7D%3C/style%3E%3Cpath%20d='M70%2020%20Q%2010%2020%2020%2050%20Q%2010%2080%2070%2080'%20stroke-width='9'%20stroke-linecap='round'/%3E%3Ccircle%20cx='70'%20cy='20'%20r='9'/%3E%3Ccircle%20cx='20'%20cy='50'%20r='10'/%3E%3Ccircle%20cx='70'%20cy='80'%20r='11'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main { pointer-events: auto; }
+.page { padding-top: 8.5rem; padding-bottom: 3rem; }
+.crumb {
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .02em;
+  color: var(--ink-soft);
+  margin: 0 0 .6rem;
+}
+.crumb a { color: var(--ink-soft); text-decoration: none; }
+.crumb a:hover { color: var(--ink); }
+.spec {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 2.2rem;
+}
+.app-icon { width: 76px; height: 76px; display: block; margin: 0 0 1.5rem; }
+.page h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.7rem, 6.5vw, 4.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 .6rem;
+  color: var(--ink);
+}
+.page .lead {
+  font-size: clamp(1.05rem, 3.2vw, 1.45rem);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0 0 2.8rem;
+  max-width: 38ch;
+}
+.prose { max-width: 48ch; font-size: 1.05rem; line-height: 1.6; color: var(--ink); margin-bottom: 4rem; }
+.prose h2 { font-family: var(--serif); font-weight: 500; font-size: 1.6rem; margin: 2.8rem 0 1rem; color: var(--ink); }
+.prose p { margin: 0 0 1.2rem; }
+.prose ul { padding-left: 1.2rem; margin: 0 0 1.5rem; }
+.prose li { margin-bottom: .4rem; }
+.prose strong { font-weight: 600; color: var(--ink-heavy); }
+.prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s; }
+.prose a:hover { border-bottom-color: var(--accent); }
+
+.dl-grid { display: grid; gap: 1rem; margin-bottom: 4rem; }
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .8rem 1.1rem;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: .95rem;
+  transition: transform .15s, opacity .15s;
+}
+.dl-btn:hover { opacity: .9; transform: translateY(-1px); }
+.dl-btn svg { width: 18px; height: 18px; }
+.dl-meta { font-size: .75rem; color: var(--ink-soft); margin-top: .4rem; font-family: var(--mono); }
+
+.screens { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 4rem; }
+.screens img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); }
+.screens figcaption { font-size: .8rem; color: var(--ink-soft); margin-top: .6rem; text-align: center; }
+
+@media (min-width: 768px) {
+  .page { padding-top: 11rem; }
+  .dl-grid { grid-template-columns: repeat(2, max-content); }
+}
+</style>
+</head>
+<body>
+
+<canvas id="noise"></canvas>
+<div id="vignette"></div>
+
+<nav>
+  <a href="/" class="brand-link">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke-width="9" stroke-linecap="round"/><circle cx="70" cy="20" r="9"/><circle cx="20" cy="50" r="10"/><circle cx="70" cy="80" r="11"/></svg>
+    <span>Choate Labs</span>
+  </a>
+  <div class="nav-links">
+    <a href="/about.html">About</a>
+  </div>
+</nav>
+
+<main class="page wrapper">
+  <div class="crumb"><a href="/">Index</a> / GreenText</div>
+  
+  <svg class="app-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" rx="22" fill="#1C1B18"/>
+    <path d="M28 32h44M28 50h32M28 68h20" stroke="#01A982" stroke-width="8" stroke-linecap="round"/>
+  </svg>
+
+  <h1>GreenText</h1>
+  <p class="lead">A massive upgrade over generic text editors, built for network engineers.</p>
+  
+  <p class="spec">macOS / Windows · Rust + React · v0.1.0</p>
+
+  <div class="dl-grid">
+    <div>
+      <a href="https://github.com/Choaterboater/GreenText" class="dl-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+        Source on GitHub
+      </a>
+      <div class="dl-meta">Public repository</div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Standard text editors break when you paste massive firewall policies or dump thousands of lines of log files containing weird control characters. GreenText is a standalone desktop text and network configuration editor built specifically for network engineers working with <strong>Aruba</strong>, <strong>Juniper</strong>, and <strong>Mist</strong>.</p>
+
+    <h2>Why GreenText?</h2>
+    <p>It's a lightning-fast combination of BBEdit and Termius, integrating text manipulation, configuration intent, and remote system management into a single Deep-Slate UI:</p>
+
+    <ul>
+      <li><strong>Monaco Editor Engine:</strong> Parsing optimizations specifically built for massive text payloads.</li>
+      <li><strong>Multi-File Workspace:</strong> Handles directories gracefully with instant Rust-powered regex search.</li>
+      <li><strong>Text Tools:</strong> One-click commands to <em>Pretty Indent</em> configs, <em>Zap Gremlins</em>, <em>Process Duplicate Lines</em>, and normalize case.</li>
+      <li><strong>Regex Pattern Playground:</strong> Live-test complex regex patterns with immediate visual feedback on capture groups.</li>
+      <li><strong>Interactive Diff Engine:</strong> Compare dirty configs against saved files and cherry-pick lines.</li>
+    </ul>
+
+    <h2>Connected Workflows</h2>
+    <p>GreenText isn't just an offline text editor. It acts as your networking cockpit:</p>
+
+    <ul>
+      <li><strong>SSH Terminal:</strong> Drop into a WebGL-accelerated <code>xterm.js</code> terminal to hit remote boxes natively.</li>
+      <li><strong>SFTP Browser:</strong> Graphically browse remote file systems over SSH and pull files right into tabs.</li>
+      <li><strong>Encrypted Vault:</strong> AES-256-GCM local storage for credentials and API keys.</li>
+      <li><strong>MCP Integration:</strong> Spin up Model Context Protocol servers (GitHub, local tools) to securely power AI automation scripts.</li>
+    </ul>
+
+    <p>We built this because network engineers deserve better tools than generic code editors overloaded with web development plugins.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrapper">
+    <p>&copy; 2026 Choate Labs. Every connection leaves a trace.</p>
+  </div>
+</footer>
+
+<script src="/assets/site.js"></script>
+</body>
+</html>
