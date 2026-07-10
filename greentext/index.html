@@ -88,20 +88,26 @@ main { pointer-events: auto; }
 </head>
 <body>
 
-<canvas id="noise"></canvas>
-<div id="vignette"></div>
+<canvas id="noise" aria-hidden="true"></canvas>
 
-<nav>
-  <a href="/" class="brand-link">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke-width="9" stroke-linecap="round"/><circle cx="70" cy="20" r="9"/><circle cx="20" cy="50" r="10"/><circle cx="70" cy="80" r="11"/></svg>
-    <span>Choate Labs</span>
-  </a>
-  <div class="nav-links">
-    <a href="/about.html">About</a>
+<header class="site-header">
+  <div class="header-inner wrap">
+    <a href="/" class="brand-link" aria-label="Choate Labs Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M70 20 Q 10 20 20 50 Q 10 80 70 80" stroke-width="9" stroke-linecap="round"/>
+        <circle cx="70" cy="20" r="9"/>
+        <circle cx="20" cy="50" r="10"/>
+        <circle cx="70" cy="80" r="11"/>
+      </svg>
+      <span>Choate Labs</span>
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/about.html">About</a>
+    </nav>
   </div>
-</nav>
+</header>
 
-<main class="page wrapper">
+<main class="page wrap">
   <div class="crumb"><a href="/">Index</a> / GreenText</div>
   
   <svg class="app-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -153,11 +159,36 @@ main { pointer-events: auto; }
 
 </main>
 
-<footer>
-  <div class="wrapper">
-    <p>&copy; 2026 Choate Labs. Every connection leaves a trace.</p>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; 2026 Stephen Choate &middot; <a href="mailto:stephen.choate@choatelabs.com">stephen.choate@choatelabs.com</a></p>
+    <p class="footer-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/greencli/">GreenCli</a>
+      <a href="/greentext/">GreenText</a>
+      <a href="/lumina/">LUMINA</a>
+      <a href="/mac-vendor-lookup/">MAC Vendor Lookup</a>
+      <a href="/rackbeacon/">RackBeacon</a>
+      <a href="/vintagecarparts/">VintageCarParts</a>
+      <a href="/voltanode/">VoltaNode</a>
+      <a href="/choatelab/">ChoateLab</a>
+    </p>
+    <p class="fine">Static files, no trackers, no analytics.</p>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    function update() {
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
 
 </body>
 </html>
