@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RackBeacon — Offline rack, closet &amp; comms-room documentation · Choate Labs</title>
-<meta name="description" content="Document any rack, closet, or comms room from your iPhone. Camera-scan serials and MACs, build U-by-U rack layouts, capture floor plans with LiDAR — all offline. By Choate Labs.">
+<meta name="description" content="Document any rack, closet, or comms room from your iPhone. Camera-scan serials and MACs, build U-by-U rack layouts, capture floor plans with LiDAR — offline by default. By Choate Labs.">
 <meta name="theme-color" content="#0F0D09">
 <link rel="canonical" href="https://choatelabs.app/rackbeacon/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='none'%3E%3Cstyle%3Epath%7Bstroke:%23A8501C%7Dcircle%7Bfill:%231C1B18%7D@media(prefers-color-scheme:dark)%7Bpath%7Bstroke:%23D8804A%7Dcircle%7Bfill:%23ECE8DD%7D%7D%3C/style%3E%3Cpath%20d='M70%2020%20Q%2010%2020%2020%2050%20Q%2010%2080%2070%2080'%20stroke-width='9'%20stroke-linecap='round'/%3E%3Ccircle%20cx='70'%20cy='20'%20r='9'/%3E%3Ccircle%20cx='20'%20cy='50'%20r='10'/%3E%3Ccircle%20cx='70'%20cy='80'%20r='11'/%3E%3C/svg%3E">
@@ -17,7 +17,7 @@ main { pointer-events: auto; }
 .page { padding-top: 8.5rem; padding-bottom: 3rem; }
 .crumb {
   font-family: var(--mono);
-  font-size: .75rem;
+  font-size: .72rem;
   letter-spacing: .02em;
   color: var(--ink-soft);
   margin: 0 0 .6rem;
@@ -125,7 +125,7 @@ main { pointer-events: auto; }
         <circle cx="65" cy="22" r="3" style="fill:var(--paper)"/>
       </svg>
       <h1>Document any rack, <span class="accent">any closet, any time</span>.</h1>
-      <p class="standfirst">RackBeacon turns your iPhone into the field tool you wish you'd had on day one — camera-scan serials and MACs, build U-by-U rack layouts, capture floor plans with LiDAR. All offline.</p>
+      <p class="standfirst">RackBeacon turns your iPhone into the field tool you wish you'd had on day one — camera-scan serials and MACs, build U-by-U rack layouts, capture floor plans with LiDAR. Offline by default.</p>
       <p class="meta-row">iPhone &amp; iPad <span class="dot">·</span> iOS 18+ <span class="dot">·</span> Coming Soon</p>
       <div class="cta">
         <span class="btn btn-disabled">Coming Soon to the App Store</span>
@@ -175,8 +175,8 @@ main { pointer-events: auto; }
 
         <div>
           <div class="ic" aria-hidden="true">◎</div>
-          <h3>100% offline</h3>
-          <p>No accounts. No analytics. No third-party SDKs. No network code in the binary. Your rack, your data, your device.</p>
+          <h3>Offline by default</h3>
+          <p>No accounts. No analytics. No third-party SDKs. The only network code is the optional, user-initiated HPE GreenLake sync. Your rack, your data, your device.</p>
         </div>
 
         <div>
@@ -191,7 +191,7 @@ main { pointer-events: auto; }
     <section class="block">
       <p class="fig-label">No data leaves the lab.</p>
       <h2>Built private by default.</h2>
-      <p>RackBeacon is fully offline. There is no network code in the binary. Your rack layouts, floor plans, photos of device labels, notes, and serials stay on your device.</p>
+      <p>RackBeacon is offline by default; the only network code in the binary is the optional HPE GreenLake sync, which runs solely at your explicit request. Your rack layouts, floor plans, photos of device labels, and notes stay on your device — and device serials/MACs leave it only when you tap Sync to your own GreenLake account.</p>
       <div class="chips">
         <span>No accounts</span>
         <span>No tracking</span>
