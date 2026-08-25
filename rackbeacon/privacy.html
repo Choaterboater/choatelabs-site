@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — RackBeacon · Choate Labs</title>
-<meta name="description" content="RackBeacon is fully offline. We collect no data, run no analytics, and use no third-party SDKs.">
+<meta name="description" content="RackBeacon is offline by default. We collect no data, run no analytics, and use no third-party SDKs; the optional HPE GreenLake sync only runs at your explicit request.">
 <meta name="theme-color" content="#0F0D09">
 <link rel="canonical" href="https://choatelabs.app/rackbeacon/privacy.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='none'%3E%3Cstyle%3Epath%7Bstroke:%23A8501C%7Dcircle%7Bfill:%231C1B18%7D@media(prefers-color-scheme:dark)%7Bpath%7Bstroke:%23D8804A%7Dcircle%7Bfill:%23ECE8DD%7D%7D%3C/style%3E%3Cpath%20d='M70%2020%20Q%2010%2020%2020%2050%20Q%2010%2080%2070%2080'%20stroke-width='9'%20stroke-linecap='round'/%3E%3Ccircle%20cx='70'%20cy='20'%20r='9'/%3E%3Ccircle%20cx='20'%20cy='50'%20r='10'/%3E%3Ccircle%20cx='70'%20cy='80'%20r='11'/%3E%3C/svg%3E">
@@ -78,21 +78,21 @@ main { pointer-events: auto; }
   <div class="wrap doc">
     <p class="crumb"><a href="/">choatelabs.app</a> / <a href="/rackbeacon/">rackbeacon</a> / privacy</p>
     <h1>Privacy Policy</h1>
-    <p class="updated">RackBeacon · Effective May 1, 2026</p>
+    <p class="updated">RackBeacon · Effective July 28, 2026</p>
 
     <div class="callout">
-      <p><strong>Short version:</strong> RackBeacon is a fully offline tool. We do not collect, store, transmit, share, or sell any of your data. There is no analytics, no telemetry, no advertising, and no third-party SDKs in the app.</p>
+      <p><strong>Short version:</strong> RackBeacon is an offline tool by default. We do not collect, store, transmit, share, or sell any of your data. There is no analytics, no telemetry, no advertising, and no third-party SDKs in the app. The single exception is the optional HPE GreenLake integration, which contacts HPE only when you enter your own API credentials and tap Sync — see “Optional HPE GreenLake sync” below.</p>
     </div>
 
     <h2>What we collect</h2>
-    <p>Nothing. The app contains no network code. There is no server to send data to. Your device never contacts Choate Labs at any point.</p>
+    <p>Nothing. There is no Choate Labs server for the app to send data to, and your device never contacts Choate Labs at any point. The app does contain one optional, user-initiated network feature — the HPE GreenLake sync described below — which talks only to HPE, and only when you ask it to.</p>
 
     <h2>What stays on your device</h2>
     <ul>
       <li><strong>Rack layouts and device records.</strong> Every rack you build, every device you place, every port assignment — stored in the app's local database.</li>
       <li><strong>Floor plans and room scans.</strong> Apple RoomPlan output, multi-room stitches, annotations, and cable runs are written to the app's Documents folder.</li>
       <li><strong>Photos of device labels.</strong> Saved to RackBeacon's app Documents folder for reference. They are not added to your iOS Photos library.</li>
-      <li><strong>Notes, serial numbers, MAC addresses, model strings.</strong> Local only. Never transmitted.</li>
+      <li><strong>Notes, serial numbers, MAC addresses, model strings.</strong> Local only — never transmitted, unless you explicitly sync device serials/MACs to your own HPE GreenLake account (see below).</li>
       <li><strong>Camera frames.</strong> Used in real time for on-device text and barcode recognition (Apple Vision and DataScannerViewController). Frames used only for OCR are never written to disk.</li>
     </ul>
     <p>You can delete any rack, device, plan, or photo at any time from inside the app. Uninstalling RackBeacon removes everything.</p>
@@ -105,7 +105,15 @@ main { pointer-events: auto; }
     <p>You can revoke this permission at any time in <em>Settings → RackBeacon → Camera</em>. The rest of the app continues to work without it.</p>
 
     <h2>Third-party services</h2>
-    <p>None. The app uses only Apple's built-in frameworks (SwiftUI, RoomPlan, Vision, AVFoundation, DataScannerViewController). There are no advertising SDKs, analytics SDKs, crash-reporting SDKs, or any other third-party libraries linked into the binary.</p>
+    <p>None by default. The app uses only Apple's built-in frameworks (SwiftUI, RoomPlan, Vision, AVFoundation, DataScannerViewController). There are no advertising SDKs, analytics SDKs, crash-reporting SDKs, or any other third-party libraries linked into the binary. The one optional integration is HPE GreenLake, described next.</p>
+
+    <h2>Optional HPE GreenLake sync</h2>
+    <p>Off unless you use it. If — and only if — you create your own API client in HPE GreenLake, enter the client ID and secret in Settings, and tap Sync, the app contacts HPE's servers (HPE SSO for authentication, then your regional GreenLake API) to register the devices you chose.</p>
+    <ul>
+      <li><strong>What is sent:</strong> each synced device's serial number and, when documented, its MAC address. Nothing else leaves the device.</li>
+      <li><strong>Your credentials:</strong> the client secret is stored in the iOS Keychain, never in plain text, and is only saved after a test or sync proves it works.</li>
+      <li><strong>Where it goes:</strong> data sent to GreenLake lives in your own HPE account and is governed by HPE's privacy policy, not this one. Sync only ever runs at your explicit tap — never in the background.</li>
+    </ul>
 
     <h2>Device library</h2>
     <p>The app bundles a static catalog of network and infrastructure hardware models — Aruba CX, Cisco Catalyst / Nexus / ISR / ASR / Firepower / UCS, Juniper EX/QFX/SRX/MX, Fortinet, Palo Alto PA, HPE ProLiant, APC Smart-UPS — used for U-size, port-layout, and faceplate rendering. This is factual product reference data; it does not contain personal information.</p>
