@@ -147,6 +147,16 @@ main { pointer-events: auto; }
     </section>
 
     <section class="block">
+      <p class="fig-label">What's new in 1.4</p>
+      <h2>Hardening and findability.</h2>
+      <div class="plain-list">
+        <div>SSH stack upgraded to russh 0.63.1 (CVE-2024-43410 was in 0.43.0; fixed in 0.44.1+).</div>
+        <div>Device REST TLS verification is on by default for new installs.</div>
+        <div>Settings is grouped (Appearance, Terminal, AI + MCP, Cloud, Backup). SFTP, Bulk runner, Config archive, and MCP live on Tools — not extra title-bar icons.</div>
+      </div>
+    </section>
+
+    <section class="block">
       <p class="fig-label">Vendor support</p>
       <div class="chips">
         <span>Aruba CX Switches</span>
@@ -184,7 +194,7 @@ main { pointer-events: auto; }
         <div>
           <div class="ic" aria-hidden="true">⛓</div>
           <h3>MCP integration</h3>
-          <p>Connects to MCP servers like centralmcp to give the AI assistant live Aruba Central access — device state, NAC policies, monitoring alerts, and more.</p>
+          <p>Paste a Claude Desktop / <code>mcpServers</code> JSON config or an HTTP URL in Settings → MCP Servers (also Tools → MCP). Adding a device host is SSH — it does not turn MCP on. The AI can then call that server's tools (for example centralmcp for live Aruba Central).</p>
         </div>
 
         <div>
