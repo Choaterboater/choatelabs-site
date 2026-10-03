@@ -25,7 +25,13 @@ App Store Connect references these URLs verbatim. They **must** return HTTP 200 
 
 ## GreenCli (`/greencli/`)
 
-Desktop terminal for Aruba/HPE networks: SSH/Telnet/serial, multi-vendor syntax highlighting, encrypted credential vault, AI assistant. v1.0.0 shipped for macOS (arm64 + Intel, signed and notarized) and Windows x64 (MSI). The directory holds the landing page, `privacy.html`, `support.html`, and the installer binaries.
+Desktop terminal for Aruba/HPE networks: SSH/Telnet/serial, multi-vendor syntax highlighting, encrypted credential vault, AI assistant, self-updating on macOS and Windows. v2.0 shipped for macOS (arm64 + Intel) and Windows x64; greencli-mcp, a read-only MCP server for Casper and Claude Code, ships next to the app. The directory holds the landing page, `privacy.html`, `support.html`, and the installer binaries.
+
+## Casper (`/casper/`)
+
+A coding helper for the terminal that runs the project's own checks before it says "done", and is careful around network gear. Preview releases for macOS, Windows and Linux.
+
+No folder here: the site is built from `site/` in the [Casper repo](https://github.com/Choaterboater/casper) and hosted on GitHub Pages. `src/worker.ts` passes `/casper/*` through to it (see [ARCHITECTURE.md](ARCHITECTURE.md#casper--casper)). Edit Casper's pages in the Casper repo, not here.
 
 ## RackBeacon (`/rackbeacon/`)
 
@@ -63,6 +69,7 @@ Ideas mentioned in the "in the notebook" aside on `index.html` and shown as fain
 3. If the project needs server-side endpoints:
    - Put handlers in `functions/<project>/api/*.ts`.
    - Add a router branch in `src/worker.ts` for `/<project>/api/*`.
+   - Add `/<project>/api/*` to `run_worker_first` in `wrangler.jsonc`. Paths not on that list never reach the Worker.
    - If it uses D1, add a binding in `wrangler.jsonc` and a schema file at the repo root.
 4. If new files shouldn't be served as static assets (e.g., a new `functions/` subtree or a schema file), add them to `.assetsignore`.
 5. `wrangler deploy`.

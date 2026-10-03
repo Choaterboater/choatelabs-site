@@ -1,5 +1,6 @@
 // Cloudflare Worker entry — routes /lumina/api/* to leaderboard handlers,
-// falls through to static assets for everything else.
+// /casper/* to Casper's GitHub Pages site, and falls through to static
+// assets for everything else.
 
 import { handleScorePost } from '../functions/lumina/api/score';
 import { handleTopGet } from '../functions/lumina/api/top';
@@ -65,6 +66,50 @@ function withSecurityHeaders(response: Response): Response {
   });
 }
 
+// Casper's site is built and hosted by GitHub Pages from the Casper repo
+// (its site/ folder). Pages serves it under /casper/ too, so paths pass
+// through unchanged: one copy of the site, served at choatelabs.app/casper/.
+const CASPER_ORIGIN = 'https://choaterboater.github.io';
+const CASPER_PASS_HEADERS = ['content-type', 'cache-control', 'etag', 'last-modified'];
+
+async function proxyCasper(request: Request, url: URL): Promise<Response> {
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    return new Response('method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
+  }
+  const upstreamHeaders = new Headers();
+  for (const name of ['if-none-match', 'if-modified-since']) {
+    const value = request.headers.get(name);
+    if (value) upstreamHeaders.set(name, value);
+  }
+  let upstream: Response;
+  try {
+    upstream = await fetch(CASPER_ORIGIN + url.pathname + url.search, {
+      method: request.method,
+      headers: upstreamHeaders,
+      redirect: 'manual',
+    });
+  } catch {
+    return new Response('Casper site unavailable', { status: 502 });
+  }
+  const headers = new Headers();
+  for (const name of CASPER_PASS_HEADERS) {
+    const value = upstream.headers.get(name);
+    if (value) headers.set(name, value);
+  }
+  // Pages redirects folders (/casper → /casper/) to an absolute github.io
+  // URL; keep the visitor on choatelabs.app.
+  const location = upstream.headers.get('location');
+  if (location) {
+    const target = new URL(location, CASPER_ORIGIN);
+    headers.set('location', target.origin === CASPER_ORIGIN ? target.pathname + target.search : location);
+  }
+  return new Response(upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers,
+  });
+}
+
 // JSON 500 that stays CORS-safe, so a thrown handler/D1 error reaches the
 // Capacitor WebView as a diagnosable error instead of an opaque CORS failure.
 function internalError(origin: string | null): Response {
@@ -101,6 +146,11 @@ export default {
       }
       if (url.pathname.startsWith('/lumina/api/')) {
         return withCors(new Response('not found', { status: 404 }), origin);
+      }
+
+      // Casper's site → GitHub Pages
+      if (url.pathname === '/casper' || url.pathname.startsWith('/casper/')) {
+        return withSecurityHeaders(await proxyCasper(request, url));
       }
 
       // Everything else → static assets (index.html, /lumina/*, etc.)

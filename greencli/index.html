@@ -147,13 +147,15 @@ main { pointer-events: auto; }
     </section>
 
     <section class="block">
-      <p class="fig-label">What's new in 1.4</p>
-      <h2>Hardening and findability.</h2>
+      <p class="fig-label">What's new in 2.0</p>
+      <h2>Updates itself. Keys out of plain files.</h2>
       <div class="plain-list">
-        <div>SSH stack upgraded to russh 0.63.1 (CVE-2024-43410 was in 0.43.0; fixed in 0.44.1+).</div>
-        <div>Device REST TLS verification is on by default for new installs.</div>
-        <div>Settings is grouped (Appearance, Terminal, AI + MCP, Cloud, Backup). SFTP, Bulk runner, Config archive, and MCP live on Tools — not extra title-bar icons.</div>
+        <div>Automatic updates on macOS and Windows. GreenCli checks GitHub once a day, checks each download's signature, and installs nothing until you tap Restart to update.</div>
+        <div>AI keys and MCP logins live in the macOS Keychain, Windows Credential Manager, or the Linux Secret Service, not in files in the data folder.</div>
+        <div>greencli-mcp ships next to the app: a read-only MCP server that lets <a href="/casper/">Casper</a> or Claude Code look up your devices and archived configs, with secrets hidden.</div>
+        <div>Built on Tauri 2. Settings, sessions, and the vault carry over from 1.9.</div>
       </div>
+      <p class="note">Coming from 1.9: install 2.0 by hand once (1.9 has no updater). Back up <code>ai_keys.json</code> and <code>mcp_creds.json</code> first, because 1.9 can't read the system password store.</p>
     </section>
 
     <section class="block">
@@ -194,7 +196,7 @@ main { pointer-events: auto; }
         <div>
           <div class="ic" aria-hidden="true">⛓</div>
           <h3>MCP integration</h3>
-          <p>Paste a Claude Desktop / <code>mcpServers</code> JSON config or an HTTP URL in Settings → MCP Servers (also Tools → MCP). Adding a device host is SSH — it does not turn MCP on. The AI can then call that server's tools (for example centralmcp for live Aruba Central).</p>
+          <p>Paste a Claude Desktop / <code>mcpServers</code> JSON config or an HTTP URL in Settings → MCP Servers (also Tools → MCP). Adding a device host is SSH — it does not turn MCP on. The AI can then call that server's tools (for example centralmcp for live Aruba Central). Going the other way, greencli-mcp lets Casper or Claude Code read GreenCli's devices and config history.</p>
         </div>
 
         <div>
