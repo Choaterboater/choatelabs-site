@@ -19,7 +19,8 @@ No build step, no framework. The homepage centerpiece is an interactive Three.js
 | `rackbeacon/`                 | `choatelabs.app/rackbeacon/`               | Landing + privacy/support pages for RackBeacon                             |
 | `voltanode/`                  | `choatelabs.app/voltanode/`                | Landing page for VoltaNode                                                 |
 | `choatelab/`                  | `choatelabs.app/choatelab/`                | Landing page for [ChoateLab](https://github.com/Choaterboater/ChoateLab) (self-hosted home-lab dashboard) |
-| `src/worker.ts`               | Cloudflare Worker entry                    | Routes `/lumina/api/*` → leaderboard handlers; everything else → static    |
+| *(no folder)*                 | `choatelabs.app/casper/`                   | [Casper](https://github.com/Choaterboater/casper)'s site: the Worker passes it through from GitHub Pages |
+| `src/worker.ts`               | Cloudflare Worker entry                    | Routes `/lumina/api/*` → leaderboard handlers; `/casper/*` → GitHub Pages; everything else → static |
 | `functions/lumina/api/`       | bound to Worker                            | `score.ts`, `top.ts`, `_shared.ts` — D1-backed leaderboard handlers        |
 | `lumina-schema.sql`           | (run via wrangler)                         | D1 schema for `scores`, `scores_daily`, `submit_log`                       |
 | `wrangler.jsonc`              | Wrangler config                            | Worker name, D1 binding (`LUMINA_DB`), static asset binding (`ASSETS`)     |
@@ -35,6 +36,7 @@ The Swift apps and App Store listings reference these exact paths. **Don't renam
 | Project                       | Status         | Where                                    |
 | ----------------------------- | -------------- | ---------------------------------------- |
 | **GreenCli**                  | v1.0 shipped   | `/greencli/` — macOS + Windows desktop terminal for Aruba/HPE networks |
+| **Casper**                    | Preview        | `/casper/` — terminal coding helper that checks its own work; site lives in the Casper repo |
 | **LUMINA: Neon Orbit**        | Live           | `/lumina/` — web game + iOS App Store    |
 | **MAC Vendor Lookup**         | Live           | `/mac-vendor-lookup/` — iOS app          |
 | **VoltaNode**                 | Running        | `/voltanode/` — multi-strategy paper-trading bot platform |
@@ -96,6 +98,8 @@ Cloudflare Workers handles TLS automatically for `choatelabs.app`. DNS at Porkbu
                 │   /lumina/api/score  POST  ─┐          │
                 │   /lumina/api/top    GET   ─┼─▶ D1     │
                 │   /lumina/api/*      OPTIONS┘ (CORS)   │
+                │                                        │
+                │   /casper/*  ─▶  GitHub Pages          │
                 │                                        │
                 │   everything else  ─▶  env.ASSETS      │
                 │                       (static HTML/JS) │

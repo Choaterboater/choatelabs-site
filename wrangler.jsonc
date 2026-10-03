@@ -9,7 +9,10 @@
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // /casper/* has no files here; the Worker passes it to GitHub Pages.
+    // Without this, browser page loads get 404.html before the Worker runs.
+    "run_worker_first": ["/casper", "/casper/*"]
   },
   "compatibility_flags": [
     "nodejs_compat"

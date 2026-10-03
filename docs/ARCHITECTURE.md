@@ -1,9 +1,10 @@
 # Architecture
 
-`choatelabs-site` is a Cloudflare Worker with two responsibilities:
+`choatelabs-site` is a Cloudflare Worker with three responsibilities:
 
 1. Serve static HTML/CSS/JS for `choatelabs.app` (the marketing site, project landing pages, the LUMINA web game).
 2. Serve a tiny JSON API for the LUMINA leaderboard, backed by Cloudflare D1.
+3. Pass `/casper/*` through to Casper's site on GitHub Pages.
 
 ```
                        ┌───────────────────────────────────────────────┐
@@ -20,6 +21,7 @@
                        │     │ (404 for other api paths)    │          │
                        │     └──────────────────────────────┘          │
                        │                                               │
+                       │     /casper/*  GET/HEAD  ──▶  GitHub Pages    │
                        │     everything else  ──▶  env.ASSETS.fetch()  │
                        └───────────────────────────────────────────────┘
 ```
@@ -31,8 +33,17 @@ if (path.startsWith('/lumina/api/') && method === 'OPTIONS') → CORS preflight
 if (path === '/lumina/api/score' && method === 'POST')      → handleScorePost
 if (path === '/lumina/api/top'   && method === 'GET')       → handleTopGet
 if (path.startsWith('/lumina/api/'))                        → 404
+if (path === '/casper' || path.startsWith('/casper/'))      → proxyCasper (GitHub Pages)
 otherwise                                                   → env.ASSETS.fetch(request)
 ```
+
+## Casper — `/casper/*`
+
+Casper's site is built and deployed by GitHub Pages from the Casper repo (its `site/` folder), at `https://choaterboater.github.io/casper/`. The Worker forwards `/casper/*` there with the path unchanged, so this repo holds no copy of it: a docs change merged in the Casper repo shows up at `choatelabs.app/casper/` once Pages redeploys.
+
+- Only `GET` and `HEAD` are forwarded; `If-None-Match` / `If-Modified-Since` go along so browsers get `304`s.
+- Only `content-type`, `cache-control`, `etag` and `last-modified` come back, plus the usual security headers.
+- Pages redirects folders (`/casper` → `/casper/`) with an absolute `github.io` URL; the Worker rewrites that `Location` to a path so visitors stay on `choatelabs.app`.
 
 The `ASSETS` binding is configured in `wrangler.jsonc`:
 

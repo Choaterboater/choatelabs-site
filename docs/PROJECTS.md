@@ -27,6 +27,12 @@ App Store Connect references these URLs verbatim. They **must** return HTTP 200 
 
 Desktop terminal for Aruba/HPE networks: SSH/Telnet/serial, multi-vendor syntax highlighting, encrypted credential vault, AI assistant. v1.0.0 shipped for macOS (arm64 + Intel, signed and notarized) and Windows x64 (MSI). The directory holds the landing page, `privacy.html`, `support.html`, and the installer binaries.
 
+## Casper (`/casper/`)
+
+A coding helper for the terminal that runs the project's own checks before it says "done", and is careful around network gear. Preview releases for macOS, Windows and Linux.
+
+No folder here: the site is built from `site/` in the [Casper repo](https://github.com/Choaterboater/casper) and hosted on GitHub Pages. `src/worker.ts` passes `/casper/*` through to it (see [ARCHITECTURE.md](ARCHITECTURE.md#casper--casper)). Edit Casper's pages in the Casper repo, not here.
+
 ## RackBeacon (`/rackbeacon/`)
 
 Native iOS app for documenting any rack, closet, or comms room. Scan device labels, place gear in the rack, capture rooms with LiDAR — all on-device. Status: in development.
