@@ -35,7 +35,7 @@ The Swift apps and App Store listings reference these exact paths. **Don't renam
 
 | Project                       | Status         | Where                                    |
 | ----------------------------- | -------------- | ---------------------------------------- |
-| **GreenCli**                  | v1.0 shipped   | `/greencli/` — macOS + Windows desktop terminal for Aruba/HPE networks |
+| **GreenCli**                  | v2.0 shipped   | `/greencli/` — macOS + Windows desktop terminal for Aruba/HPE networks |
 | **Casper**                    | Preview        | `/casper/` — terminal coding helper that checks its own work; site lives in the Casper repo |
 | **LUMINA: Neon Orbit**        | Live           | `/lumina/` — web game + iOS App Store    |
 | **MAC Vendor Lookup**         | Live           | `/mac-vendor-lookup/` — iOS app          |
