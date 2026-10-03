@@ -94,6 +94,22 @@ main { pointer-events: auto; }
 .plain-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0 3rem; }
 .plain-list > div { border-top: 1px solid var(--line); padding: .95rem 0 1.15rem; font-size: .95rem; color: var(--ink-soft); }
 .more { margin-top: 1.8rem; font-size: .95rem; }
+.pictures { scroll-margin-top: 5rem; }
+.shot-lead { margin: 0; }
+.shot-lead a { display: block; border: 1px solid var(--line); }
+.shot-lead a:hover { border-color: var(--accent); }
+.shot-lead img { display: block; width: 100%; height: auto; }
+.shot-lead figcaption { margin: .9rem 0 0; max-width: 70ch; font-size: .98rem; color: var(--ink-soft); }
+.shot-lead figcaption strong { font-family: var(--serif); font-weight: 500; font-size: 1.1rem; color: var(--ink); margin-right: .35rem; }
+.shot-thumbs { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: .6rem; }
+.shot-thumbs a { display: block; border: 1px solid var(--line); opacity: .62; }
+.shot-thumbs a:hover { opacity: 1; }
+.shot-thumbs a[aria-current="true"] { border-color: var(--accent); opacity: 1; }
+.shot-thumbs img { display: block; width: 100%; height: auto; }
+.shot-more { display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; margin: 1.4rem 0 0; font-size: .95rem; }
+@media (max-width: 720px) {
+  .shot-thumbs { grid-template-columns: repeat(3, 1fr); }
+}
 </style>
 </head>
 <body>
@@ -140,9 +156,39 @@ main { pointer-events: auto; }
       <p class="meta-row">macOS &amp; Windows · Tauri Desktop · <span id="gc-version">latest release</span></p>
       <div class="cta">
         <a href="https://github.com/Choaterboater/GreenCli/releases/latest" class="btn btn-primary" target="_blank" rel="noopener">⬇ Download GreenCli — macOS &amp; Windows</a>
+        <a href="#pictures" class="btn">See pictures</a>
       </div>
       <p class="note">
         Unsigned beta builds — macOS: right-click the app → Open on first launch · Windows: "More info" → "Run anyway"
+      </p>
+    </section>
+
+    <!-- Pictures come from the GreenCli website, which takes them again on
+         every release (choaterboater.github.io/GreenCli/screenshots/). Each
+         small one links to its full-size image; the script below shows it
+         large instead. -->
+    <section class="block pictures" id="pictures" aria-label="GreenCli in pictures">
+      <p class="fig-label">In pictures · made-up demo data, no real devices or keys</p>
+      <figure class="shot-lead">
+        <a href="https://choaterboater.github.io/GreenCli/screenshots/01-main-window.png" target="_blank" rel="noopener">
+          <img src="https://choaterboater.github.io/GreenCli/screenshots/thumbs/01-main-window.png"
+               srcset="https://choaterboater.github.io/GreenCli/screenshots/thumbs/01-main-window.png 960w, https://choaterboater.github.io/GreenCli/screenshots/01-main-window.png 2880w"
+               sizes="(min-width: 1100px) 1000px, 100vw" width="960" height="600"
+               alt="Main window: an AOS-CX session with show output, saved hosts in folders on the left.">
+        </a>
+        <figcaption aria-live="polite"><strong>Main window</strong> <span>An AOS-CX session with show output, saved hosts in folders on the left.</span></figcaption>
+      </figure>
+      <ul class="shot-thumbs">
+        <li><a href="https://choaterboater.github.io/GreenCli/screenshots/01-main-window.png" aria-current="true" data-title="Main window" data-text="An AOS-CX session with show output, saved hosts in folders on the left."><img src="https://choaterboater.github.io/GreenCli/screenshots/thumbs/01-main-window.png" width="960" height="600" loading="lazy" decoding="async" alt="Main window"></a></li>
+        <li><a href="https://choaterboater.github.io/GreenCli/screenshots/02-config-editor.png" data-title="Config Editor" data-text="An Aruba CX change with squiggles, the Problems list and where Send goes."><img src="https://choaterboater.github.io/GreenCli/screenshots/thumbs/02-config-editor.png" width="960" height="600" loading="lazy" decoding="async" alt="Config Editor"></a></li>
+        <li><a href="https://choaterboater.github.io/GreenCli/screenshots/05-ai-assistant.png" data-title="AI Assistant" data-text="It ran a show command; the keys in its output show as &lt;secret hidden&gt;."><img src="https://choaterboater.github.io/GreenCli/screenshots/thumbs/05-ai-assistant.png" width="960" height="600" loading="lazy" decoding="async" alt="AI Assistant"></a></li>
+        <li><a href="https://choaterboater.github.io/GreenCli/screenshots/03-ai-review-diff.png" data-title="AI fix" data-text="The AI's fix shown as a diff to Apply or Discard. Secrets were put back."><img src="https://choaterboater.github.io/GreenCli/screenshots/thumbs/03-ai-review-diff.png" width="960" height="600" loading="lazy" decoding="async" alt="AI fix"></a></li>
+        <li><a href="https://choaterboater.github.io/GreenCli/screenshots/09-change-jobs.png" data-title="Change Jobs" data-text="The dry run of a VLAN change on four switches, with the rollback timer."><img src="https://choaterboater.github.io/GreenCli/screenshots/thumbs/09-change-jobs.png" width="960" height="600" loading="lazy" decoding="async" alt="Change Jobs"></a></li>
+        <li><a href="https://choaterboater.github.io/GreenCli/screenshots/11-network-intent.png" data-title="Network Intent" data-text="Checks of the state you expect, with one problem found on two switches."><img src="https://choaterboater.github.io/GreenCli/screenshots/thumbs/11-network-intent.png" width="960" height="600" loading="lazy" decoding="async" alt="Network Intent"></a></li>
+      </ul>
+      <p class="shot-more">
+        <a href="https://choaterboater.github.io/GreenCli/#photos" target="_blank" rel="noopener">All 11 pictures</a>
+        <a href="https://choaterboater.github.io/GreenCli/guide/" target="_blank" rel="noopener">Read the guide</a>
       </p>
     </section>
 
@@ -154,6 +200,7 @@ main { pointer-events: auto; }
         <div>AI keys and MCP logins live in the macOS Keychain, Windows Credential Manager, or the Linux Secret Service, not in files in the data folder.</div>
         <div>greencli-mcp ships next to the app: a read-only MCP server that lets <a href="/casper/">Casper</a> or Claude Code look up your devices and archived configs, with secrets hidden.</div>
         <div>Built on Tauri 2. Settings, sessions, and the vault carry over from 1.9.</div>
+        <div>New in 2.0.1: Restart to update waits while a config send or file transfer is running, and Ctrl+click (Cmd+click on a Mac) opens a web address in your browser.</div>
       </div>
       <p class="note">Coming from 1.9: install 2.0 by hand once (1.9 has no updater). Back up <code>ai_keys.json</code> and <code>mcp_creds.json</code> first, because 1.9 can't read the system password store.</p>
     </section>
@@ -284,6 +331,35 @@ main { pointer-events: auto; }
     }
     window.addEventListener('scroll', update, { passive: true });
     update();
+  })();
+</script>
+
+<script>
+  // Pictures: a small one shows large in place. Ctrl/Cmd/middle-click still
+  // opens the full-size image, and without this script every one is a link.
+  (function () {
+    var box = document.getElementById('pictures');
+    if (!box) return;
+    var lead = box.querySelector('.shot-lead a');
+    var leadImg = lead.querySelector('img');
+    var title = box.querySelector('.shot-lead figcaption strong');
+    var text = box.querySelector('.shot-lead figcaption span');
+    var thumbs = box.querySelectorAll('.shot-thumbs a');
+    Array.prototype.forEach.call(thumbs, function (a) {
+      a.addEventListener('click', function (e) {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        var small = a.querySelector('img').getAttribute('src');
+        leadImg.srcset = small + ' 960w, ' + a.href + ' 2880w';
+        leadImg.src = small;
+        leadImg.alt = a.dataset.title + ': ' + a.dataset.text;
+        lead.href = a.href;
+        title.textContent = a.dataset.title;
+        text.textContent = a.dataset.text;
+        Array.prototype.forEach.call(thumbs, function (t) { t.removeAttribute('aria-current'); });
+        a.setAttribute('aria-current', 'true');
+      });
+    });
   })();
 </script>
 
