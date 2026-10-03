@@ -200,6 +200,7 @@ main { pointer-events: auto; }
         <div>AI keys and MCP logins live in the macOS Keychain, Windows Credential Manager, or the Linux Secret Service, not in files in the data folder.</div>
         <div>greencli-mcp ships next to the app: a read-only MCP server that lets <a href="/casper/">Casper</a> or Claude Code look up your devices and archived configs, with secrets hidden.</div>
         <div>Built on Tauri 2. Settings, sessions, and the vault carry over from 1.9.</div>
+        <div>New in 2.0.1: Restart to update waits while a config send or file transfer is running, and Ctrl+click (Cmd+click on a Mac) opens a web address in your browser.</div>
       </div>
       <p class="note">Coming from 1.9: install 2.0 by hand once (1.9 has no updater). Back up <code>ai_keys.json</code> and <code>mcp_creds.json</code> first, because 1.9 can't read the system password store.</p>
     </section>
