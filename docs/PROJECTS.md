@@ -25,7 +25,7 @@ App Store Connect references these URLs verbatim. They **must** return HTTP 200 
 
 ## GreenCli (`/greencli/`)
 
-Desktop terminal for Aruba/HPE networks: SSH/Telnet/serial, multi-vendor syntax highlighting, encrypted credential vault, AI assistant, self-updating on macOS and Windows. v2.0 shipped for macOS (arm64 + Intel) and Windows x64; greencli-mcp, a read-only MCP server for Casper and Claude Code, ships next to the app. The directory holds the landing page, `privacy.html`, `support.html`, and the installer binaries.
+Desktop terminal for Aruba/HPE networks: SSH/Telnet/serial, multi-vendor syntax highlighting, encrypted credential vault, AI assistant, self-updating on macOS and Windows. v2.0 shipped for macOS (arm64 + Intel) and Windows x64; greencli-mcp, a read-only MCP server for Casper and Claude Code, ships next to the app. The page's pictures load from the GreenCli website (`choaterboater.github.io/GreenCli/screenshots/`), which takes them again on every release; if a file name there changes, update the gallery in `greencli/index.html`. The directory holds the landing page, `privacy.html`, `support.html`, and the installer binaries.
 
 ## Casper (`/casper/`)
 
