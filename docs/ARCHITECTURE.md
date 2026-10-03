@@ -50,9 +50,13 @@ The `ASSETS` binding is configured in `wrangler.jsonc`:
 ```jsonc
 "assets": {
   "directory": ".",
-  "binding": "ASSETS"
+  "binding": "ASSETS",
+  "not_found_handling": "404-page",
+  "run_worker_first": ["/lumina/api/*", "/casper", "/casper/*"]
 }
 ```
+
+`run_worker_first` is the list of paths the Worker answers, and it is the whole list: a request for any other path is served from the static files only, and one with no matching file gets `404.html` without the Worker running. A new Worker route has to be added there as well as in `src/worker.ts`.
 
 Wrangler serves every file under the project root *except* anything matched by `.assetsignore`. That ignore file is what keeps `src/`, `functions/`, `wrangler.*`, `DEPLOY.md`, `.git*`, and `lumina-schema.sql` from ever being served as a static asset.
 

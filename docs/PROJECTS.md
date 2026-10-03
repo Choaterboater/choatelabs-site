@@ -69,6 +69,7 @@ Ideas mentioned in the "in the notebook" aside on `index.html` and shown as fain
 3. If the project needs server-side endpoints:
    - Put handlers in `functions/<project>/api/*.ts`.
    - Add a router branch in `src/worker.ts` for `/<project>/api/*`.
+   - Add `/<project>/api/*` to `run_worker_first` in `wrangler.jsonc`. Paths not on that list never reach the Worker.
    - If it uses D1, add a binding in `wrangler.jsonc` and a schema file at the repo root.
 4. If new files shouldn't be served as static assets (e.g., a new `functions/` subtree or a schema file), add them to `.assetsignore`.
 5. `wrangler deploy`.
