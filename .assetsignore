@@ -14,6 +14,10 @@ LICENSE
 docs/
 docs/**
 
+# Local secrets (git-ignored too); a local `wrangler deploy` would serve them
+.dev.vars*
+.env*
+
 # Wrangler internals (auto-generated during build)
 .wrangler/
 .wrangler/**
