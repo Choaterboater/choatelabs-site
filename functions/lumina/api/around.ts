@@ -8,8 +8,9 @@
 // "score" means MAX(score) per player; for daily it's the single per-date row.
 //
 // If the player has never submitted, returns { rank: null, entries: [] }.
+// Other players' rows show a hashed playerId (see publicPlayerId).
 
-import { Env, json, error } from './_shared';
+import { Env, json, error, publicPlayerId } from './_shared';
 
 const MAX_WINDOW = 10;
 
@@ -78,16 +79,16 @@ export async function handleAroundGet(request: Request, env: Env): Promise<Respo
       mode: 'daily',
       date,
       rank,
-      entries: (rows.results ?? []).map((r, i) => ({
+      entries: await Promise.all((rows.results ?? []).map(async (r, i) => ({
         rank: offset + i + 1,
-        playerId: r.player_id,
+        playerId: await publicPlayerId(r.player_id, playerId),
         initials: r.initials,
         score: r.score,
         combo: r.combo,
         durationMs: r.duration_ms,
         perfects: r.perfects,
         createdAt: r.created_at,
-      })),
+      }))),
     });
   }
 
@@ -139,15 +140,15 @@ export async function handleAroundGet(request: Request, env: Env): Promise<Respo
   return json({
     mode: 'global',
     rank,
-    entries: (rows.results ?? []).map((r, i) => ({
+    entries: await Promise.all((rows.results ?? []).map(async (r, i) => ({
       rank: offset + i + 1,
-      playerId: r.player_id,
+      playerId: await publicPlayerId(r.player_id, playerId),
       initials: r.initials,
       score: r.score,
       combo: r.combo,
       durationMs: r.duration_ms,
       perfects: r.perfects,
       createdAt: r.created_at,
-    })),
+    }))),
   });
 }

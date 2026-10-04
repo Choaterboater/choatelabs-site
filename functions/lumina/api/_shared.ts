@@ -27,6 +27,23 @@ export async function sha256Hex(input: string): Promise<string> {
     .join('');
 }
 
+/**
+ * The ID the public board shows for a row. A player's ID is the only proof
+ * of who posts a score, so other players see a one-way hash that still tells
+ * rows apart. The viewer's own row keeps the real ID (they sent it), so the
+ * game can mark it as theirs.
+ */
+export async function publicPlayerId(playerId: string, viewerId: string | null): Promise<string> {
+  if (viewerId && playerId === viewerId) return playerId;
+  return (await sha256Hex(`lumina-player:${playerId}`)).slice(0, 16);
+}
+
+/** A playerId query parameter, or null when it is missing or malformed. */
+export function viewerIdParam(url: URL): string | null {
+  const id = url.searchParams.get('playerId') ?? '';
+  return /^[a-zA-Z0-9-]{8,64}$/.test(id) ? id : null;
+}
+
 /** UTC date string YYYY-MM-DD — used as the daily challenge key. */
 export function todayUtc(): string {
   const d = new Date();
