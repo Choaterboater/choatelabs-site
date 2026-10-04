@@ -52,14 +52,15 @@ export async function handleScorePost(request: Request, env: Env): Promise<Respo
     .run();
 
   if (mode === 'daily') {
-    // Upsert: keep best score per (date, player)
+    // Upsert: keep best score per (date, player). The name changes only with
+    // a higher score, as on the global board (its name comes from the best run).
     await env.LUMINA_DB.prepare(
       `INSERT INTO scores_daily
         (challenge_date, player_id, initials, score, combo, duration_ms, perfects, created_at)
        VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)
        ON CONFLICT (challenge_date, player_id) DO UPDATE SET
          score = MAX(score, excluded.score),
-         initials = excluded.initials,
+         initials = CASE WHEN excluded.score > score THEN excluded.initials ELSE initials END,
          combo = CASE WHEN excluded.score > score THEN excluded.combo ELSE combo END,
          duration_ms = CASE WHEN excluded.score > score THEN excluded.duration_ms ELSE duration_ms END,
          perfects = CASE WHEN excluded.score > score THEN excluded.perfects ELSE perfects END,

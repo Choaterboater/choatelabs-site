@@ -1,8 +1,10 @@
-// GET /lumina/api/top?mode=global|daily&date=YYYY-MM-DD&limit=50&offset=0
+// GET /lumina/api/top?mode=global|daily&date=YYYY-MM-DD&limit=50&offset=0[&playerId=…]
 // Returns a slice of the requested leaderboard. Ranks in the response are
 // absolute (offset + index + 1) so paging clients can render correct numbers.
+// Rows show a hashed playerId; with &playerId=, that player's own row keeps
+// the real one (see publicPlayerId).
 
-import { Env, json, error } from './_shared';
+import { Env, json, error, publicPlayerId, viewerIdParam } from './_shared';
 
 const MAX_LIMIT = 500;
 
@@ -11,6 +13,7 @@ export async function handleTopGet(request: Request, env: Env): Promise<Response
   const mode = url.searchParams.get('mode') === 'daily' ? 'daily' : 'global';
   const limit = Math.min(MAX_LIMIT, Math.max(1, Number(url.searchParams.get('limit')) || 50));
   const offset = Math.max(0, Number(url.searchParams.get('offset')) || 0);
+  const viewerId = viewerIdParam(url);
 
   if (mode === 'daily') {
     const date = url.searchParams.get('date');
@@ -38,16 +41,16 @@ export async function handleTopGet(request: Request, env: Env): Promise<Response
     return json({
       mode: 'daily',
       date,
-      entries: (rows.results ?? []).map((r, i) => ({
+      entries: await Promise.all((rows.results ?? []).map(async (r, i) => ({
         rank: offset + i + 1,
-        playerId: r.player_id,
+        playerId: await publicPlayerId(r.player_id, viewerId),
         initials: r.initials,
         score: r.score,
         combo: r.combo,
         durationMs: r.duration_ms,
         perfects: r.perfects,
         createdAt: r.created_at,
-      })),
+      }))),
     });
   }
 
@@ -72,15 +75,15 @@ export async function handleTopGet(request: Request, env: Env): Promise<Response
 
   return json({
     mode: 'global',
-    entries: (rows.results ?? []).map((r, i) => ({
+    entries: await Promise.all((rows.results ?? []).map(async (r, i) => ({
       rank: offset + i + 1,
-      playerId: r.player_id,
+      playerId: await publicPlayerId(r.player_id, viewerId),
       initials: r.initials,
       score: r.score,
       combo: r.combo,
       durationMs: r.duration_ms,
       perfects: r.perfects,
       createdAt: r.created_at,
-    })),
+    }))),
   });
 }
